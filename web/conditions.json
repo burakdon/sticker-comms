@@ -1,0 +1,274 @@
+{
+  "conditions": [
+    "alone",
+    "chat",
+    "text_only"
+  ],
+  "rotations": {
+    "0": {
+      "alone": "A",
+      "chat": "B",
+      "text_only": "C"
+    },
+    "1": {
+      "alone": "B",
+      "chat": "C",
+      "text_only": "A"
+    },
+    "2": {
+      "alone": "C",
+      "chat": "A",
+      "text_only": "B"
+    }
+  },
+  "stickers": [
+    {
+      "sticker_id": "TR_TXT_01",
+      "culture": "TR",
+      "has_text": 1,
+      "set": "B",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "TR_TXT_02",
+      "culture": "TR",
+      "has_text": 1,
+      "set": "C",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "TR_TXT_03",
+      "culture": "TR",
+      "has_text": 1,
+      "set": "B",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "TR_TXT_04",
+      "culture": "TR",
+      "has_text": 1,
+      "set": "C",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "TR_TXT_05",
+      "culture": "TR",
+      "has_text": 1,
+      "set": "A",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "TR_NOTXT_01",
+      "culture": "TR",
+      "has_text": 0,
+      "set": "A",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "TR_NOTXT_02",
+      "culture": "TR",
+      "has_text": 0,
+      "set": "C",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "TR_NOTXT_03",
+      "culture": "TR",
+      "has_text": 0,
+      "set": "A",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "TR_NOTXT_04",
+      "culture": "TR",
+      "has_text": 0,
+      "set": "C",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "TR_NOTXT_05",
+      "culture": "TR",
+      "has_text": 0,
+      "set": "B",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "CN_TXT_01",
+      "culture": "CN",
+      "has_text": 1,
+      "set": "A",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "CN_TXT_02",
+      "culture": "CN",
+      "has_text": 1,
+      "set": "C",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "CN_TXT_03",
+      "culture": "CN",
+      "has_text": 1,
+      "set": "A",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "CN_TXT_04",
+      "culture": "CN",
+      "has_text": 1,
+      "set": "C",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "CN_TXT_05",
+      "culture": "CN",
+      "has_text": 1,
+      "set": "B",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "CN_NOTXT_01",
+      "culture": "CN",
+      "has_text": 0,
+      "set": "A",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "CN_NOTXT_02",
+      "culture": "CN",
+      "has_text": 0,
+      "set": "B",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "CN_NOTXT_03",
+      "culture": "CN",
+      "has_text": 0,
+      "set": "A",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "CN_NOTXT_04",
+      "culture": "CN",
+      "has_text": 0,
+      "set": "B",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "CN_NOTXT_05",
+      "culture": "CN",
+      "has_text": 0,
+      "set": "C",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "EN_TXT_01",
+      "culture": "EN",
+      "has_text": 1,
+      "set": "A",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "EN_TXT_02",
+      "culture": "EN",
+      "has_text": 1,
+      "set": "B",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "EN_TXT_03",
+      "culture": "EN",
+      "has_text": 1,
+      "set": "A",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "EN_TXT_04",
+      "culture": "EN",
+      "has_text": 1,
+      "set": "B",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "EN_TXT_05",
+      "culture": "EN",
+      "has_text": 1,
+      "set": "C",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "EN_NOTXT_01",
+      "culture": "EN",
+      "has_text": 0,
+      "set": "B",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "EN_NOTXT_02",
+      "culture": "EN",
+      "has_text": 0,
+      "set": "C",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "EN_NOTXT_03",
+      "culture": "EN",
+      "has_text": 0,
+      "set": "B",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "EN_NOTXT_04",
+      "culture": "EN",
+      "has_text": 0,
+      "set": "C",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "EN_NOTXT_05",
+      "culture": "EN",
+      "has_text": 0,
+      "set": "A",
+      "chat_line": null,
+      "file": null
+    },
+    {
+      "sticker_id": "ATTN_01",
+      "culture": "ATTN",
+      "has_text": 1,
+      "set": null,
+      "chat_line": null,
+      "file": null
+    }
+  ]
+}

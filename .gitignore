@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+.ipynb_checkpoints/
+*.ipynb
+.env
+# Licensed sticker images are shown on the task page but never committed
+stimuli/licensed/
