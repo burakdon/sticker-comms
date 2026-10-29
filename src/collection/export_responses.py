@@ -50,7 +50,8 @@ COLUMNS = {
     "starts": ["participant_id", "started_at", "device", "user_agent", "received_at"],
     "participants": [
         "participant_id", "rotation", "fam_turkish", "fam_chinese", "fam_american",
-        "meme_fluency", "native_language", "age_bracket", "sticker_use_frequency",
+        "meme_fluency", "native_language", "bilingual", "other_languages",
+        "age_bracket", "sticker_use_frequency",
         "device", "user_agent", "screen_width", "started_at", "finished_at",
         "passed_attention_check", "n_trials", "received_at",
     ],

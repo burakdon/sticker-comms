@@ -113,12 +113,20 @@
     const form = ev.target;
     let ok = true;
     $$("#survey-form fieldset").forEach((fs) => {
+      if (fs.hidden) return;
       const req = fs.querySelector("[required]");
       if (!req) return;
       const valid = req.type === "radio" ? !!fs.querySelector("input:checked") : req.value.trim() !== "";
       fs.classList.toggle("invalid", !valid);
       ok = ok && valid;
     });
+    // "Which ones?" is required only when bilingual = yes.
+    const langField = $("#other-languages-field");
+    if (!langField.hidden) {
+      const valid = $("#other_languages").value.trim() !== "";
+      langField.classList.toggle("invalid", !valid);
+      ok = ok && valid;
+    }
     $("#survey-error").hidden = ok;
     if (!ok) return;
 
@@ -133,6 +141,8 @@
         fam_american: data.fam_american,
         meme_fluency: Number(data.meme_fluency),
         native_language: data.native_language.trim(),
+        bilingual: data.bilingual,
+        other_languages: data.bilingual === "yes" ? (data.other_languages || "").trim() : "",
         age_bracket: data.age_bracket,
         sticker_use_frequency: data.sticker_use_frequency,
         device: deviceType(),
@@ -346,6 +356,11 @@
 
     $("#btn-start").addEventListener("click", onStart);
     $("#survey-form").addEventListener("submit", onSurveySubmit);
+    $$("input[name=bilingual]").forEach((r) =>
+      r.addEventListener("change", () => {
+        $("#other-languages-field").hidden = r.value !== "yes";
+      })
+    );
     $("#btn-begin").addEventListener("click", beginTrials);
     $$(".choice").forEach((b) => b.addEventListener("click", onChoice));
     $$(".conf").forEach((b) => b.addEventListener("click", onConfidence));

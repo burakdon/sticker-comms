@@ -144,7 +144,7 @@ Assumptions to check and report: normality of paired differences (Shapiro–Wilk
 `sticker_id` · `set` (A/B/C)
 
 ### `data/raw/participants.csv` — one row per person
-`participant_id` · `rotation` · `fam_turkish` · `fam_chinese` · `fam_american` · `meme_fluency` · `native_language` · `age_bracket` · `sticker_use_frequency` · `device` · `started_at` · `finished_at` · `passed_attention_check`
+`participant_id` · `rotation` · `fam_turkish` · `fam_chinese` · `fam_american` · `meme_fluency` · `native_language` · `bilingual` (yes/no) · `other_languages` (free text) · `age_bracket` · `sticker_use_frequency` · `device` · `started_at` · `finished_at` · `passed_attention_check`
 
 ### `data/raw/trials.csv` — one row per trial
 `participant_id` · `sticker_id` · `trial_order` · `context` (alone/chat/text_only) · `response` · `confidence` · `rt_ms`

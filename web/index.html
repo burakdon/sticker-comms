@@ -95,6 +95,19 @@
         <input id="native_language" name="native_language" type="text" autocomplete="off" placeholder="e.g. Turkish" required maxlength="40">
       </fieldset>
 
+      <fieldset>
+        <legend>Do you speak any other languages fluently?</legend>
+        <div class="pills">
+          <label><input type="radio" name="bilingual" value="yes" required><span>Yes</span></label>
+          <label><input type="radio" name="bilingual" value="no"><span>No</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset id="other-languages-field" hidden>
+        <legend><label for="other_languages">Which ones?</label></legend>
+        <input id="other_languages" name="other_languages" type="text" autocomplete="off" placeholder="e.g. English, German" maxlength="80">
+      </fieldset>
+
       <p id="survey-error" class="error" hidden>Please answer every question.</p>
       <button type="submit" class="btn primary">Continue</button>
     </form>

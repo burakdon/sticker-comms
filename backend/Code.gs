@@ -26,7 +26,8 @@ var SHEETS = {
   starts: ["participant_id", "started_at", "device", "user_agent", "received_at"],
   participants: [
     "participant_id", "rotation", "fam_turkish", "fam_chinese", "fam_american",
-    "meme_fluency", "native_language", "age_bracket", "sticker_use_frequency",
+    "meme_fluency", "native_language", "bilingual", "other_languages",
+    "age_bracket", "sticker_use_frequency",
     "device", "user_agent", "screen_width", "started_at", "finished_at",
     "passed_attention_check", "n_trials", "received_at",
   ],
@@ -94,11 +95,19 @@ function doGet(e) {
 // ---------- helpers ----------
 
 function getSheet(ss, name) {
+  var cols = SHEETS[name];
   var sheet = ss.getSheetByName(name);
   if (!sheet) {
     sheet = ss.insertSheet(name);
-    sheet.appendRow(SHEETS[name]);
+    sheet.appendRow(cols);
     sheet.setFrozenRows(1);
+    return sheet;
+  }
+  // Keep the header in sync when columns are added to SHEETS after deployment.
+  // New columns are always appended at the end, so older rows stay aligned.
+  var header = sheet.getRange(1, 1, 1, Math.max(sheet.getLastColumn(), 1)).getValues()[0];
+  if (header.join("\u0001") !== cols.join("\u0001")) {
+    sheet.getRange(1, 1, 1, cols.length).setValues([cols]);
   }
   return sheet;
 }
