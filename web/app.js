@@ -177,15 +177,27 @@
     $("#confidence").hidden = true;
     $("#choices").hidden = false;
     $$(".choice").forEach((b) => (b.disabled = false));
-    state.current = { shownAt: performance.now() };
+    state.current = { shownAt: performance.now(), changes: 0 };
+  }
+
+  // Back from the confidence step to the three options. The first reaction
+  // time is kept; the change is flagged so it can be inspected in cleaning.
+  function onChangeAnswer() {
+    if (!state.current || !state.current.response) return;
+    state.current.response = null;
+    state.current.changes += 1;
+    $("#confidence").hidden = true;
+    $("#choices").hidden = false;
+    $$(".choice").forEach((b) => (b.disabled = false));
   }
 
   function onChoice(ev) {
     const btn = ev.currentTarget;
     if (!state.current || state.current.response) return;
-    const rt = Math.round(performance.now() - state.current.shownAt);
     state.current.response = btn.dataset.response;
-    state.current.rt_ms = rt;
+    if (state.current.rt_ms === undefined) {
+      state.current.rt_ms = Math.round(performance.now() - state.current.shownAt);
+    }
     $$(".choice").forEach((b) => (b.disabled = true));
     $("#choices").hidden = true;
     $("#confidence").hidden = false;
@@ -205,6 +217,7 @@
       response: state.current.response,
       confidence: Number(ev.currentTarget.dataset.confidence),
       rt_ms: state.current.rt_ms,
+      changed_answer: state.current.changes,
     });
     state.current = null;
     state.i += 1;
@@ -364,6 +377,7 @@
     $("#btn-begin").addEventListener("click", beginTrials);
     $$(".choice").forEach((b) => b.addEventListener("click", onChoice));
     $$(".conf").forEach((b) => b.addEventListener("click", onConfidence));
+    $("#btn-change").addEventListener("click", onChangeAnswer);
     $("#btn-bonus-next").addEventListener("click", () => onBonusNext(false));
     $("#btn-bonus-skip").addEventListener("click", () => onBonusNext(true));
 

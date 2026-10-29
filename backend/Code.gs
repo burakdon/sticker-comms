@@ -33,7 +33,7 @@ var SHEETS = {
   ],
   trials: [
     "participant_id", "sticker_id", "trial_order", "context", "is_attention_check",
-    "response", "confidence", "rt_ms",
+    "response", "confidence", "rt_ms", "changed_answer",
   ],
   freetext: ["participant_id", "sticker_id", "text"],
 };
