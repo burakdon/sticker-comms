@@ -2,7 +2,7 @@
 
 **Can people tell what a WhatsApp sticker means when it comes from a culture they're not part of, and does seeing it inside a chat help?**
 
-Module Project 2 (Statistical Analysis), Duke AIPI 510. A within-subject experiment: participants judge the intended sentiment (positive / negative / sarcastic) of 30 Turkish, Chinese and English/American stickers. Each sticker is shown alone, in a mock chat, or as the chat line only (sticker hidden), with the condition counterbalanced by a Latin square.
+Module Project 2 (Statistical Analysis), Duke AIPI 510. A within-subject experiment: participants judge the intended sentiment (positive / negative / sarcastic) of 36 Turkish, Chinese and English/American stickers (6 with text and 6 without per culture). Each sticker is shown alone, in a mock chat, or as the chat line only (sticker hidden), with the condition counterbalanced by a Latin square.
 
 The full design, hypotheses, analysis plan and timeline are in [PROJECT_BRIEF.md](PROJECT_BRIEF.md).
 

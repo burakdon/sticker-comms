@@ -31,25 +31,25 @@ ROTATIONS = {
 
 
 def assign_sets(stimuli: pd.DataFrame) -> pd.DataFrame:
-    """Deal each culture x has_text cell of 5 stickers across sets A/B/C.
+    """Deal each culture x has_text cell across sets A/B/C as evenly as possible.
 
-    Each cell contributes 2/2/1 stickers; which set receives the single sticker
-    rotates across cells, so every set ends up with exactly 10. Within a cell,
-    stickers are sorted by intended sentiment before dealing so each set gets a
-    spread of sentiments rather than a cluster.
+    Stickers in a cell are sorted by intended sentiment and dealt round-robin,
+    so each set gets a spread of sentiments rather than a cluster. The starting
+    set rotates across cells, so if a cell size isn't a multiple of 3 the extra
+    stickers don't all land in the same set. The total must be a multiple of 3
+    so the three sets end up equal in size.
     """
     exp = stimuli[stimuli["culture"] != "ATTN"].copy()
     exp["_sent"] = exp["intended_sentiment"].map(SENTIMENT_ORDER).fillna(9)
 
     assigned = []
     cells = exp.groupby(["culture", "has_text"], sort=True)
-    for cell_idx, (_, cell) in enumerate(cells):
+    offset = 0
+    for _, cell in cells:
         cell = cell.sort_values(["_sent", "sticker_id"])
-        short_set = SETS[(2 - cell_idx) % 3]  # set receiving only 1 from this cell
-        order = [s for s in SETS if s != short_set] * 2 + [short_set]
-        # Dealing round-robin over `order` gives 2/2/1.
-        for sticker_id, set_name in zip(cell["sticker_id"], order):
-            assigned.append({"sticker_id": sticker_id, "set": set_name})
+        for i, sticker_id in enumerate(cell["sticker_id"]):
+            assigned.append({"sticker_id": sticker_id, "set": SETS[(i + offset) % 3]})
+        offset += len(cell)
 
     sets = pd.DataFrame(assigned)
     counts = sets["set"].value_counts()

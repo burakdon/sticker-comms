@@ -33,8 +33,8 @@ from statsmodels.stats.power import TTestPower
 ROOT = Path(__file__).resolve().parents[2]
 ALPHA = 0.05
 TARGET_POWER = 0.80
-N_STICKERS = 30
-TRIALS_PER_CONDITION = 10
+N_STICKERS = 36
+TRIALS_PER_CONDITION = 12
 
 # Chart tokens (light surface).
 SURFACE = "#fcfcfb"
@@ -137,7 +137,7 @@ def plot(analytic, sim, out_path):
         ax.plot(grp["n"], grp["power"], color=color, linewidth=2, marker="o",
                 markersize=5, markeredgecolor=SURFACE, markeredgewidth=1.5,
                 label=f"{baseline:.0%} → {baseline + lift:.0%}  (d_z ≈ {d_mid:.2f})")
-    style_axis(ax, "Simulated: 10 trials per condition, random effects")
+    style_axis(ax, f"Simulated: {TRIALS_PER_CONDITION} trials per condition, random effects")
     ax.legend(frameon=False, fontsize=8, labelcolor=INK_2, loc="lower right")
 
     fig.tight_layout()

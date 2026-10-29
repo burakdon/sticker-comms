@@ -400,6 +400,7 @@
       return;
     }
     preload(conditions.stickers);
+    $("#n-stickers").textContent = conditions.stickers.filter((s) => s.set || s.culture === "ATTN").length;
 
     $("#btn-start").addEventListener("click", onStart);
     $("#survey-form").addEventListener("submit", onSurveySubmit);

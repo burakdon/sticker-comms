@@ -53,6 +53,10 @@ SPEC = {
     "EN_NOTXT_03": ("🙄", None),
     "EN_NOTXT_04": ("🦭👍", None),
     "EN_NOTXT_05": ("😢", None),
+    "CN_TXT_06": ("👌", "收到"),
+    "CN_NOTXT_06": ("🐼🙏", None),
+    "EN_TXT_06": ("🙃", "it is what it is"),
+    "EN_NOTXT_06": ("😐", None),
     "ATTN_01": ("👉", "Please select POSITIVE"),
 }
 

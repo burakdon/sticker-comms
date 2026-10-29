@@ -39,19 +39,19 @@ Framing for the report: the in-group advantage in cross-cultural emotion recogni
 
 One online session, ~4 minutes on a phone, one link for everyone. No separate stimulus-collection phase.
 
-### 3.1 Stimuli — 30 stickers + 1 attention check
+### 3.1 Stimuli — 36 stickers + 1 attention check
 
 | | text on sticker | no text | author (writes answer key + chat line) |
 |---|---|---|---|
-| **Turkish (TR)** | 5 | 5 | Burak |
-| **Chinese (CN)** | 5 | 5 | teammate |
-| **English / American (EN)** | 5 | 5 | both, checked by an American classmate |
+| **Turkish (TR)** | 6 | 6 | Burak |
+| **Chinese (CN)** | 6 | 6 | teammate |
+| **English / American (EN)** | 6 | 6 | both, checked by an American classmate |
 
 For every sticker the author records, **before launch**:
 - `intended_sentiment` — positive / negative / sarcastic. This is the answer key (**sender intent**).
 - `chat_line` — a realistic message, **written in English**, that the sticker would be sent in reply to. English so that the context is readable by everyone; the sticker's own text stays in its original language.
 
-Sentiment roughly balanced within each culture (~4/3/3 across the three options).
+Sentiment roughly balanced within each culture (~2/2/2 across the three options within each 6-sticker cell).
 
 **Exclude:** any sticker showing the face of a classmate, friend, or child. Profanity is allowed (it is part of how these stickers are used); say so in the report's limitations/ethics note.
 **Licensing:** licensed characters (Shrek, Hello Kitty, etc.) may be shown on the task page but are **not committed to the repo** (`in_repo = 0` in `data/stimuli.csv`; describe them in text).
@@ -75,13 +75,13 @@ Context conditions:
 ### 3.3 Session flow
 
 1. **Consent + pre-survey (~30 s):** familiarity with Turkish / Chinese / American culture (none · some · native each) · meme fluency (1–5) · native language · age bracket · sticker-use frequency (daily · weekly · rarely) · device (auto-detected).
-2. **30 trials + 1 attention check, random order.** Each sticker appears exactly once, in one context condition. Question: *"What does the sender mean?"* (positive · negative · sarcastic) then *"How confident are you?"* (1–5).
+2. **36 trials + 1 attention check, random order.** Each sticker appears exactly once, in one context condition. Question: *"What does the sender mean?"* (positive · negative · sarcastic) then *"How confident are you?"* (1–5).
 3. **Bonus block (optional):** 3 stickers shown alone — *"What message would you send this after?"* (free text). Placed last so it cannot influence the main trials.
 4. Thank-you screen.
 
 ### 3.4 Randomization (Latin square)
 
-`src/collection/assign_conditions.py` splits the 30 stickers into three sets **A, B, C** of 10, balanced on culture × has_text (and spread across sentiment as far as possible). Each participant is assigned one of three rotations:
+`src/collection/assign_conditions.py` splits the 36 stickers into three sets **A, B, C** of 12, balanced on culture × has_text (and spread across sentiment as far as possible). Each participant is assigned one of three rotations:
 
 | rotation | alone | chat | text_only |
 |---|---|---|---|
@@ -120,7 +120,7 @@ For each sticker, take in-group participants' trials where the sticker is visibl
 | H2, H3 | Mixed-effects logistic regression: `correct ~ context * in_group + has_text + (1 | participant) + (1 | sticker)` | odds ratios, 95% CI |
 | H4 | Exact binomial test vs. p = 1/3 on out-group trials | exact CI, Cohen's h |
 
-Assumptions to check and report: normality of paired differences (Shapiro–Wilk + QQ plot), sphericity (Mauchly), and why the mixed model is needed (30 non-independent trials per person, stickers as a random sample).
+Assumptions to check and report: normality of paired differences (Shapiro–Wilk + QQ plot), sphericity (Mauchly), and why the mixed model is needed (36 non-independent trials per person, stickers as a random sample).
 
 ---
 
@@ -130,7 +130,7 @@ Assumptions to check and report: normality of paired differences (Shapiro–Wilk
 - d_z = 0.4 → **n ≈ 52**; d_z = 0.5 → n ≈ 34.
 - **Target 70–100 participants, including ≥ 15 natives per culture** (TR from Burak's network, CN from teammate's, US from class).
 - H3 (interaction) is adequately powered only for medium-to-large effects — say so.
-- `src/analysis/power_analysis.py` does it two ways: (1) analytic (`statsmodels` `TTestPower`), (2) simulation of the actual trial structure (10 binary trials per condition per person, participant and sticker random effects) to show what accuracy lift d_z = 0.4 corresponds to.
+- `src/analysis/power_analysis.py` does it two ways: (1) analytic (`statsmodels` `TTestPower`), (2) simulation of the actual trial structure (12 binary trials per condition per person, participant and sticker random effects) to show what accuracy lift d_z = 0.4 corresponds to.
 - Pilot (5 people) re-estimates baseline accuracy and the SD of per-person differences.
 
 ---
@@ -228,6 +228,6 @@ sticker-comms/
 - Answer key is sender intent from one author per culture; validated by in-group agreement but sarcasm is inherently ambiguous.
 - EN stickers authored by non-native speakers unless the classmate check happens.
 - Chat lines are in English for all cultures — less authentic for TR/CN, deliberately chosen so context is accessible.
-- 30 trials per person → mixed model handles non-independence.
+- 36 trials per person → mixed model handles non-independence.
 - Interaction underpowered for small effects.
 - Stickers shown outside the WhatsApp UI.
