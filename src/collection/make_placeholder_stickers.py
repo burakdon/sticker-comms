@@ -116,6 +116,8 @@ def main() -> None:
         if sid not in SPEC:
             print(f"no placeholder spec for {sid}; skipping")
             continue
+        if row["file"] and not row["file"].endswith(".svg"):
+            continue  # a real sticker has replaced this placeholder
         target = out_dir / f"{sid}.svg"
         if target.exists() and not args.force:
             skipped += 1

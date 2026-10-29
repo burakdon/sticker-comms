@@ -26,57 +26,57 @@
       "sticker_id": "TR_TXT_01",
       "culture": "TR",
       "has_text": 1,
-      "set": "C",
-      "chat_line": "sorry, I can't make it to dinner tonight",
-      "file": "stimuli/TR_TXT_01.svg"
+      "set": "B",
+      "chat_line": "failed my driving test again",
+      "file": "stimuli/TR_TXT_01.webp"
     },
     {
       "sticker_id": "TR_TXT_02",
       "culture": "TR",
       "has_text": 1,
-      "set": "B",
-      "chat_line": "failed my driving test again",
-      "file": "stimuli/TR_TXT_02.svg"
+      "set": "C",
+      "chat_line": "I saved you the last slice",
+      "file": "stimuli/TR_TXT_02.webp"
     },
     {
       "sticker_id": "TR_TXT_03",
       "culture": "TR",
       "has_text": 1,
       "set": "C",
-      "chat_line": "I ate your leftover pizza",
-      "file": "stimuli/TR_TXT_03.svg"
+      "chat_line": "I WILL fight the TA if the grade doesn't change",
+      "file": "stimuli/TR_TXT_03.webp"
     },
     {
       "sticker_id": "TR_TXT_04",
       "culture": "TR",
       "has_text": 1,
       "set": "A",
-      "chat_line": "wrote you a three-paragraph birthday message",
-      "file": "stimuli/TR_TXT_04.svg"
+      "chat_line": "my ex just posted a poem about healing",
+      "file": "stimuli/TR_TXT_04.webp"
     },
     {
       "sticker_id": "TR_TXT_05",
       "culture": "TR",
       "has_text": 1,
       "set": "B",
-      "chat_line": "they cancelled the concert",
-      "file": "stimuli/TR_TXT_05.svg"
+      "chat_line": "sorry, I can't make it to dinner tonight",
+      "file": "stimuli/TR_TXT_05.webp"
     },
     {
       "sticker_id": "TR_NOTXT_01",
       "culture": "TR",
       "has_text": 0,
       "set": "A",
-      "chat_line": "just got my visa approved!!",
-      "file": "stimuli/TR_NOTXT_01.svg"
+      "chat_line": "made börek, come over",
+      "file": "stimuli/TR_NOTXT_01.webp"
     },
     {
       "sticker_id": "TR_NOTXT_02",
       "culture": "TR",
       "has_text": 0,
       "set": "B",
-      "chat_line": "look at my new pink phone case",
-      "file": "stimuli/TR_NOTXT_02.svg"
+      "chat_line": "I ate your leftover pizza",
+      "file": "stimuli/TR_NOTXT_02.webp"
     },
     {
       "sticker_id": "TR_NOTXT_03",

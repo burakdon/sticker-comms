@@ -1,29 +1,29 @@
 sticker_id,culture,has_text,author,description,intended_sentiment,chat_line,in_repo,file,notes
-TR_TXT_01,TR,1,burak,"Sad face with the text 'üzdün' (you made me sad)",negative,"sorry, I can't make it to dinner tonight",1,stimuli/TR_TXT_01.svg,placeholder image
-TR_TXT_02,TR,1,burak,"Flower with the text 'ÜZÜLME AL ÇİÇEK' (don't be sad, have a flower)",positive,failed my driving test again,1,stimuli/TR_TXT_02.svg,placeholder image
-TR_TXT_03,TR,1,burak,"Shocked face with the text 'Bu ne ahlaksızlık' (what is this indecency)",sarcastic,I ate your leftover pizza,1,stimuli/TR_TXT_03.svg,placeholder image
-TR_TXT_04,TR,1,burak,"Teary face with the text 'Duygulandırdın panpa' (you moved me, bro)",sarcastic,wrote you a three-paragraph birthday message,1,stimuli/TR_TXT_04.svg,placeholder image
-TR_TXT_05,TR,1,burak,"Crying face with the text 'AĞLAMA ODASI' (crying room)",negative,they cancelled the concert,1,stimuli/TR_TXT_05.svg,placeholder image
-TR_NOTXT_01,TR,0,burak,Politician grinning while eating ice cream (placeholder: grinning face + ice cream),positive,just got my visa approved!!,1,stimuli/TR_NOTXT_01.svg,placeholder image
-TR_NOTXT_02,TR,0,burak,Politician holding a Hello Kitty plush (placeholder: cat + bow),sarcastic,look at my new pink phone case,1,stimuli/TR_NOTXT_02.svg,placeholder image
+TR_TXT_01,TR,1,burak,"Cartoon blob offering a flower, text 'ÜZÜLME AL ÇİÇEK' (don't be sad, have a flower)",positive,failed my driving test again,1,stimuli/TR_TXT_01.webp,"real sticker; sentiment + chat line drafted by Claude, Burak to confirm"
+TR_TXT_02,TR,1,burak,"Child's drawing of a smiling blob with hearts, text 'SENİ YERİM' (lit. 'I'll eat you' = you're adorable)",positive,I saved you the last slice,1,stimuli/TR_TXT_02.webp,"real sticker; sentiment + chat line drafted by Claude, Burak to confirm"
+TR_TXT_03,TR,1,burak,"Politician Devlet Bahçeli gesturing at a podium, text 'SAKİN OL LİSELİ' (calm down, high-schooler)",sarcastic,I WILL fight the TA if the grade doesn't change,1,stimuli/TR_TXT_03.webp,"real sticker; sentiment + chat line drafted by Claude, Burak to confirm"
+TR_TXT_04,TR,1,burak,"Man with unibrow and open shirt, text 'gusam mı hocam' (shall I vomit, teacher?)",sarcastic,my ex just posted a poem about healing,1,stimuli/TR_TXT_04.webp,"real sticker; sentiment + chat line drafted by Claude, Burak to confirm"
+TR_TXT_05,TR,1,burak,"Actor crying, text 'KALBİMİ ÇOK KIRDIN' (you broke my heart)",negative,"sorry, I can't make it to dinner tonight",1,stimuli/TR_TXT_05.webp,"real sticker; sentiment + chat line drafted by Claude, Burak to confirm"
+TR_NOTXT_01,TR,0,burak,"Politician Binali Yıldırım making finger hearts, surrounded by heart emoji",positive,"made börek, come over",1,stimuli/TR_NOTXT_01.webp,"real sticker; sentiment + chat line drafted by Claude, Burak to confirm"
+TR_NOTXT_02,TR,0,burak,Singer İbrahim Tatlıses pointing a gun at the camera,sarcastic,I ate your leftover pizza,1,stimuli/TR_NOTXT_02.webp,"real sticker; sentiment + chat line drafted by Claude, Burak to confirm"
 TR_NOTXT_03,TR,0,burak,Politician crying (placeholder: loudly crying face),negative,the match last night...,1,stimuli/TR_NOTXT_03.svg,placeholder image
 TR_NOTXT_04,TR,0,burak,Politician surrounded by hearts (placeholder: smiling face with hearts),positive,"made börek, come over",1,stimuli/TR_NOTXT_04.svg,placeholder image
 TR_NOTXT_05,TR,0,burak,Grumpy uncle at a tea house (placeholder: unamused face + tea),negative,can you cover my shift on saturday?,1,stimuli/TR_NOTXT_05.svg,placeholder image
-CN_TXT_01,CN,1,teammate,"Raised fist with the text '加油' (keep going)",positive,exam in 10 minutes,1,stimuli/CN_TXT_01.svg,placeholder image
-CN_TXT_02,CN,1,teammate,"Face covering ears with the text '我不听我不听' (I'm not listening)",sarcastic,you need to stop ordering bubble tea every day,1,stimuli/CN_TXT_02.svg,placeholder image
-CN_TXT_03,CN,1,teammate,"Figure walking away with the text '告辞' (farewell)",sarcastic,want to come to my 6am run tomorrow?,1,stimuli/CN_TXT_03.svg,placeholder image
-CN_TXT_04,CN,1,teammate,"Tired face with the text '心累' (heart tired)",negative,boss just added another meeting at 7pm,1,stimuli/CN_TXT_04.svg,placeholder image
-CN_TXT_05,CN,1,teammate,"Party face with the text '好耶' (yay)",positive,class is cancelled tomorrow,1,stimuli/CN_TXT_05.svg,placeholder image
+CN_TXT_01,CN,1,teammate,Raised fist with the text '加油' (keep going),positive,exam in 10 minutes,1,stimuli/CN_TXT_01.svg,placeholder image
+CN_TXT_02,CN,1,teammate,Face covering ears with the text '我不听我不听' (I'm not listening),sarcastic,you need to stop ordering bubble tea every day,1,stimuli/CN_TXT_02.svg,placeholder image
+CN_TXT_03,CN,1,teammate,Figure walking away with the text '告辞' (farewell),sarcastic,want to come to my 6am run tomorrow?,1,stimuli/CN_TXT_03.svg,placeholder image
+CN_TXT_04,CN,1,teammate,Tired face with the text '心累' (heart tired),negative,boss just added another meeting at 7pm,1,stimuli/CN_TXT_04.svg,placeholder image
+CN_TXT_05,CN,1,teammate,Party face with the text '好耶' (yay),positive,class is cancelled tomorrow,1,stimuli/CN_TXT_05.svg,placeholder image
 CN_NOTXT_01,CN,0,teammate,Panda-head meme with thumbs up (placeholder: panda + thumbs up),positive,I finished the whole assignment,1,stimuli/CN_NOTXT_01.svg,placeholder image
 CN_NOTXT_02,CN,0,teammate,Panda-head meme sweating (placeholder: panda + sweat drops),negative,presentation got moved to today,1,stimuli/CN_NOTXT_02.svg,placeholder image
 CN_NOTXT_03,CN,0,teammate,Panda-head meme with smug smile (placeholder: panda + smirk),sarcastic,I told you that movie would be bad,1,stimuli/CN_NOTXT_03.svg,placeholder image
 CN_NOTXT_04,CN,0,teammate,Cat holding a knife (placeholder: cat + knife),sarcastic,"I forgot your birthday, sorry",1,stimuli/CN_NOTXT_04.svg,placeholder image
 CN_NOTXT_05,CN,0,teammate,Pig lying flat / tang ping (placeholder: pig + bed),negative,want to go out tonight?,1,stimuli/CN_NOTXT_05.svg,placeholder image
-EN_TXT_01,EN,1,burak+teammate,"Dog in a burning room with the text 'This is fine'",sarcastic,three deadlines tomorrow and my laptop just died,1,stimuli/EN_TXT_01.svg,placeholder image
-EN_TXT_02,EN,1,burak+teammate,"Party popper with the text 'LET'S GOOO'",positive,we got the tickets!!,1,stimuli/EN_TXT_02.svg,placeholder image
-EN_TXT_03,EN,1,burak+teammate,"Shrek with the text 'I'm calling the police' (placeholder: police officer + phone)",sarcastic,I put pineapple on the pizza,1,stimuli/EN_TXT_03.svg,placeholder image; real sticker is licensed (in_repo=0)
-EN_TXT_04,EN,1,burak+teammate,"Weary face with the text 'big mood'",negative,monday again,1,stimuli/EN_TXT_04.svg,placeholder image
-EN_TXT_05,EN,1,burak+teammate,"Flexed arm with the text 'you got this'",positive,"interview in an hour, so nervous",1,stimuli/EN_TXT_05.svg,placeholder image
+EN_TXT_01,EN,1,burak+teammate,Dog in a burning room with the text 'This is fine',sarcastic,three deadlines tomorrow and my laptop just died,1,stimuli/EN_TXT_01.svg,placeholder image
+EN_TXT_02,EN,1,burak+teammate,Party popper with the text 'LET'S GOOO',positive,we got the tickets!!,1,stimuli/EN_TXT_02.svg,placeholder image
+EN_TXT_03,EN,1,burak+teammate,Shrek with the text 'I'm calling the police' (placeholder: police officer + phone),sarcastic,I put pineapple on the pizza,1,stimuli/EN_TXT_03.svg,placeholder image; real sticker is licensed (in_repo=0)
+EN_TXT_04,EN,1,burak+teammate,Weary face with the text 'big mood',negative,monday again,1,stimuli/EN_TXT_04.svg,placeholder image
+EN_TXT_05,EN,1,burak+teammate,Flexed arm with the text 'you got this',positive,"interview in an hour, so nervous",1,stimuli/EN_TXT_05.svg,placeholder image
 EN_NOTXT_01,EN,0,burak+teammate,Dancing cat (placeholder: cat + dancer),positive,it's friday!!!,1,stimuli/EN_NOTXT_01.svg,placeholder image
 EN_NOTXT_02,EN,0,burak+teammate,Sad dog with big eyes (placeholder: dog + pleading face),negative,they ran out of the cake,1,stimuli/EN_NOTXT_02.svg,placeholder image
 EN_NOTXT_03,EN,0,burak+teammate,Eye-roll side-eye face (placeholder: face with rolling eyes),sarcastic,I'm definitely going to the gym tomorrow,1,stimuli/EN_NOTXT_03.svg,placeholder image
