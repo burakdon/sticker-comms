@@ -8,3 +8,4 @@ venv/
 .env
 # Licensed sticker images are shown on the task page but never committed
 stimuli/licensed/
+.claude/

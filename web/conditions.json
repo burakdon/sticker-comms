@@ -26,241 +26,241 @@
       "sticker_id": "TR_TXT_01",
       "culture": "TR",
       "has_text": 1,
-      "set": "B",
-      "chat_line": null,
-      "file": null
+      "set": "C",
+      "chat_line": "sorry, I can't make it to dinner tonight",
+      "file": "stimuli/TR_TXT_01.svg"
     },
     {
       "sticker_id": "TR_TXT_02",
       "culture": "TR",
       "has_text": 1,
-      "set": "C",
-      "chat_line": null,
-      "file": null
+      "set": "B",
+      "chat_line": "failed my driving test again",
+      "file": "stimuli/TR_TXT_02.svg"
     },
     {
       "sticker_id": "TR_TXT_03",
       "culture": "TR",
       "has_text": 1,
-      "set": "B",
-      "chat_line": null,
-      "file": null
+      "set": "C",
+      "chat_line": "I ate your leftover pizza",
+      "file": "stimuli/TR_TXT_03.svg"
     },
     {
       "sticker_id": "TR_TXT_04",
       "culture": "TR",
       "has_text": 1,
-      "set": "C",
-      "chat_line": null,
-      "file": null
+      "set": "A",
+      "chat_line": "wrote you a three-paragraph birthday message",
+      "file": "stimuli/TR_TXT_04.svg"
     },
     {
       "sticker_id": "TR_TXT_05",
       "culture": "TR",
       "has_text": 1,
-      "set": "A",
-      "chat_line": null,
-      "file": null
+      "set": "B",
+      "chat_line": "they cancelled the concert",
+      "file": "stimuli/TR_TXT_05.svg"
     },
     {
       "sticker_id": "TR_NOTXT_01",
       "culture": "TR",
       "has_text": 0,
       "set": "A",
-      "chat_line": null,
-      "file": null
+      "chat_line": "just got my visa approved!!",
+      "file": "stimuli/TR_NOTXT_01.svg"
     },
     {
       "sticker_id": "TR_NOTXT_02",
       "culture": "TR",
       "has_text": 0,
-      "set": "C",
-      "chat_line": null,
-      "file": null
+      "set": "B",
+      "chat_line": "look at my new pink phone case",
+      "file": "stimuli/TR_NOTXT_02.svg"
     },
     {
       "sticker_id": "TR_NOTXT_03",
       "culture": "TR",
       "has_text": 0,
       "set": "A",
-      "chat_line": null,
-      "file": null
+      "chat_line": "the match last night...",
+      "file": "stimuli/TR_NOTXT_03.svg"
     },
     {
       "sticker_id": "TR_NOTXT_04",
       "culture": "TR",
       "has_text": 0,
       "set": "C",
-      "chat_line": null,
-      "file": null
+      "chat_line": "made börek, come over",
+      "file": "stimuli/TR_NOTXT_04.svg"
     },
     {
       "sticker_id": "TR_NOTXT_05",
       "culture": "TR",
       "has_text": 0,
-      "set": "B",
-      "chat_line": null,
-      "file": null
+      "set": "C",
+      "chat_line": "can you cover my shift on saturday?",
+      "file": "stimuli/TR_NOTXT_05.svg"
     },
     {
       "sticker_id": "CN_TXT_01",
       "culture": "CN",
       "has_text": 1,
       "set": "A",
-      "chat_line": null,
-      "file": null
+      "chat_line": "exam in 10 minutes",
+      "file": "stimuli/CN_TXT_01.svg"
     },
     {
       "sticker_id": "CN_TXT_02",
       "culture": "CN",
       "has_text": 1,
       "set": "C",
-      "chat_line": null,
-      "file": null
+      "chat_line": "you need to stop ordering bubble tea every day",
+      "file": "stimuli/CN_TXT_02.svg"
     },
     {
       "sticker_id": "CN_TXT_03",
       "culture": "CN",
       "has_text": 1,
-      "set": "A",
-      "chat_line": null,
-      "file": null
+      "set": "B",
+      "chat_line": "want to come to my 6am run tomorrow?",
+      "file": "stimuli/CN_TXT_03.svg"
     },
     {
       "sticker_id": "CN_TXT_04",
       "culture": "CN",
       "has_text": 1,
-      "set": "C",
-      "chat_line": null,
-      "file": null
+      "set": "A",
+      "chat_line": "boss just added another meeting at 7pm",
+      "file": "stimuli/CN_TXT_04.svg"
     },
     {
       "sticker_id": "CN_TXT_05",
       "culture": "CN",
       "has_text": 1,
-      "set": "B",
-      "chat_line": null,
-      "file": null
+      "set": "C",
+      "chat_line": "class is cancelled tomorrow",
+      "file": "stimuli/CN_TXT_05.svg"
     },
     {
       "sticker_id": "CN_NOTXT_01",
       "culture": "CN",
       "has_text": 0,
       "set": "A",
-      "chat_line": null,
-      "file": null
+      "chat_line": "I finished the whole assignment",
+      "file": "stimuli/CN_NOTXT_01.svg"
     },
     {
       "sticker_id": "CN_NOTXT_02",
       "culture": "CN",
       "has_text": 0,
       "set": "B",
-      "chat_line": null,
-      "file": null
+      "chat_line": "presentation got moved to today",
+      "file": "stimuli/CN_NOTXT_02.svg"
     },
     {
       "sticker_id": "CN_NOTXT_03",
       "culture": "CN",
       "has_text": 0,
-      "set": "A",
-      "chat_line": null,
-      "file": null
+      "set": "B",
+      "chat_line": "I told you that movie would be bad",
+      "file": "stimuli/CN_NOTXT_03.svg"
     },
     {
       "sticker_id": "CN_NOTXT_04",
       "culture": "CN",
       "has_text": 0,
-      "set": "B",
-      "chat_line": null,
-      "file": null
+      "set": "C",
+      "chat_line": "I forgot your birthday, sorry",
+      "file": "stimuli/CN_NOTXT_04.svg"
     },
     {
       "sticker_id": "CN_NOTXT_05",
       "culture": "CN",
       "has_text": 0,
-      "set": "C",
-      "chat_line": null,
-      "file": null
+      "set": "A",
+      "chat_line": "want to go out tonight?",
+      "file": "stimuli/CN_NOTXT_05.svg"
     },
     {
       "sticker_id": "EN_TXT_01",
       "culture": "EN",
       "has_text": 1,
-      "set": "A",
-      "chat_line": null,
-      "file": null
+      "set": "B",
+      "chat_line": "three deadlines tomorrow and my laptop just died",
+      "file": "stimuli/EN_TXT_01.svg"
     },
     {
       "sticker_id": "EN_TXT_02",
       "culture": "EN",
       "has_text": 1,
-      "set": "B",
-      "chat_line": null,
-      "file": null
+      "set": "A",
+      "chat_line": "we got the tickets!!",
+      "file": "stimuli/EN_TXT_02.svg"
     },
     {
       "sticker_id": "EN_TXT_03",
       "culture": "EN",
       "has_text": 1,
-      "set": "A",
-      "chat_line": null,
-      "file": null
+      "set": "C",
+      "chat_line": "I put pineapple on the pizza",
+      "file": "stimuli/EN_TXT_03.svg"
     },
     {
       "sticker_id": "EN_TXT_04",
       "culture": "EN",
       "has_text": 1,
-      "set": "B",
-      "chat_line": null,
-      "file": null
+      "set": "A",
+      "chat_line": "monday again",
+      "file": "stimuli/EN_TXT_04.svg"
     },
     {
       "sticker_id": "EN_TXT_05",
       "culture": "EN",
       "has_text": 1,
-      "set": "C",
-      "chat_line": null,
-      "file": null
+      "set": "B",
+      "chat_line": "interview in an hour, so nervous",
+      "file": "stimuli/EN_TXT_05.svg"
     },
     {
       "sticker_id": "EN_NOTXT_01",
       "culture": "EN",
       "has_text": 0,
       "set": "B",
-      "chat_line": null,
-      "file": null
+      "chat_line": "it's friday!!!",
+      "file": "stimuli/EN_NOTXT_01.svg"
     },
     {
       "sticker_id": "EN_NOTXT_02",
       "culture": "EN",
       "has_text": 0,
-      "set": "C",
-      "chat_line": null,
-      "file": null
+      "set": "B",
+      "chat_line": "they ran out of the cake",
+      "file": "stimuli/EN_NOTXT_02.svg"
     },
     {
       "sticker_id": "EN_NOTXT_03",
       "culture": "EN",
       "has_text": 0,
-      "set": "B",
-      "chat_line": null,
-      "file": null
+      "set": "A",
+      "chat_line": "I'm definitely going to the gym tomorrow",
+      "file": "stimuli/EN_NOTXT_03.svg"
     },
     {
       "sticker_id": "EN_NOTXT_04",
       "culture": "EN",
       "has_text": 0,
       "set": "C",
-      "chat_line": null,
-      "file": null
+      "chat_line": "sent you the notes",
+      "file": "stimuli/EN_NOTXT_04.svg"
     },
     {
       "sticker_id": "EN_NOTXT_05",
       "culture": "EN",
       "has_text": 0,
-      "set": "A",
-      "chat_line": null,
-      "file": null
+      "set": "C",
+      "chat_line": "my code worked all day and now it doesn't",
+      "file": "stimuli/EN_NOTXT_05.svg"
     },
     {
       "sticker_id": "ATTN_01",
@@ -268,7 +268,7 @@
       "has_text": 1,
       "set": null,
       "chat_line": null,
-      "file": null
+      "file": "stimuli/ATTN_01.svg"
     }
   ]
 }
