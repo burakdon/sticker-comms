@@ -13,8 +13,9 @@ Usage:
     python src/collection/export_responses.py --url "<web app url>" --token "<EXPORT_TOKEN>"
     python src/collection/export_responses.py --from-local data/raw/local_json/
 
-    # or via environment variables
-    STICKER_EXPORT_URL=... STICKER_EXPORT_TOKEN=... python src/collection/export_responses.py
+    # or put STICKER_EXPORT_URL and STICKER_EXPORT_TOKEN in a .env file at the repo
+    # root (gitignored) and just run
+    python src/collection/export_responses.py
 """
 
 import argparse
@@ -29,6 +30,21 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = ROOT / "data" / "raw"
+
+
+def load_dotenv(path: Path = ROOT / ".env") -> None:
+    """Read KEY=VALUE lines from .env (gitignored) into os.environ, without overriding."""
+    if not path.exists():
+        return
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
+
+load_dotenv()
 
 COLUMNS = {
     "starts": ["participant_id", "started_at", "device", "user_agent", "received_at"],
