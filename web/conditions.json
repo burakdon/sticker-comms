@@ -74,7 +74,7 @@
       "sticker_id": "TR_NOTXT_02",
       "culture": "TR",
       "has_text": 0,
-      "set": "B",
+      "set": "C",
       "chat_line": "I ate your leftover pizza",
       "file": "stimuli/TR_NOTXT_02.webp"
     },
@@ -82,17 +82,17 @@
       "sticker_id": "TR_NOTXT_03",
       "culture": "TR",
       "has_text": 0,
-      "set": "A",
-      "chat_line": "the match last night...",
-      "file": "stimuli/TR_NOTXT_03.svg"
+      "set": "B",
+      "chat_line": "I think I'll start waking up at 5am from tomorrow",
+      "file": "stimuli/TR_NOTXT_03.webp"
     },
     {
       "sticker_id": "TR_NOTXT_04",
       "culture": "TR",
       "has_text": 0,
-      "set": "C",
-      "chat_line": "made börek, come over",
-      "file": "stimuli/TR_NOTXT_04.svg"
+      "set": "A",
+      "chat_line": "they cancelled the concert",
+      "file": "stimuli/TR_NOTXT_04.webp"
     },
     {
       "sticker_id": "TR_NOTXT_05",
@@ -100,7 +100,7 @@
       "has_text": 0,
       "set": "C",
       "chat_line": "can you cover my shift on saturday?",
-      "file": "stimuli/TR_NOTXT_05.svg"
+      "file": "stimuli/TR_NOTXT_05.webp"
     },
     {
       "sticker_id": "CN_TXT_01",
