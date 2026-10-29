@@ -42,7 +42,7 @@
       "sticker_id": "TR_TXT_03",
       "culture": "TR",
       "has_text": 1,
-      "set": "C",
+      "set": "A",
       "chat_line": "I WILL fight the TA if the grade doesn't change",
       "file": "stimuli/TR_TXT_03.webp"
     },
@@ -50,7 +50,7 @@
       "sticker_id": "TR_TXT_04",
       "culture": "TR",
       "has_text": 1,
-      "set": "A",
+      "set": "B",
       "chat_line": "my ex just posted a poem about healing",
       "file": "stimuli/TR_TXT_04.webp"
     },
@@ -58,7 +58,7 @@
       "sticker_id": "TR_TXT_05",
       "culture": "TR",
       "has_text": 1,
-      "set": "B",
+      "set": "C",
       "chat_line": "sorry, I can't make it to dinner tonight",
       "file": "stimuli/TR_TXT_05.webp"
     },
