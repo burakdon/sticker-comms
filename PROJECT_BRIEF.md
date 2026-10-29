@@ -53,7 +53,7 @@ For every sticker the author records, **before launch**:
 
 Sentiment roughly balanced within each culture (~4/3/3 across the three options).
 
-**Exclude:** anything dark/offensive, profanity, and any sticker showing the face of a classmate, friend, or child.
+**Exclude:** any sticker showing the face of a classmate, friend, or child. Profanity is allowed (it is part of how these stickers are used); say so in the report's limitations/ethics note.
 **Licensing:** licensed characters (Shrek, Hello Kitty, etc.) may be shown on the task page but are **not committed to the repo** (`in_repo = 0` in `data/stimuli.csv`; describe them in text).
 
 ### 3.2 Variables

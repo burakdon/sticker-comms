@@ -98,7 +98,7 @@ The images in `stimuli/` are emoji stand-ins so the pipeline can be tested. To s
 2. In `data/stimuli.csv`, update `file`, `description`, `intended_sentiment` and `chat_line`. Set `in_repo = 0` for licensed characters and host those outside the repo.
 3. Run `python src/collection/assign_conditions.py` and push.
 
-Don't add stickers with real faces of friends, classmates or children, or anything offensive.
+Don't add stickers with real faces of friends, classmates or children. Profanity is fine; it's how these stickers are actually used.
 
 ## Data
 
