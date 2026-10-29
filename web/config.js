@@ -2,7 +2,7 @@
 window.STICKER_CONFIG = {
   // Google Apps Script web-app URL (see backend/Code.gs). Leave empty for local
   // mode: responses stay in the browser and can be downloaded as JSON.
-  ENDPOINT_URL: "https://script.google.com/macros/s/AKfycbwHbtgqpb963qAaqHKzqacTQ7JHZF-wI0cmW7qZHHkiDCWQqwPK-DXhoiseaZDmVx6N8g/exec",
+  ENDPOINT_URL: "https://script.google.com/macros/s/AKfycbyFXpzK59sqChwFupWWVwg6pkiISEQsTBnThRjp_A_K73iN3P2KNMhyplweW6dRWYJNsQ/exec",
 
   // Must match SECRET in backend/Code.gs. It only keeps random junk out of the
   // sheet; it is visible to anyone who reads this file.
