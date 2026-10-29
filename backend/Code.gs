@@ -36,6 +36,9 @@ var SHEETS = {
     "response", "confidence", "rt_ms", "changed_answer",
   ],
   freetext: ["participant_id", "sticker_id", "text"],
+  // Identifying. Only served by doGet when asked for by name; never part of the
+  // default export. Delete this tab after the draw.
+  giveaway: ["participant_id", "name", "contact", "received_at"],
 };
 
 function doPost(e) {
@@ -68,6 +71,16 @@ function doPost(e) {
       return respond({ ok: true });
     }
 
+    if (body.type === "giveaway") {
+      var entry = body.entry || {};
+      if (!entry.participant_id || !entry.name || !entry.contact) {
+        return respond({ ok: false, error: "incomplete entry" });
+      }
+      entry.received_at = now;
+      appendRows(ss, "giveaway", [entry]);
+      return respond({ ok: true });
+    }
+
     return respond({ ok: false, error: "unknown type" });
   } catch (err) {
     return respond({ ok: false, error: String(err) });
@@ -77,14 +90,16 @@ function doPost(e) {
 }
 
 /**
- * GET ?token=EXPORT_TOKEN            -> all sheets as JSON
- * GET ?token=EXPORT_TOKEN&sheet=trials -> one sheet
+ * GET ?token=EXPORT_TOKEN              -> all study sheets as JSON (not giveaway)
+ * GET ?token=EXPORT_TOKEN&sheet=trials -> one sheet (giveaway only this way)
  */
 function doGet(e) {
   var params = (e && e.parameter) || {};
   if (params.token !== EXPORT_TOKEN) return respond({ ok: false, error: "bad token" });
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var names = params.sheet ? [params.sheet] : Object.keys(SHEETS);
+  var names = params.sheet
+    ? [params.sheet]
+    : Object.keys(SHEETS).filter(function (n) { return n !== "giveaway"; });
   var out = { ok: true, exported_at: new Date().toISOString(), sheets: {} };
   names.forEach(function (name) {
     out.sheets[name] = readRows(ss, name);

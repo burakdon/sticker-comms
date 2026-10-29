@@ -15,10 +15,11 @@
   <section id="screen-intro" class="screen">
     <h1>What does this sticker mean?</h1>
     <p>A 4-minute study for a Duke class project. You will see 31 stickers, some on their own and some inside a chat, and pick what the sender most likely means.</p>
+    <p class="giveaway-banner">🧸 Finish and you can enter a draw to win a <strong>baby squishy</strong>.</p>
     <ul class="bullets">
       <li>There are no right or wrong answers. Go with your first instinct.</li>
       <li>Works best on a phone. Please do the whole thing in one sitting.</li>
-      <li>Anonymous: we save only your answers, how long each took, and a few background questions. No names or contact details.</li>
+      <li>Your answers are anonymous. If you enter the giveaway, your name is stored separately and only used to contact the winner.</li>
     </ul>
     <p class="consent">By tapping <strong>Start</strong> you confirm you are 18 or older and agree to take part.</p>
     <button id="btn-start" class="btn primary">Start</button>
@@ -178,6 +179,16 @@
       <button id="btn-download" class="btn">Download my answers</button>
     </div>
     <p id="local-note" class="hint" hidden>Local mode: no server is configured, so your answers were kept in this browser. Use the download button and send the file to the study team.</p>
+
+    <form id="giveaway-form" class="giveaway" hidden>
+      <h3>🧸 Enter the baby squishy draw</h3>
+      <p class="hint">One entry per person. Stored separately from your answers and deleted after the draw.</p>
+      <input id="gw-name" name="name" type="text" placeholder="Your name" autocomplete="name" maxlength="60" required>
+      <input id="gw-contact" name="contact" type="text" placeholder="Email or phone number" autocomplete="email" maxlength="80" required>
+      <button type="submit" class="btn primary">Enter the draw</button>
+      <p id="gw-status" class="hint" hidden></p>
+    </form>
+
     <p>You can close this page now. If you know someone from Turkey, China or the US who would do this, please pass the link on.</p>
     <p id="contact" class="hint"></p>
   </section>

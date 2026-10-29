@@ -104,6 +104,7 @@ Don't add stickers with real faces of friends, classmates or children, or anythi
 
 - `data/stimuli.csv` is written by hand by the sticker authors (Burak: Turkish, teammate: Chinese, both: English/American). `intended_sentiment` is the sender-intent answer key. It is deliberately **not** included in `web/conditions.json`, so participants can't read it from the page.
 - Responses are anonymous: random participant ID, demographics in brackets, no names or contact details.
+- **Giveaway entries** (name + contact) live in a separate `giveaway` tab of the sheet, linked only by participant ID. The default export never pulls them; `python src/collection/export_responses.py --giveaway` writes them to `data/private/` (gitignored) and reports duplicate contacts. Delete the tab after the draw.
 
 ## Contributing
 

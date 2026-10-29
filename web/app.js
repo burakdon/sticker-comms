@@ -331,6 +331,7 @@
       if (ok) {
         try { localStorage.removeItem(key); } catch (_) {}
         setStatus("Saved. Thank you!");
+        $("#giveaway-form").hidden = false;
       } else {
         setStatus("Could not reach the server. Check your connection and tap Retry, or download your answers and send them to us.");
         $("#save-actions").hidden = false;
@@ -338,6 +339,39 @@
     };
     $("#btn-retry").onclick = attempt;
     attempt();
+  }
+
+  // Giveaway entry: name + contact go to their own sheet tab, linked only by
+  // participant_id, and are never exported with the study data.
+  async function onGiveawaySubmit(ev) {
+    ev.preventDefault();
+    const name = $("#gw-name").value.trim();
+    const contact = $("#gw-contact").value.trim();
+    const status = $("#gw-status");
+    status.hidden = false;
+    if (!name || !contact) {
+      status.textContent = "Please fill in both fields.";
+      return;
+    }
+    const btn = $("#giveaway-form button");
+    btn.disabled = true;
+    status.textContent = "Entering…";
+    let ok = false;
+    try {
+      ok = await post({
+        type: "giveaway",
+        secret: CFG.SECRET,
+        entry: { participant_id: state.participant.participant_id, name, contact },
+      });
+    } catch (_) { ok = false; }
+    if (ok) {
+      status.textContent = "You're in the draw. Good luck!";
+      $("#gw-name").disabled = true;
+      $("#gw-contact").disabled = true;
+    } else {
+      status.textContent = "Could not reach the server. Please try again.";
+      btn.disabled = false;
+    }
   }
 
   // Re-send anything a previous visit could not deliver. Safe to repeat: the
@@ -378,6 +412,7 @@
     $$(".choice").forEach((b) => b.addEventListener("click", onChoice));
     $$(".conf").forEach((b) => b.addEventListener("click", onConfidence));
     $("#btn-change").addEventListener("click", onChangeAnswer);
+    $("#giveaway-form").addEventListener("submit", onGiveawaySubmit);
     $("#btn-bonus-next").addEventListener("click", () => onBonusNext(false));
     $("#btn-bonus-skip").addEventListener("click", () => onBonusNext(true));
 

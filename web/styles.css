@@ -55,6 +55,11 @@ p { margin: 0 0 12px; }
 .bullets { padding-left: 20px; margin: 0 0 14px; }
 .bullets li { margin-bottom: 6px; }
 .consent { font-size: 15px; color: var(--muted); }
+.giveaway-banner { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; padding: 10px 14px; }
+.giveaway { margin: 18px 0; padding: 16px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; }
+.giveaway h3 { margin: 0 0 6px; font-size: 18px; }
+.giveaway input { margin-top: 8px; }
+.giveaway .btn.primary { margin-top: 12px; }
 .error { color: var(--error); font-size: 15px; }
 .status { font-size: 18px; }
 .row { display: flex; gap: 10px; margin-top: 8px; }

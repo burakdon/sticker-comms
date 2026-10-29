@@ -115,13 +115,48 @@ def write_csvs(sheets: dict[str, list[dict]], out_dir: Path) -> None:
                 print(f"  {col}: {natives} native")
 
 
+def export_giveaway(url: str, token: str) -> None:
+    """Pull giveaway entries (identifying) to data/private/, which git ignores.
+
+    Prints one row per distinct contact with the number of participant_ids that
+    used it, so duplicate participation is easy to spot before the draw.
+    """
+    req = Request(f"{url}?{urlencode({'token': token, 'sheet': 'giveaway'})}",
+                  headers={"User-Agent": "sticker-comms-export"})
+    with urlopen(req, timeout=60) as resp:
+        payload = json.load(resp)
+    if not payload.get("ok"):
+        sys.exit(f"backend error: {payload.get('error')}")
+    df = pd.DataFrame(payload["sheets"].get("giveaway", []),
+                      columns=["participant_id", "name", "contact", "received_at"])
+    out = ROOT / "data" / "private"
+    out.mkdir(parents=True, exist_ok=True)
+    df.to_csv(out / "giveaway.csv", index=False)
+    print(f"{len(df)} entries -> {out / 'giveaway.csv'} (gitignored)")
+    if len(df):
+        key = df["contact"].astype(str).str.strip().str.lower()
+        dupes = df.assign(_k=key).groupby("_k")["participant_id"].agg(["count", list])
+        dupes = dupes[dupes["count"] > 1]
+        print(f"{key.nunique()} unique contacts, {len(dupes)} entered more than once")
+        if len(dupes):
+            print(dupes.to_string())
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--url", default=os.environ.get("STICKER_EXPORT_URL"), help="Apps Script web app URL")
     parser.add_argument("--token", default=os.environ.get("STICKER_EXPORT_TOKEN"), help="EXPORT_TOKEN from Code.gs")
     parser.add_argument("--from-local", type=Path, help="directory of downloaded JSON payloads instead of the backend")
     parser.add_argument("--out", type=Path, default=RAW_DIR)
+    parser.add_argument("--giveaway", action="store_true",
+                        help="instead of study data, pull giveaway entries to data/private/ (gitignored)")
     args = parser.parse_args()
+
+    if args.giveaway:
+        if not (args.url and args.token):
+            sys.exit("--giveaway needs --url and --token (or the .env variables)")
+        export_giveaway(args.url, args.token)
+        return
 
     if args.from_local:
         sheets = load_local(args.from_local)

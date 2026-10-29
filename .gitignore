@@ -9,3 +9,5 @@ venv/
 # Licensed sticker images are shown on the task page but never committed
 stimuli/licensed/
 .claude/
+# Identifying giveaway entries, never committed
+data/private/
