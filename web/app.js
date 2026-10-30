@@ -321,6 +321,8 @@
     $("#btn-download").onclick = () => download(payload);
 
     if (!CFG.ENDPOINT_URL) {
+      $("#done-title").textContent = "Thank you!";
+      $("#closing").hidden = false;
       setStatus("Done.");
       $("#local-note").hidden = false;
       $("#save-actions").hidden = false;
@@ -329,15 +331,17 @@
     }
 
     const attempt = async () => {
-      setStatus("Saving your answers…");
+      setStatus("Saving your answers, hang on a second. The squishy draw is next 🧸");
       $("#save-actions").hidden = true;
       let ok = false;
       try { ok = await post(payload); } catch (_) { ok = false; }
       if (ok) {
         try { localStorage.removeItem(key); } catch (_) {}
-        setStatus("Saved. Thank you!");
+        $("#done-title").textContent = "Thank you!";
+        setStatus("Saved. Two quick things before you go:");
         $("#giveaway-form").hidden = false;
         $("#secret-form").hidden = false;
+        $("#closing").hidden = false;
       } else {
         setStatus("Could not reach the server. Check your connection and tap Retry, or download your answers and send them to us.");
         $("#save-actions").hidden = false;
