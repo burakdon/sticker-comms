@@ -116,7 +116,8 @@
       if (fs.hidden) return;
       const req = fs.querySelector("[required]");
       if (!req) return;
-      const valid = req.type === "radio" ? !!fs.querySelector("input:checked") : req.value.trim() !== "";
+      let valid = req.type === "radio" ? !!fs.querySelector("input:checked") : req.value.trim() !== "";
+      if (req.type === "number" && valid) valid = Number(req.value) >= 18 && Number(req.value) <= 99;
       fs.classList.toggle("invalid", !valid);
       ok = ok && valid;
     });
@@ -143,7 +144,9 @@
         native_language: data.native_language.trim(),
         bilingual: data.bilingual,
         other_languages: data.bilingual === "yes" ? (data.other_languages || "").trim() : "",
-        age_bracket: data.age_bracket,
+        // Stored under the existing `age_bracket` column (now a plain number) so
+        // the sheet layout and backend don't need to change.
+        age_bracket: Number(data.age),
         sticker_use_frequency: data.sticker_use_frequency,
         device: deviceType(),
         user_agent: navigator.userAgent,

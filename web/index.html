@@ -106,16 +106,8 @@
       </fieldset>
 
       <fieldset>
-        <legend>Age</legend>
-        <div class="pills">
-          <label><input type="radio" name="age_bracket" value="18-21" required><span>18–21</span></label>
-          <label><input type="radio" name="age_bracket" value="22-25"><span>22–25</span></label>
-          <label><input type="radio" name="age_bracket" value="26-29"><span>26–29</span></label>
-          <label><input type="radio" name="age_bracket" value="30-33"><span>30–33</span></label>
-          <label><input type="radio" name="age_bracket" value="34-37"><span>34–37</span></label>
-          <label><input type="radio" name="age_bracket" value="38-44"><span>38–44</span></label>
-          <label><input type="radio" name="age_bracket" value="45+"><span>45+</span></label>
-        </div>
+        <legend><label for="age">How old are you?</label></legend>
+        <input id="age" name="age" type="number" inputmode="numeric" min="18" max="99" placeholder="e.g. 24" required>
       </fieldset>
 
       <fieldset>
