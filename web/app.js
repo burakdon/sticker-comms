@@ -332,6 +332,7 @@
         try { localStorage.removeItem(key); } catch (_) {}
         setStatus("Saved. Thank you!");
         $("#giveaway-form").hidden = false;
+        $("#secret-form").hidden = false;
       } else {
         setStatus("Could not reach the server. Check your connection and tap Retry, or download your answers and send them to us.");
         $("#save-actions").hidden = false;
@@ -371,6 +372,37 @@
     } else {
       status.textContent = "Could not reach the server. Please try again.";
       btn.disabled = false;
+    }
+  }
+
+  // Secret question: AIPI cohort + two course grades, stored in their own
+  // sheet tab keyed by participant_id. Optional; skipping sends nothing.
+  async function onSecretSubmit(ev) {
+    ev.preventDefault();
+    const status = $("#secret-status");
+    const cohort = ($("input[name=aipi_cohort]:checked") || {}).value;
+    status.hidden = false;
+    if (!cohort) {
+      status.textContent = "Pick yes or no, or tap Skip.";
+      return;
+    }
+    const entry = {
+      participant_id: state.participant.participant_id,
+      aipi_cohort: cohort,
+      aipi520_midterm: cohort === "yes" ? $("#g520").value.trim() : "",
+      aipi510_project1: cohort === "yes" ? $("#g510").value.trim() : "",
+    };
+    const btns = $$("#secret-form button");
+    btns.forEach((b) => (b.disabled = true));
+    status.textContent = "Sending…";
+    let ok = false;
+    try { ok = await post({ type: "extra", secret: CFG.SECRET, entry }); } catch (_) { ok = false; }
+    if (ok) {
+      status.textContent = cohort === "yes" ? "Got it. Our lips are sealed." : "Got it, thanks!";
+      $$("#secret-form input").forEach((i) => (i.disabled = true));
+    } else {
+      status.textContent = "Could not reach the server. Please try again.";
+      btns.forEach((b) => (b.disabled = false));
     }
   }
 
@@ -414,6 +446,11 @@
     $$(".conf").forEach((b) => b.addEventListener("click", onConfidence));
     $("#btn-change").addEventListener("click", onChangeAnswer);
     $("#giveaway-form").addEventListener("submit", onGiveawaySubmit);
+    $("#secret-form").addEventListener("submit", onSecretSubmit);
+    $("#btn-secret-skip").addEventListener("click", () => ($("#secret-form").hidden = true));
+    $$("input[name=aipi_cohort]").forEach((r) =>
+      r.addEventListener("change", () => ($("#secret-grades").hidden = r.value !== "yes"))
+    );
     $("#btn-bonus-next").addEventListener("click", () => onBonusNext(false));
     $("#btn-bonus-skip").addEventListener("click", () => onBonusNext(true));
 

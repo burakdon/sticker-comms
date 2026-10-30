@@ -39,6 +39,8 @@ var SHEETS = {
   // Identifying. Only served by doGet when asked for by name; never part of the
   // default export. Delete this tab after the draw.
   giveaway: ["participant_id", "name", "contact", "received_at"],
+  // Optional end-of-study question for AIPI students (cohort + two grades).
+  extra: ["participant_id", "aipi_cohort", "aipi520_midterm", "aipi510_project1", "received_at"],
 };
 
 function doPost(e) {
@@ -78,6 +80,14 @@ function doPost(e) {
       }
       entry.received_at = now;
       appendRows(ss, "giveaway", [entry]);
+      return respond({ ok: true });
+    }
+
+    if (body.type === "extra") {
+      var extra = body.entry || {};
+      if (!extra.participant_id || !extra.aipi_cohort) return respond({ ok: false, error: "incomplete entry" });
+      extra.received_at = now;
+      appendRows(ss, "extra", [extra]);
       return respond({ ok: true });
     }
 

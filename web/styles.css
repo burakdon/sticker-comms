@@ -55,7 +55,43 @@ p { margin: 0 0 12px; }
 .bullets { padding-left: 20px; margin: 0 0 14px; }
 .bullets li { margin-bottom: 6px; }
 .consent { font-size: 15px; color: var(--muted); }
-.giveaway-banner { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; padding: 10px 14px; }
+/* Home page */
+.intro h1 { font-size: 30px; margin-top: 6px; }
+.intro h1 em { font-style: normal; color: var(--accent); }
+.lede { font-size: 18px; }
+.sticker-strip { display: flex; justify-content: space-between; gap: 4px; margin: 4px -4px 10px; }
+.sticker-strip img {
+  width: 15%; aspect-ratio: 1; object-fit: contain; border-radius: 12px;
+  animation: bob 2.8s ease-in-out infinite; animation-delay: var(--d); transform: rotate(var(--r));
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(var(--r)); }
+  50% { transform: translateY(-7px) rotate(calc(var(--r) * -1)); }
+}
+.prize {
+  display: flex; align-items: center; gap: 14px;
+  margin: 14px 0 16px; padding: 12px;
+  background: linear-gradient(135deg, #ffe9f3, #e7f0ff 55%, #fff3d6);
+  border: 1.5px solid rgba(0,0,0,0.06); border-radius: 18px; color: #1a1a1a;
+  box-shadow: 0 6px 20px rgba(230, 120, 170, 0.18);
+}
+.prize img { width: 42%; max-width: 190px; border-radius: 12px; animation: wiggle 3.5s ease-in-out infinite; }
+.prize-text { display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.35; }
+.prize-text strong { font-size: 19px; }
+@keyframes wiggle { 0%, 100% { transform: rotate(-2deg) scale(1); } 50% { transform: rotate(2deg) scale(1.03); } }
+@media (prefers-reduced-motion: reduce) { .sticker-strip img, .prize img { animation: none; } }
+
+/* Example stickers under the sticker-use question */
+.examples { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+.examples img { width: 50px; height: 50px; object-fit: contain; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); }
+.examples .hint { margin-left: 4px; }
+
+/* Secret question */
+.secret { margin: 18px 0; padding: 16px; background: var(--surface); border: 1.5px dashed var(--border); border-radius: 14px; }
+.secret h3 { margin: 0 0 6px; font-size: 18px; }
+.secret fieldset { margin: 10px 0 6px; }
+label.stacked { display: block; font-weight: 600; margin-top: 10px; }
+label.stacked input { margin-top: 6px; font-weight: 400; }
 .giveaway { margin: 18px 0; padding: 16px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; }
 .giveaway h3 { margin: 0 0 6px; font-size: 18px; }
 .giveaway input { margin-top: 8px; }

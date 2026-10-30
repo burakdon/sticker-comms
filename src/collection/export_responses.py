@@ -60,6 +60,7 @@ COLUMNS = {
         "response", "confidence", "rt_ms", "changed_answer",
     ],
     "freetext": ["participant_id", "sticker_id", "text"],
+    "extra": ["participant_id", "aipi_cohort", "aipi520_midterm", "aipi510_project1", "received_at"],
 }
 
 

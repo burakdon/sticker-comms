@@ -12,14 +12,30 @@
 <main class="app">
 
   <!-- 1. Landing / consent -->
-  <section id="screen-intro" class="screen">
-    <h1>What does this sticker mean?</h1>
-    <p>A 4-minute study for a Duke class project. You will see <span id="n-stickers">37</span> stickers, some on their own and some inside a chat, and pick what the sender most likely means.</p>
-    <p class="giveaway-banner">🧸 Finish and you can enter a draw to win a <strong>baby squishy</strong>.</p>
+  <section id="screen-intro" class="screen intro">
+    <div class="sticker-strip" aria-hidden="true">
+      <img src="assets/decor_raccoon.webp" alt="" style="--d:0s;--r:-8deg">
+      <img src="assets/decor_hsktr.webp" alt="" style="--d:.4s;--r:6deg">
+      <img src="assets/decor_bear.webp" alt="" style="--d:.8s;--r:-4deg">
+      <img src="assets/decor_hasbulla.webp" alt="" style="--d:1.2s;--r:7deg">
+      <img src="assets/decor_dog.webp" alt="" style="--d:1.6s;--r:-6deg">
+      <img src="assets/decor_mind.webp" alt="" style="--d:2s;--r:5deg">
+    </div>
+    <h1>What does this sticker <em>actually</em> mean?</h1>
+    <p class="lede">A 4-minute game for a Duke class project. <span id="n-stickers">37</span> stickers from three cultures, some on their own, some inside a chat. Your job: guess what the sender meant.</p>
+
+    <div class="prize">
+      <img src="assets/squishy.webp" alt="Four glittery baby squishies in orange, blue, pink and purple">
+      <div class="prize-text">
+        <strong>🧸 Win a baby squishy</strong>
+        <span>Finish the study and enter the draw. One winner, one squishy, zero regrets.</span>
+      </div>
+    </div>
+
     <ul class="bullets">
-      <li>There are no right or wrong answers. Go with your first instinct.</li>
-      <li>Works best on a phone. Please do the whole thing in one sitting.</li>
-      <li>Your answers are anonymous. If you enter the giveaway, your name is stored separately and only used to contact the winner.</li>
+      <li>No right or wrong answers. Go with your gut.</li>
+      <li>Best on a phone, in one sitting.</li>
+      <li>Anonymous. If you enter the giveaway, your name is stored separately and only used to contact the winner.</li>
     </ul>
     <p class="consent">By tapping <strong>Start</strong> you confirm you are 18 or older and agree to take part.</p>
     <button id="btn-start" class="btn primary">Start</button>
@@ -73,6 +89,13 @@
 
       <fieldset>
         <legend>How often do you send stickers or GIFs in chats?</legend>
+        <div class="examples" aria-hidden="true">
+          <img src="assets/decor_cam.webp" alt="">
+          <img src="assets/decor_clap.webp" alt="">
+          <img src="assets/decor_bear.webp" alt="">
+          <img src="assets/decor_dog.webp" alt="">
+          <span class="hint">things like these</span>
+        </div>
         <div class="pills">
           <label><input type="radio" name="sticker_use_frequency" value="daily" required><span>Daily</span></label>
           <label><input type="radio" name="sticker_use_frequency" value="weekly"><span>Weekly</span></label>
@@ -187,6 +210,31 @@
       <input id="gw-contact" name="contact" type="text" placeholder="Email or phone number" autocomplete="email" maxlength="80" required>
       <button type="submit" class="btn primary">Enter the draw</button>
       <p id="gw-status" class="hint" hidden></p>
+    </form>
+
+    <form id="secret-form" class="secret" hidden>
+      <h3>🤫 One last secret question</h3>
+      <p class="hint">Only for Duke AIPI students. Optional, anonymous, and purely for one fun chart in our presentation.</p>
+      <fieldset>
+        <legend>Are you in the AIPI program, this year's cohort?</legend>
+        <div class="pills">
+          <label><input type="radio" name="aipi_cohort" value="yes"><span>Yes</span></label>
+          <label><input type="radio" name="aipi_cohort" value="no"><span>No</span></label>
+        </div>
+      </fieldset>
+      <div id="secret-grades" hidden>
+        <label class="stacked" for="g520">Your AIPI 520 midterm grade
+          <input id="g520" name="aipi520_midterm" type="text" inputmode="decimal" placeholder="e.g. 88" maxlength="10" autocomplete="off">
+        </label>
+        <label class="stacked" for="g510">Your AIPI 510 project 1 grade
+          <input id="g510" name="aipi510_project1" type="text" inputmode="decimal" placeholder="e.g. 95" maxlength="10" autocomplete="off">
+        </label>
+      </div>
+      <div class="row">
+        <button type="button" id="btn-secret-skip" class="btn">Skip</button>
+        <button type="submit" class="btn primary">Submit</button>
+      </div>
+      <p id="secret-status" class="hint" hidden></p>
     </form>
 
     <p>You can close this page now. If you know someone from Turkey, China or the US who would do this, please pass the link on.</p>
