@@ -239,6 +239,8 @@
 
   function showBonus() {
     const s = state.bonus[state.bonusIdx];
+    $("#bonus-progress").textContent = `${state.bonusIdx + 1} of ${state.bonus.length}`;
+    $("#bonus-progress-fill").style.width = `${(state.bonusIdx / state.bonus.length) * 100}%`;
     $("#bonus-stimulus").innerHTML = `<div class="alone"><img class="sticker" src="${assetUrl(s.file)}" alt="" draggable="false"></div>`;
     $("#bonus-text").value = "";
   }

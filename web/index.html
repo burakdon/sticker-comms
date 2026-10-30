@@ -27,10 +27,11 @@
     <div class="prize">
       <img src="assets/squishy.webp" alt="Four glittery baby squishies in orange, blue, pink and purple">
       <div class="prize-text">
-        <strong>🧸 Win a baby squishy</strong>
-        <span>Finish the study and enter the draw. One winner, one squishy, zero regrets.</span>
+        <strong>🧸 Win a baby squishy*</strong>
+        <span>Finish the study and enter the draw. More than one squishy is up for grabs.</span>
       </div>
     </div>
+    <p class="fineprint">*One squishy is reserved for AIPI students who attend the Project 2 presentations in person.</p>
 
     <ul class="bullets">
       <li>No right or wrong answers. Go with your gut.</li>
@@ -184,6 +185,10 @@
   <!-- 5. Bonus free text -->
   <section id="screen-bonus" class="screen" hidden>
     <h2>One more thing <span class="hint">(optional)</span></h2>
+    <div class="progress-row">
+      <div class="progress-bar"><div id="bonus-progress-fill"></div></div>
+      <span id="bonus-progress" class="progress-text"></span>
+    </div>
     <p>Imagine <strong>you</strong> are sending this sticker. What message would you be replying to?</p>
     <div id="bonus-stimulus" class="stimulus"></div>
     <textarea id="bonus-text" rows="2" maxlength="200" placeholder="e.g. just failed my midterm"></textarea>
@@ -204,8 +209,9 @@
     <p id="local-note" class="hint" hidden>Local mode: no server is configured, so your answers were kept in this browser. Use the download button and send the file to the study team.</p>
 
     <form id="giveaway-form" class="giveaway" hidden>
-      <h3>🧸 Enter the baby squishy draw</h3>
+      <h3>🧸 Enter the baby squishy draw*</h3>
       <p class="hint">One entry per person. Stored separately from your answers and deleted after the draw.</p>
+      <p class="fineprint">*One squishy is reserved for AIPI students who attend the Project 2 presentations in person.</p>
       <input id="gw-name" name="name" type="text" placeholder="Your name" autocomplete="name" maxlength="60" required>
       <input id="gw-contact" name="contact" type="text" placeholder="Email or phone number" autocomplete="email" maxlength="80" required>
       <button type="submit" class="btn primary">Enter the draw</button>
@@ -213,21 +219,20 @@
     </form>
 
     <form id="secret-form" class="secret" hidden>
-      <h3>🤫 One last secret question</h3>
-      <p class="hint">Only for Duke AIPI students. Optional, anonymous, and purely for one fun chart in our presentation.</p>
+      <h3>Are you in this year's AIPI cohort?</h3>
+      <p class="hint">Optional and anonymous. Purely for one fun chart in our presentation.</p>
       <fieldset>
-        <legend>Are you in the AIPI program, this year's cohort?</legend>
         <div class="pills">
           <label><input type="radio" name="aipi_cohort" value="yes"><span>Yes</span></label>
           <label><input type="radio" name="aipi_cohort" value="no"><span>No</span></label>
         </div>
       </fieldset>
       <div id="secret-grades" hidden>
-        <label class="stacked" for="g520">Your AIPI 520 midterm grade
-          <input id="g520" name="aipi520_midterm" type="text" inputmode="decimal" placeholder="e.g. 88" maxlength="10" autocomplete="off">
+        <label class="stacked" for="g520">Your AIPI 520 midterm grade <span class="hint">(pretty please)</span>
+          <input id="g520" name="aipi520_midterm" type="text" inputmode="decimal" maxlength="10" autocomplete="off">
         </label>
-        <label class="stacked" for="g510">Your AIPI 510 project 1 grade
-          <input id="g510" name="aipi510_project1" type="text" inputmode="decimal" placeholder="e.g. 95" maxlength="10" autocomplete="off">
+        <label class="stacked" for="g510">Your AIPI 510 project 1 grade <span class="hint">(pretty please)</span>
+          <input id="g510" name="aipi510_project1" type="text" inputmode="decimal" maxlength="10" autocomplete="off">
         </label>
       </div>
       <div class="row">
@@ -237,7 +242,7 @@
       <p id="secret-status" class="hint" hidden></p>
     </form>
 
-    <p>You can close this page now. If you know someone from Turkey, China or the US who would do this, please pass the link on.</p>
+    <p>What a fun study right! Pass it on to friends and family please 🙂</p>
     <p id="contact" class="hint"></p>
   </section>
 
