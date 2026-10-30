@@ -23,16 +23,16 @@ CN_NOTXT_03,CN,0,teammate,Panda-head meme with smug smile (placeholder: panda + 
 CN_NOTXT_04,CN,0,teammate,Cat holding a knife (placeholder: cat + knife),sarcastic,"I forgot your birthday, sorry",1,stimuli/CN_NOTXT_04.svg,placeholder image
 CN_NOTXT_05,CN,0,teammate,Pig lying flat / tang ping (placeholder: pig + bed),negative,want to go out tonight?,1,stimuli/CN_NOTXT_05.svg,placeholder image
 CN_NOTXT_06,CN,0,teammate,"Panda-head meme with hands pressed together, pleading (placeholder: panda + folded hands)",negative,I need the group project done by tonight,1,stimuli/CN_NOTXT_06.svg,placeholder image
-EN_TXT_01,EN,1,burak+teammate,Dog in a burning room with the text 'This is fine',sarcastic,three deadlines tomorrow and my laptop just died,1,stimuli/EN_TXT_01.svg,placeholder image
-EN_TXT_02,EN,1,burak+teammate,Party popper with the text 'LET'S GOOO',positive,we got the tickets!!,1,stimuli/EN_TXT_02.svg,placeholder image
-EN_TXT_03,EN,1,burak+teammate,Shrek with the text 'I'm calling the police' (placeholder: police officer + phone),sarcastic,I put pineapple on the pizza,1,stimuli/EN_TXT_03.svg,placeholder image; real sticker is licensed (in_repo=0)
-EN_TXT_04,EN,1,burak+teammate,Weary face with the text 'big mood',negative,monday again,1,stimuli/EN_TXT_04.svg,placeholder image
-EN_TXT_05,EN,1,burak+teammate,Flexed arm with the text 'you got this',positive,"interview in an hour, so nervous",1,stimuli/EN_TXT_05.svg,placeholder image
-EN_TXT_06,EN,1,burak+teammate,Upside-down smiling face with the text 'it is what it is',sarcastic,the professor moved the deadline up by a week,1,stimuli/EN_TXT_06.svg,placeholder image
-EN_NOTXT_01,EN,0,burak+teammate,Dancing cat (placeholder: cat + dancer),positive,it's friday!!!,1,stimuli/EN_NOTXT_01.svg,placeholder image
-EN_NOTXT_02,EN,0,burak+teammate,Sad dog with big eyes (placeholder: dog + pleading face),negative,they ran out of the cake,1,stimuli/EN_NOTXT_02.svg,placeholder image
-EN_NOTXT_03,EN,0,burak+teammate,Eye-roll side-eye face (placeholder: face with rolling eyes),sarcastic,I'm definitely going to the gym tomorrow,1,stimuli/EN_NOTXT_03.svg,placeholder image
-EN_NOTXT_04,EN,0,burak+teammate,Seal giving a thumbs up (placeholder: seal + thumbs up),positive,sent you the notes,1,stimuli/EN_NOTXT_04.svg,placeholder image
-EN_NOTXT_05,EN,0,burak+teammate,Crying Wojak (placeholder: crying face),negative,my code worked all day and now it doesn't,1,stimuli/EN_NOTXT_05.svg,placeholder image
-EN_NOTXT_06,EN,0,burak+teammate,Neutral straight-mouth face (placeholder: neutral face),negative,how was the date?,1,stimuli/EN_NOTXT_06.svg,placeholder image
+EN_TXT_01,EN,1,burak+teammate,"Two men nodding, caption 'Did we nail it? Cause I feel like we nailed it.' (Workaholics)",positive,"presentation went so well, they asked zero hard questions",1,stimuli/EN_TXT_01.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
+EN_TXT_02,EN,1,burak+teammate,"Woman snapping her fingers, caption 'YAS QUEEN!'",positive,I finally quit that job,1,stimuli/EN_TXT_02.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
+EN_TXT_03,EN,1,burak+teammate,"Michael Scott screaming, caption 'NO, GOD! PLEASE NO! NO! NO! NOOOO!' (The Office)",negative,the group project got extended by two weeks,1,stimuli/EN_TXT_03.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
+EN_TXT_04,EN,1,burak+teammate,"Cartoon blue cat crying at a desk, caption 'DEVASTATED'",negative,they discontinued my favorite snack,1,stimuli/EN_TXT_04.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
+EN_TXT_05,EN,1,burak+teammate,"Patrick Star answering the phone, caption 'No, this is Patrick!' (SpongeBob)",sarcastic,is this the pizza place?,1,stimuli/EN_TXT_05.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
+EN_TXT_06,EN,1,burak+teammate,"Tina Fey frantic in an office, caption 'EVERYTHING IS FINE'",sarcastic,how's the thesis going?,1,stimuli/EN_TXT_06.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
+EN_NOTXT_01,EN,0,burak+teammate,Nick Wilde the fox (Zootopia) doing a little dance,positive,it's friday!!!,1,stimuli/EN_NOTXT_01.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
+EN_NOTXT_02,EN,0,burak+teammate,White chihuahua with a big open-mouth smile,positive,I saved you the last slice,1,stimuli/EN_NOTXT_02.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
+EN_NOTXT_03,EN,0,burak+teammate,Crying cat meme (photo of a cat with tears),negative,they ran out of the cake,1,stimuli/EN_NOTXT_03.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
+EN_NOTXT_04,EN,0,burak+teammate,Hasbulla crying and wiping his eyes,negative,my code worked all day and now it doesn't,1,stimuli/EN_NOTXT_04.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
+EN_NOTXT_05,EN,0,burak+teammate,Blinking white guy meme (Drew Scanlon),sarcastic,I'm definitely going to the gym tomorrow,1,stimuli/EN_NOTXT_05.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
+EN_NOTXT_06,EN,0,burak+teammate,Pedro the monkey puppet looking away awkwardly,sarcastic,did you remember to pay me back?,1,stimuli/EN_NOTXT_06.webp,"real sticker; sentiment + chat line drafted by Claude, authors to confirm"
 ATTN_01,ATTN,1,burak,Attention check: plain sticker reading 'Please select POSITIVE',positive,,1,stimuli/ATTN_01.svg,always shown alone; excluded from analysis

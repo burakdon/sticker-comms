@@ -219,48 +219,48 @@
       "culture": "EN",
       "has_text": 1,
       "set": "A",
-      "chat_line": "three deadlines tomorrow and my laptop just died",
-      "file": "stimuli/EN_TXT_01.svg"
+      "chat_line": "presentation went so well, they asked zero hard questions",
+      "file": "stimuli/EN_TXT_01.webp"
     },
     {
       "sticker_id": "EN_TXT_02",
       "culture": "EN",
       "has_text": 1,
-      "set": "A",
-      "chat_line": "we got the tickets!!",
-      "file": "stimuli/EN_TXT_02.svg"
+      "set": "B",
+      "chat_line": "I finally quit that job",
+      "file": "stimuli/EN_TXT_02.webp"
     },
     {
       "sticker_id": "EN_TXT_03",
       "culture": "EN",
       "has_text": 1,
-      "set": "B",
-      "chat_line": "I put pineapple on the pizza",
-      "file": "stimuli/EN_TXT_03.svg"
+      "set": "C",
+      "chat_line": "the group project got extended by two weeks",
+      "file": "stimuli/EN_TXT_03.webp"
     },
     {
       "sticker_id": "EN_TXT_04",
       "culture": "EN",
       "has_text": 1,
-      "set": "C",
-      "chat_line": "monday again",
-      "file": "stimuli/EN_TXT_04.svg"
+      "set": "A",
+      "chat_line": "they discontinued my favorite snack",
+      "file": "stimuli/EN_TXT_04.webp"
     },
     {
       "sticker_id": "EN_TXT_05",
       "culture": "EN",
       "has_text": 1,
       "set": "B",
-      "chat_line": "interview in an hour, so nervous",
-      "file": "stimuli/EN_TXT_05.svg"
+      "chat_line": "is this the pizza place?",
+      "file": "stimuli/EN_TXT_05.webp"
     },
     {
       "sticker_id": "EN_TXT_06",
       "culture": "EN",
       "has_text": 1,
       "set": "C",
-      "chat_line": "the professor moved the deadline up by a week",
-      "file": "stimuli/EN_TXT_06.svg"
+      "chat_line": "how's the thesis going?",
+      "file": "stimuli/EN_TXT_06.webp"
     },
     {
       "sticker_id": "EN_NOTXT_01",
@@ -268,47 +268,47 @@
       "has_text": 0,
       "set": "A",
       "chat_line": "it's friday!!!",
-      "file": "stimuli/EN_NOTXT_01.svg"
+      "file": "stimuli/EN_NOTXT_01.webp"
     },
     {
       "sticker_id": "EN_NOTXT_02",
       "culture": "EN",
       "has_text": 0,
-      "set": "C",
-      "chat_line": "they ran out of the cake",
-      "file": "stimuli/EN_NOTXT_02.svg"
+      "set": "B",
+      "chat_line": "I saved you the last slice",
+      "file": "stimuli/EN_NOTXT_02.webp"
     },
     {
       "sticker_id": "EN_NOTXT_03",
       "culture": "EN",
       "has_text": 0,
       "set": "C",
-      "chat_line": "I'm definitely going to the gym tomorrow",
-      "file": "stimuli/EN_NOTXT_03.svg"
+      "chat_line": "they ran out of the cake",
+      "file": "stimuli/EN_NOTXT_03.webp"
     },
     {
       "sticker_id": "EN_NOTXT_04",
       "culture": "EN",
       "has_text": 0,
-      "set": "B",
-      "chat_line": "sent you the notes",
-      "file": "stimuli/EN_NOTXT_04.svg"
+      "set": "A",
+      "chat_line": "my code worked all day and now it doesn't",
+      "file": "stimuli/EN_NOTXT_04.webp"
     },
     {
       "sticker_id": "EN_NOTXT_05",
       "culture": "EN",
       "has_text": 0,
-      "set": "A",
-      "chat_line": "my code worked all day and now it doesn't",
-      "file": "stimuli/EN_NOTXT_05.svg"
+      "set": "B",
+      "chat_line": "I'm definitely going to the gym tomorrow",
+      "file": "stimuli/EN_NOTXT_05.webp"
     },
     {
       "sticker_id": "EN_NOTXT_06",
       "culture": "EN",
       "has_text": 0,
-      "set": "B",
-      "chat_line": "how was the date?",
-      "file": "stimuli/EN_NOTXT_06.svg"
+      "set": "C",
+      "chat_line": "did you remember to pay me back?",
+      "file": "stimuli/EN_NOTXT_06.webp"
     },
     {
       "sticker_id": "ATTN_01",
