@@ -59,7 +59,7 @@
       "culture": "TR",
       "has_text": 1,
       "set": "C",
-      "chat_line": "sorry, I can't make it to dinner tonight",
+      "chat_line": "I'm going to hangout with some people tonight, won't be home for dinner",
       "file": "stimuli/TR_TXT_05.webp"
     },
     {
@@ -75,7 +75,7 @@
       "culture": "TR",
       "has_text": 0,
       "set": "A",
-      "chat_line": "made börek, come over",
+      "chat_line": "made cookies, come over",
       "file": "stimuli/TR_NOTXT_01.webp"
     },
     {
@@ -115,7 +115,7 @@
       "culture": "TR",
       "has_text": 0,
       "set": "C",
-      "chat_line": "I'm definitely not going to check my phone during the exam",
+      "chat_line": "I think half the class cheated in the exam, why didn't we!",
       "file": "stimuli/TR_NOTXT_06.webp"
     },
     {
@@ -235,7 +235,7 @@
       "culture": "EN",
       "has_text": 1,
       "set": "C",
-      "chat_line": "the group project got extended by two weeks",
+      "chat_line": "we just got assigned another group project",
       "file": "stimuli/EN_TXT_03.webp"
     },
     {
@@ -251,7 +251,7 @@
       "culture": "EN",
       "has_text": 1,
       "set": "B",
-      "chat_line": "is this the pizza place?",
+      "chat_line": "is this the pizza place we are going to?",
       "file": "stimuli/EN_TXT_05.webp"
     },
     {
