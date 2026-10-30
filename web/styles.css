@@ -148,7 +148,7 @@ legend { font-weight: 600; margin-bottom: 8px; padding: 0; }
 .pills.scale label { min-width: 0; flex: 1; }
 .scale-ends { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; margin-top: 6px; }
 fieldset.invalid legend { color: var(--error); }
-input[type="text"], textarea {
+input[type="text"], input[type="number"], textarea {
   width: 100%;
   padding: 12px 14px;
   border: 1.5px solid var(--border);
