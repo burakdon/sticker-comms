@@ -25,6 +25,27 @@
 
   let conditions = null;
   let state = null;
+  let stimulusLoad = 0;
+
+  // A missing/slow image must never become an answerable blank trial.
+  function waitForStimulus(container, ready, failed) {
+    const token = ++stimulusLoad;
+    const img = $(container).querySelector("img.sticker");
+    if (!img) { ready(); return; } // text_only intentionally has no image
+    let settled = false;
+    let timer;
+    const settle = (ok) => {
+      if (settled || token !== stimulusLoad) return;
+      settled = true;
+      clearTimeout(timer);
+      img.onload = img.onerror = null;
+      (ok ? ready : failed)();
+    };
+    img.onload = () => settle(img.naturalWidth > 0);
+    img.onerror = () => settle(false);
+    timer = setTimeout(() => settle(false), 15000);
+    if (img.complete) settle(img.naturalWidth > 0);
+  }
 
   // ---------- helpers ----------
 
@@ -179,8 +200,18 @@
     $("#stimulus").innerHTML = renderStimulus(t);
     $("#confidence").hidden = true;
     $("#choices").hidden = false;
-    $$(".choice").forEach((b) => (b.disabled = false));
-    state.current = { shownAt: performance.now(), changes: 0 };
+    $$(".choice").forEach((b) => (b.disabled = true));
+    state.current = null;
+    $("#stimulus-error").hidden = true;
+    $("#stimulus-loading").hidden = false;
+    waitForStimulus("#stimulus", () => {
+      $("#stimulus-loading").hidden = true;
+      state.current = { shownAt: performance.now(), changes: 0 };
+      $$(".choice").forEach((b) => (b.disabled = false));
+    }, () => {
+      $("#stimulus-loading").hidden = true;
+      $("#stimulus-error").hidden = false;
+    });
   }
 
   // Back from the confidence step to the three options. The first reaction
@@ -246,6 +277,13 @@
     $("#bonus-progress-fill").style.width = `${(state.bonusIdx / state.bonus.length) * 100}%`;
     $("#bonus-stimulus").innerHTML = `<div class="alone"><img class="sticker" src="${assetUrl(s.file)}" alt="" draggable="false"></div>`;
     $("#bonus-text").value = "";
+    $("#bonus-error").hidden = true;
+    $("#btn-bonus-next").disabled = true;
+    $("#bonus-text").disabled = true;
+    waitForStimulus("#bonus-stimulus", () => {
+      $("#btn-bonus-next").disabled = false;
+      $("#bonus-text").disabled = false;
+    }, () => { $("#bonus-error").hidden = false; });
   }
 
   function onBonusNext(skip) {
@@ -451,6 +489,8 @@
       })
     );
     $("#btn-begin").addEventListener("click", beginTrials);
+    $("#btn-stimulus-retry").addEventListener("click", showTrial);
+    $("#btn-bonus-retry").addEventListener("click", showBonus);
     $$(".choice").forEach((b) => b.addEventListener("click", onChoice));
     $$(".conf").forEach((b) => b.addEventListener("click", onConfidence));
     $("#btn-change").addEventListener("click", onChangeAnswer);

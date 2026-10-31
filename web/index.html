@@ -155,6 +155,11 @@
     </div>
 
     <div id="stimulus" class="stimulus"></div>
+    <p id="stimulus-loading" role="status" hidden>Loading the image…</p>
+    <div id="stimulus-error" role="alert" hidden>
+      <p class="error">The image could not load. Please check your connection and retry. Do not guess from a missing image.</p>
+      <button id="btn-stimulus-retry" class="btn" type="button">Retry image</button>
+    </div>
 
     <div id="choices" class="choices">
       <p class="question">What does the sender mean?</p>
@@ -186,6 +191,10 @@
     </div>
     <p>Imagine <strong>you</strong> are sending this sticker. What message would you be replying to?</p>
     <div id="bonus-stimulus" class="stimulus"></div>
+    <div id="bonus-error" role="alert" hidden>
+      <p class="error">The image could not load. Retry, or skip this optional question.</p>
+      <button id="btn-bonus-retry" class="btn" type="button">Retry image</button>
+    </div>
     <textarea id="bonus-text" rows="2" maxlength="200" placeholder="e.g. just failed my midterm"></textarea>
     <div class="row">
       <button id="btn-bonus-skip" class="btn">Skip</button>
