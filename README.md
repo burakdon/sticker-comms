@@ -14,7 +14,7 @@ data/
   sticker_sets.csv      generated: Latin-square set (A/B/C) per sticker
   raw/                  exported responses (participants.csv, trials.csv, freetext.csv, starts.csv)
   processed/            cleaned data
-stimuli/                sticker images (placeholders until the real ones are dropped in)
+stimuli/                sticker images and the attention-check SVG
 web/                    the task page (vanilla HTML/JS, hosted on GitHub Pages)
 backend/Code.gs         Google Apps Script that writes responses to a Google Sheet
 src/
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 # 1. Power analysis -> outputs/tables/power_*.csv, outputs/figures/power_curve.png
 python src/analysis/power_analysis.py
 
-# 2. Placeholder sticker images -> stimuli/*.svg (skips files that already exist)
+# 2. Optional development placeholders -> stimuli/*.svg (skips real files)
 python src/collection/make_placeholder_stickers.py
 
 # 3. Latin-square assignment -> data/sticker_sets.csv, web/conditions.json
