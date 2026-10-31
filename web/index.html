@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>Sticker Study</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="app">
+
+  <!-- 1. Landing / consent -->
+  <section id="screen-intro" class="screen intro">
+    <div class="sticker-strip" aria-hidden="true">
+      <img src="assets/decor_raccoon.webp" alt="" style="--d:0s;--r:-8deg">
+      <img src="assets/decor_hsktr.webp" alt="" style="--d:.4s;--r:6deg">
+      <img src="assets/decor_bear.webp" alt="" style="--d:.8s;--r:-4deg">
+      <img src="assets/decor_hasbulla.webp" alt="" style="--d:1.2s;--r:7deg">
+      <img src="assets/decor_dog.webp" alt="" style="--d:1.6s;--r:-6deg">
+      <img src="assets/decor_mind.webp" alt="" style="--d:2s;--r:5deg">
+    </div>
+    <h1>What does this sticker <em>actually</em> mean?</h1>
+    <p class="lede">A 4-minute game for a Duke class project. <span id="n-stickers">37</span> stickers from three cultures, some on their own, some inside a chat. Your job: guess what the sender meant.</p>
+
+    <div class="prize">
+      <img src="assets/squishy.webp" alt="Four glittery baby squishies in orange, blue, pink and purple">
+      <div class="prize-text">
+        <strong>🧸 Win a baby squishy*</strong>
+        <span>Finish the study and enter the draw. More than one squishy is up for grabs.</span>
+      </div>
+    </div>
+    <p class="fineprint">*One squishy is reserved for AIPI students who attend the Project 2 presentations in person.</p>
+
+    <ul class="bullets">
+      <li>No right or wrong answers. Go with your gut.</li>
+      <li>Best on a phone, in one sitting.</li>
+      <li>Anonymous. If you enter the giveaway, your name is stored separately and only used to contact the winner.</li>
+    </ul>
+    <p class="consent">By tapping <strong>Start</strong> you confirm you are 18 or older and agree to take part.</p>
+    <button id="btn-start" class="btn primary">Start</button>
+    <p id="load-error" class="error" hidden>Could not load the study. Please reload the page.</p>
+  </section>
+
+  <!-- 2. Pre-survey -->
+  <section id="screen-survey" class="screen" hidden>
+    <h2>A few quick questions</h2>
+    <form id="survey-form" novalidate>
+      <p class="field-intro">How familiar are you with each of these cultures? <span class="hint">Native = you grew up in it or speak the language natively.</span></p>
+
+      <fieldset>
+        <legend>Turkish culture</legend>
+        <div class="pills">
+          <label><input type="radio" name="fam_turkish" value="none" required><span>None</span></label>
+          <label><input type="radio" name="fam_turkish" value="some"><span>Some</span></label>
+          <label><input type="radio" name="fam_turkish" value="native"><span>Native</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Chinese culture</legend>
+        <div class="pills">
+          <label><input type="radio" name="fam_chinese" value="none" required><span>None</span></label>
+          <label><input type="radio" name="fam_chinese" value="some"><span>Some</span></label>
+          <label><input type="radio" name="fam_chinese" value="native"><span>Native</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>American culture</legend>
+        <div class="pills">
+          <label><input type="radio" name="fam_american" value="none" required><span>None</span></label>
+          <label><input type="radio" name="fam_american" value="some"><span>Some</span></label>
+          <label><input type="radio" name="fam_american" value="native"><span>Native</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>How well do you know internet memes?</legend>
+        <div class="pills scale">
+          <label><input type="radio" name="meme_fluency" value="1" required><span>1</span></label>
+          <label><input type="radio" name="meme_fluency" value="2"><span>2</span></label>
+          <label><input type="radio" name="meme_fluency" value="3"><span>3</span></label>
+          <label><input type="radio" name="meme_fluency" value="4"><span>4</span></label>
+          <label><input type="radio" name="meme_fluency" value="5"><span>5</span></label>
+        </div>
+        <div class="scale-ends"><span>Not at all</span><span>Very well</span></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>How often do you send stickers or GIFs in chats?</legend>
+        <div class="examples" aria-hidden="true">
+          <img src="assets/decor_cam.webp" alt="">
+          <img src="assets/decor_clap.webp" alt="">
+          <img src="assets/decor_bear.webp" alt="">
+          <img src="assets/decor_dog.webp" alt="">
+          <span class="hint">things like these</span>
+        </div>
+        <div class="pills">
+          <label><input type="radio" name="sticker_use_frequency" value="daily" required><span>Daily</span></label>
+          <label><input type="radio" name="sticker_use_frequency" value="weekly"><span>Weekly</span></label>
+          <label><input type="radio" name="sticker_use_frequency" value="rarely"><span>Rarely</span></label>
+          <label><input type="radio" name="sticker_use_frequency" value="never"><span>Never</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><label for="age">How old are you?</label></legend>
+        <input id="age" name="age" type="number" inputmode="numeric" min="18" max="99" placeholder="e.g. 24" required>
+      </fieldset>
+
+      <fieldset>
+        <legend><label for="native_language">Native language</label></legend>
+        <input id="native_language" name="native_language" type="text" autocomplete="off" placeholder="e.g. Turkish" required maxlength="40">
+      </fieldset>
+
+      <fieldset>
+        <legend>Do you speak any other languages fluently?</legend>
+        <div class="pills">
+          <label><input type="radio" name="bilingual" value="yes" required><span>Yes</span></label>
+          <label><input type="radio" name="bilingual" value="no"><span>No</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset id="other-languages-field" hidden>
+        <legend><label for="other_languages">Which ones?</label></legend>
+        <input id="other_languages" name="other_languages" type="text" autocomplete="off" placeholder="e.g. English, German" maxlength="80">
+      </fieldset>
+
+      <p id="survey-error" class="error" hidden>Please answer every question.</p>
+      <button type="submit" class="btn primary">Continue</button>
+    </form>
+  </section>
+
+  <!-- 3. Instructions -->
+  <section id="screen-instructions" class="screen" hidden>
+    <h2>How it works</h2>
+    <p>Each sticker was sent by someone in a chat. Your job is to guess <strong>what the sender meant</strong>:</p>
+    <ul class="bullets">
+      <li><strong>Positive</strong>: happy, supportive, excited, affectionate.</li>
+      <li><strong>Negative</strong>: sad, annoyed, disappointed, tired.</li>
+      <li><strong>Sarcastic</strong>: joking, teasing, or saying the opposite of what they mean.</li>
+    </ul>
+    <p>Sometimes you will see the message the sticker replied to. Sometimes the sticker is hidden and you only see the message. Answer anyway, with your best guess.</p>
+    <p>After each answer, say how sure you were. Try to answer quickly.</p>
+    <button id="btn-begin" class="btn primary">Begin</button>
+  </section>
+
+  <!-- 4. Trial -->
+  <section id="screen-trial" class="screen trial" hidden>
+    <div class="progress-row">
+      <div class="progress-bar"><div id="progress-fill"></div></div>
+      <span id="progress" class="progress-text"></span>
+    </div>
+
+    <div id="stimulus" class="stimulus"></div>
+
+    <div id="choices" class="choices">
+      <p class="question">What does the sender mean?</p>
+      <button class="btn choice" data-response="positive">Positive</button>
+      <button class="btn choice" data-response="negative">Negative</button>
+      <button class="btn choice" data-response="sarcastic">Sarcastic</button>
+    </div>
+
+    <div id="confidence" class="confidence" hidden>
+      <p class="question">How sure are you?</p>
+      <div class="scale-row">
+        <button class="btn conf" data-confidence="1">1</button>
+        <button class="btn conf" data-confidence="2">2</button>
+        <button class="btn conf" data-confidence="3">3</button>
+        <button class="btn conf" data-confidence="4">4</button>
+        <button class="btn conf" data-confidence="5">5</button>
+      </div>
+      <div class="scale-ends"><span>Just guessing</span><span>Very sure</span></div>
+      <button id="btn-change" class="btn link" type="button">← Change my answer</button>
+    </div>
+  </section>
+
+  <!-- 5. Bonus free text -->
+  <section id="screen-bonus" class="screen" hidden>
+    <h2>One more thing</h2>
+    <div class="progress-row">
+      <div class="progress-bar"><div id="bonus-progress-fill"></div></div>
+      <span id="bonus-progress" class="progress-text"></span>
+    </div>
+    <p>Imagine <strong>you</strong> are sending this sticker. What message would you be replying to?</p>
+    <div id="bonus-stimulus" class="stimulus"></div>
+    <textarea id="bonus-text" rows="2" maxlength="200" placeholder="e.g. just failed my midterm"></textarea>
+    <div class="row">
+      <button id="btn-bonus-skip" class="btn">Skip</button>
+      <button id="btn-bonus-next" class="btn primary">Next</button>
+    </div>
+  </section>
+
+  <!-- 6. Thank you -->
+  <section id="screen-done" class="screen" hidden>
+    <h2 id="done-title">Almost done…</h2>
+    <p id="save-status" class="status">Saving your answers, hang on a second. The squishy draw is next 🧸</p>
+    <div id="save-actions" class="row" hidden>
+      <button id="btn-retry" class="btn primary">Retry</button>
+      <button id="btn-download" class="btn">Download my answers</button>
+    </div>
+    <p id="local-note" class="hint" hidden>Local mode: no server is configured, so your answers were kept in this browser. Use the download button and send the file to the study team.</p>
+
+    <form id="giveaway-form" class="giveaway" hidden>
+      <h3>🧸 Enter the baby squishy draw*</h3>
+      <p class="hint">One entry per person. Stored separately from your answers and deleted after the draw.</p>
+      <p class="fineprint">*One squishy is reserved for AIPI students who attend the Project 2 presentations in person.</p>
+      <input id="gw-name" name="name" type="text" placeholder="Your name" autocomplete="name" maxlength="60" required>
+      <input id="gw-contact" name="contact" type="text" placeholder="Email or phone number" autocomplete="email" maxlength="80" required>
+      <button type="submit" class="btn primary">Enter the draw</button>
+      <p id="gw-status" class="hint" hidden></p>
+    </form>
+
+    <form id="secret-form" class="secret" hidden>
+      <h3>Are you in this year's AIPI cohort?</h3>
+      <p class="hint">Optional and anonymous. Purely for one fun chart in our presentation.</p>
+      <fieldset>
+        <div class="pills">
+          <label><input type="radio" name="aipi_cohort" value="yes"><span>Yes</span></label>
+          <label><input type="radio" name="aipi_cohort" value="no"><span>No</span></label>
+        </div>
+      </fieldset>
+      <div id="secret-grades" hidden>
+        <label class="stacked" for="g520">Your AIPI 520 midterm grade <span class="hint">(pretty please)</span>
+          <input id="g520" name="aipi520_midterm" type="text" inputmode="decimal" maxlength="10" autocomplete="off">
+        </label>
+        <label class="stacked" for="g510">Your AIPI 510 project 1 grade <span class="hint">(pretty please)</span>
+          <input id="g510" name="aipi510_project1" type="text" inputmode="decimal" maxlength="10" autocomplete="off">
+        </label>
+      </div>
+      <div class="row">
+        <button type="button" id="btn-secret-skip" class="btn">Skip</button>
+        <button type="submit" class="btn primary">Submit</button>
+      </div>
+      <p id="secret-status" class="hint" hidden></p>
+    </form>
+
+    <p id="closing" hidden>What a fun study right! Pass it on to friends and family please 🙂</p>
+    <p id="contact" class="hint"></p>
+  </section>
+
+</main>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
