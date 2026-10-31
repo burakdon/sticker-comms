@@ -123,96 +123,96 @@
       "culture": "CN",
       "has_text": 1,
       "set": "A",
-      "chat_line": "exam in 10 minutes",
-      "file": "stimuli/CN_TXT_01.svg"
+      "chat_line": "I just got a great internship offer!",
+      "file": "stimuli/CN_TXT_01.webp"
     },
     {
       "sticker_id": "CN_TXT_02",
       "culture": "CN",
       "has_text": 1,
       "set": "B",
-      "chat_line": "you need to stop ordering bubble tea every day",
-      "file": "stimuli/CN_TXT_02.svg"
+      "chat_line": "Our team won the game!",
+      "file": "stimuli/CN_TXT_02.webp"
     },
     {
       "sticker_id": "CN_TXT_03",
       "culture": "CN",
       "has_text": 1,
       "set": "C",
-      "chat_line": "want to come to my 6am run tomorrow?",
-      "file": "stimuli/CN_TXT_03.svg"
+      "chat_line": "The professor just added three more assignments.",
+      "file": "stimuli/CN_TXT_03.webp"
     },
     {
       "sticker_id": "CN_TXT_04",
       "culture": "CN",
       "has_text": 1,
       "set": "A",
-      "chat_line": "boss just added another meeting at 7pm",
-      "file": "stimuli/CN_TXT_04.svg"
+      "chat_line": "There are three exams scheduled for the same day.",
+      "file": "stimuli/CN_TXT_04.webp"
     },
     {
       "sticker_id": "CN_TXT_05",
       "culture": "CN",
       "has_text": 1,
       "set": "B",
-      "chat_line": "class is cancelled tomorrow",
-      "file": "stimuli/CN_TXT_05.svg"
+      "chat_line": "How are you holding up after staying up all night?",
+      "file": "stimuli/CN_TXT_05.webp"
     },
     {
       "sticker_id": "CN_TXT_06",
       "culture": "CN",
       "has_text": 1,
       "set": "C",
-      "chat_line": "can you send me the notes before class?",
-      "file": "stimuli/CN_TXT_06.svg"
+      "chat_line": "I told our professor the exam was way too easy.",
+      "file": "stimuli/CN_TXT_06.webp"
     },
     {
       "sticker_id": "CN_NOTXT_01",
       "culture": "CN",
       "has_text": 0,
       "set": "A",
-      "chat_line": "I finished the whole assignment",
-      "file": "stimuli/CN_NOTXT_01.svg"
+      "chat_line": "Our presentation got an A!",
+      "file": "stimuli/CN_NOTXT_01.webp"
     },
     {
       "sticker_id": "CN_NOTXT_02",
       "culture": "CN",
       "has_text": 0,
       "set": "B",
-      "chat_line": "presentation got moved to today",
-      "file": "stimuli/CN_NOTXT_02.svg"
+      "chat_line": "I got tickets to the concert!",
+      "file": "stimuli/CN_NOTXT_02.webp"
     },
     {
       "sticker_id": "CN_NOTXT_03",
       "culture": "CN",
       "has_text": 0,
-      "set": "B",
-      "chat_line": "I told you that movie would be bad",
-      "file": "stimuli/CN_NOTXT_03.svg"
+      "set": "C",
+      "chat_line": "Our weekend trip just got cancelled.",
+      "file": "stimuli/CN_NOTXT_03.webp"
     },
     {
       "sticker_id": "CN_NOTXT_04",
       "culture": "CN",
       "has_text": 0,
-      "set": "C",
-      "chat_line": "I forgot your birthday, sorry",
-      "file": "stimuli/CN_NOTXT_04.svg"
+      "set": "A",
+      "chat_line": "I failed the final exam.",
+      "file": "stimuli/CN_NOTXT_04.webp"
     },
     {
       "sticker_id": "CN_NOTXT_05",
       "culture": "CN",
       "has_text": 0,
-      "set": "C",
-      "chat_line": "want to go out tonight?",
-      "file": "stimuli/CN_NOTXT_05.svg"
+      "set": "B",
+      "chat_line": "Can you do my half of the group project too?",
+      "file": "stimuli/CN_NOTXT_05.webp"
     },
     {
       "sticker_id": "CN_NOTXT_06",
       "culture": "CN",
       "has_text": 0,
-      "set": "A",
-      "chat_line": "I need the group project done by tonight",
-      "file": "stimuli/CN_NOTXT_06.svg"
+      "set": "C",
+      "chat_line": "I never gossip about anyone, obviously.",
+      "file": "stimuli/CN_NOTXT_06.webp"
     },
     {
       "sticker_id": "EN_TXT_01",

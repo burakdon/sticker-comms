@@ -1,6 +1,6 @@
 /* Sticker sentiment task.
  *
- * Flow: intro -> pre-survey -> instructions -> 30 trials + 1 attention check
+ * Flow: intro -> pre-survey -> instructions -> 36 trials + 1 attention check
  *       -> optional free-text block -> thank-you (submit).
  *
  * Randomization happens here, on the client:

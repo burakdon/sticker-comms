@@ -67,9 +67,18 @@ function doPost(e) {
         return respond({ ok: true, duplicate: true }); // client retry; nothing to do
       }
       participant.received_at = now;
-      appendRows(ss, "participants", [participant]);
-      appendRows(ss, "trials", body.trials || []);
-      appendRows(ss, "freetext", body.freetext || []);
+      try {
+        // Commit the participant marker last. If an earlier append fails, remove
+        // any partial rows so the client's retry can safely write the full payload.
+        appendRows(ss, "trials", body.trials || []);
+        appendRows(ss, "freetext", body.freetext || []);
+        appendRows(ss, "participants", [participant]);
+      } catch (writeErr) {
+        deleteRowsForParticipant(ss, "trials", participant.participant_id);
+        deleteRowsForParticipant(ss, "freetext", participant.participant_id);
+        deleteRowsForParticipant(ss, "participants", participant.participant_id);
+        throw writeErr;
+      }
       return respond({ ok: true });
     }
 
@@ -158,6 +167,16 @@ function alreadyStored(ss, participantId) {
     if (String(ids[i][0]) === String(participantId)) return true;
   }
   return false;
+}
+
+function deleteRowsForParticipant(ss, name, participantId) {
+  var sheet = ss.getSheetByName(name);
+  if (!sheet || sheet.getLastRow() < 2) return;
+  var ids = sheet.getRange(2, 1, sheet.getLastRow() - 1, 1).getValues();
+  // Delete bottom-up so row indexes remain valid.
+  for (var i = ids.length - 1; i >= 0; i--) {
+    if (String(ids[i][0]) === String(participantId)) sheet.deleteRow(i + 2);
+  }
 }
 
 function readRows(ss, name) {
