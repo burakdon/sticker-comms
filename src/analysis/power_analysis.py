@@ -2,8 +2,8 @@
 
 Two approaches:
   1. Analytic: paired t-test on per-person accuracy, statsmodels TTestPower.
-  2. Simulation of the actual trial structure: each participant answers 10 binary
-     trials per condition on a rotating third of 30 stickers, with participant and
+  2. Simulation of the actual trial structure: each participant answers 12 binary
+     trials per condition on a rotating third of 36 stickers, with participant and
      sticker random effects on the logit scale. Per-person accuracy is then
      compared with a paired t-test, exactly as planned for the real data.
 

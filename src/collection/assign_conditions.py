@@ -1,6 +1,6 @@
 """Latin-square assignment of stickers to context conditions.
 
-Splits the 30 experimental stickers into three sets (A, B, C) of 10, balanced on
+Splits the 36 experimental stickers into three sets (A, B, C) of 12, balanced on
 culture x has_text and spread across intended sentiment. Each participant gets one
 of three rotations, so across the sample every sticker appears equally often in
 every context condition (alone / chat / text_only).
