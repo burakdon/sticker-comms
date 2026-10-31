@@ -118,7 +118,7 @@
     const you =
       trial.context === "chat"
         ? img
-        : `<div class="sticker hidden-sticker"><span>sticker hidden</span></div>`;
+        : `<div class="sticker hidden-sticker"><span>🙈 Sticker hidden<br><small>on purpose. Guess from the message alone.</small></span></div>`;
     return `
       <div class="chat">
         <div class="chat-header"><span class="avatar">👤</span>Friend</div>
@@ -206,6 +206,11 @@
     $("#progress").textContent = `${state.i + 1} / ${n}`;
     $("#progress-fill").style.width = `${(state.i / n) * 100}%`;
     $("#stimulus").innerHTML = renderStimulus(t);
+    // One-time explainer the first time a text-only trial comes up; most people
+    // skim the instructions and think the hidden box is a broken image.
+    const firstTextOnly = t.context === "text_only" && !state.seenTextOnly;
+    if (firstTextOnly) state.seenTextOnly = true;
+    $("#textonly-callout").hidden = !firstTextOnly;
     $("#confidence").hidden = true;
     $("#choices").hidden = false;
     $$(".choice").forEach((b) => (b.disabled = true));
