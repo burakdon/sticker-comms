@@ -21,7 +21,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "flyer"
-STUDY_URL = "https://burakdon.github.io/sticker-comms/web/"
+STUDY_URL = "https://burakdon.github.io/sticker-comms/web/?src=flyer"  # ?src tags the channel
 SHORT_URL = "burakdon.github.io/sticker-comms/web"
 
 

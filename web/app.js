@@ -66,6 +66,12 @@
   const deviceType = () =>
     /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ? "mobile" : "desktop";
 
+  // Recruitment channel, from ?src=flyer / ?src=whatsapp etc. in the link.
+  const source = () => {
+    const s = (new URLSearchParams(location.search).get("src") || "direct").trim().toLowerCase();
+    return s.replace(/[^a-z0-9_-]/g, "").slice(0, 30) || "direct";
+  };
+
   // Stimulus paths in stimuli.csv are relative to the repo root; the page lives in web/.
   const assetUrl = (file) => (/^https?:\/\//i.test(file) ? file : "../" + file);
 
@@ -170,7 +176,9 @@
         age_bracket: Number(data.age),
         sticker_use_frequency: data.sticker_use_frequency,
         device: deviceType(),
-        user_agent: navigator.userAgent,
+        // The recruitment channel rides along in the UA string so the sheet
+        // needs no new column; export_responses.py splits it back out.
+        user_agent: `${navigator.userAgent} src=${source()}`,
         screen_width: window.screen.width,
         started_at: isoNow(),
         finished_at: null,

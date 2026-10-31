@@ -47,13 +47,13 @@ def load_dotenv(path: Path = ROOT / ".env") -> None:
 load_dotenv()
 
 COLUMNS = {
-    "starts": ["participant_id", "started_at", "device", "user_agent", "received_at"],
+    "starts": ["participant_id", "started_at", "device", "user_agent", "received_at", "source"],  # source derived from UA
     "participants": [
         "participant_id", "rotation", "fam_turkish", "fam_chinese", "fam_american",
         "meme_fluency", "native_language", "bilingual", "other_languages",
         "age_bracket", "sticker_use_frequency",
         "device", "user_agent", "screen_width", "started_at", "finished_at",
-        "passed_attention_check", "n_trials", "received_at",
+        "passed_attention_check", "n_trials", "received_at", "source",
     ],
     "trials": [
         "participant_id", "sticker_id", "trial_order", "context", "is_attention_check",
@@ -99,6 +99,11 @@ def write_csvs(sheets: dict[str, list[dict]], out_dir: Path) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     for name, cols in COLUMNS.items():
         df = pd.DataFrame(sheets.get(name, []))
+        if "user_agent" in df:
+            # The page appends " src=<channel>" to the UA (no backend column needed).
+            ua = df["user_agent"].astype(str)
+            df["source"] = ua.str.extract(r" src=([a-z0-9_-]+)$")[0].fillna("direct")
+            df["user_agent"] = ua.str.replace(r" src=[a-z0-9_-]+$", "", regex=True)
         df = df.reindex(columns=cols)
         if name == "trials" and len(df):
             df = df.sort_values(["participant_id", "trial_order"])
