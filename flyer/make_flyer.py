@@ -1,0 +1,168 @@
+"""Build the recruitment flyer in two versions: color (for sharing) and B/W (for printing).
+
+Outputs, in flyer/:
+    flyer_color.png   1275x1650 (US Letter at 150 dpi) for WhatsApp / Slack / Instagram
+    flyer_color.pdf   same, as a PDF
+    flyer_bw.pdf      black-and-white print version
+    flyer_bw.png
+
+The QR code points at STUDY_URL. Rendering uses the system Chrome via Playwright.
+
+Usage:
+    python flyer/make_flyer.py
+"""
+
+import base64
+import io
+from pathlib import Path
+
+import qrcode
+from playwright.sync_api import sync_playwright
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "flyer"
+STUDY_URL = "https://burakdon.github.io/sticker-comms/web/"
+SHORT_URL = "burakdon.github.io/sticker-comms/web"
+
+
+def qr_data_uri(url: str) -> str:
+    qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_M, box_size=12, border=1)
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
+
+
+HTML = """<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<style>
+  @page {{ size: Letter; margin: 0; }}
+  * {{ box-sizing: border-box; }}
+  html, body {{ margin: 0; padding: 0; }}
+  body {{
+    width: 8.5in; height: 11in; overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #111; background: #fff;
+  }}
+  .page {{ width: 8.5in; height: 11in; padding: 0.55in 0.6in 0.45in; display: flex; flex-direction: column; position: relative; }}
+
+  /* ---- color theme ---- */
+  .color .page {{ background: linear-gradient(160deg, #fff7fb 0%, #eef3ff 50%, #fff6e3 100%); }}
+  .color .title em {{ color: #2a78d6; }}
+  .color .prize {{ background: linear-gradient(135deg, #ffe0ee, #dbe8ff 55%, #fff0c7); border: 2px solid rgba(0,0,0,.06); box-shadow: 0 12px 36px rgba(230,120,170,.22); }}
+  .color .qr-box {{ background: #fff; box-shadow: 0 12px 36px rgba(42,120,214,.18); border: 2px solid rgba(0,0,0,.06); }}
+  .color .pill {{ background: #2a78d6; color: #fff; }}
+  .color .strip img {{ box-shadow: 0 6px 16px rgba(0,0,0,.14); }}
+  .color .need strong {{ color: #d6336c; }}
+
+  /* ---- black & white theme ---- */
+  .bw img {{ filter: grayscale(1) contrast(1.15); }}
+  .bw .title em {{ text-decoration: underline; text-decoration-thickness: 6px; text-underline-offset: 6px; }}
+  .bw .prize {{ border: 3px dashed #000; background: #fff; }}
+  .bw .qr-box {{ border: 3px solid #000; background: #fff; }}
+  .bw .pill {{ background: #000; color: #fff; }}
+  .bw .strip img {{ border: 2px solid #000; background: #fff; }}
+
+  .strip {{ display: flex; justify-content: space-between; margin: 0 0.1in 0.2in; }}
+  .strip img {{ width: 0.95in; height: 0.95in; object-fit: contain; border-radius: 16px; background: #fff; }}
+  .strip img:nth-child(odd) {{ transform: rotate(-6deg); }}
+  .strip img:nth-child(even) {{ transform: rotate(5deg); }}
+
+  .title {{ font-size: 54px; line-height: 1.02; font-weight: 800; letter-spacing: -0.5px; margin: 0 0 10px; }}
+  .title em {{ font-style: normal; }}
+  .sub {{ font-size: 20px; line-height: 1.35; margin: 0 0 0.22in; max-width: 7in; }}
+  .sub b {{ font-weight: 700; }}
+
+  .mid {{ display: flex; gap: 0.3in; align-items: stretch; margin-bottom: 0.22in; }}
+  .qr-box {{ flex: 0 0 3.05in; border-radius: 22px; padding: 0.2in; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }}
+  .qr-box img {{ width: 2.45in; height: 2.45in; image-rendering: pixelated; filter: none; }}
+  .qr-box .scan {{ font-size: 22px; font-weight: 800; margin-top: 8px; }}
+  .qr-box .url {{ font-size: 12.5px; color: #444; margin-top: 2px; word-break: break-all; }}
+
+  .prize {{ flex: 1; border-radius: 22px; padding: 0.22in 0.24in; display: flex; flex-direction: column; justify-content: center; gap: 8px; }}
+  .prize img {{ width: 100%; max-height: 1.75in; object-fit: contain; border-radius: 14px; }}
+  .prize h2 {{ font-size: 30px; line-height: 1.05; margin: 2px 0 0; font-weight: 800; }}
+  .prize p {{ font-size: 16px; line-height: 1.35; margin: 0; }}
+  .pill {{ display: inline-block; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 999px; letter-spacing: .3px; text-transform: uppercase; }}
+
+  .how {{ display: flex; gap: 0.2in; margin-bottom: 0.2in; }}
+  .how div {{ flex: 1; font-size: 15px; line-height: 1.35; }}
+  .how .n {{ font-size: 28px; font-weight: 800; display: block; line-height: 1; margin-bottom: 4px; }}
+
+  .need {{ font-size: 18px; line-height: 1.35; margin: 0 0 0.12in; }}
+  .foot {{ margin-top: auto; font-size: 12px; color: #444; line-height: 1.35; }}
+  .foot .fine {{ font-size: 10.5px; color: #666; margin-top: 4px; }}
+</style></head>
+<body class="{theme}">
+<div class="page">
+  <div class="strip">
+    <img src="../web/assets/decor_raccoon.webp"><img src="../web/assets/decor_hsktr.webp"><img src="../web/assets/decor_bear.webp">
+    <img src="../web/assets/decor_hasbulla.webp"><img src="../web/assets/decor_dog.webp"><img src="../web/assets/decor_mind.webp">
+  </div>
+
+  <h1 class="title">What does this sticker <em>actually</em> mean?</h1>
+  <p class="sub">A <b>5-minute game</b> on your phone. 37 stickers from Turkish, Chinese and American chats. Some on their own, some inside a conversation. Guess what the sender meant.</p>
+
+  <div class="mid">
+    <div class="qr-box">
+      <img src="{qr}" alt="QR code">
+      <div class="scan">Scan to play</div>
+      <div class="url">{short_url}</div>
+    </div>
+    <div class="prize">
+      <img src="../web/assets/squishy.webp" alt="baby squishies">
+      <span class="pill">Giveaway</span>
+      <h2>🧸 Win a baby squishy*</h2>
+      <p>Finish the game and enter the draw. More than one squishy is up for grabs.</p>
+    </div>
+  </div>
+
+  <div class="how">
+    <div><span class="n">1</span>Scan the code, tap Start.</div>
+    <div><span class="n">2</span>For each sticker, pick positive, negative or sarcastic.</div>
+    <div><span class="n">3</span>Enter the squishy draw at the end.</div>
+  </div>
+
+  <p class="need">We need <strong>everyone</strong>, and especially native <strong>Turkish</strong>, <strong>Chinese</strong> and <strong>English</strong> speakers. Pass it on to friends and family.</p>
+
+  <div class="foot">
+    Duke AIPI 510 · Module Project 2 · Burak Dönbekci &amp; Canyang Xu · Anonymous, 18+
+    <div class="fine">*One squishy is reserved for AIPI students who attend the Project 2 presentations in person. Giveaway contact details are stored separately from answers and deleted after the draw.</div>
+  </div>
+</div>
+</body></html>
+"""
+
+
+def main() -> None:
+    OUT.mkdir(exist_ok=True)
+    qr = qr_data_uri(STUDY_URL)
+    with sync_playwright() as p:
+        browser = p.chromium.launch(channel="chrome", headless=True)
+        page = browser.new_page(viewport={"width": 816, "height": 1056}, device_scale_factor=1)
+        for theme in ("color", "bw"):
+            html_path = OUT / f"flyer_{theme}.html"
+            html_path.write_text(HTML.format(theme=theme, qr=qr, short_url=SHORT_URL), encoding="utf-8")
+            page.goto(html_path.as_uri())
+            page.wait_for_timeout(400)
+            page.pdf(path=str(OUT / f"flyer_{theme}.pdf"), format="Letter", print_background=True, prefer_css_page_size=True)
+            page.screenshot(path=str(OUT / f"flyer_{theme}.png"), full_page=False, scale="device",
+                            clip={"x": 0, "y": 0, "width": 816, "height": 1056})
+            print("wrote", theme)
+        browser.close()
+    # Higher-resolution PNG for sharing (150 dpi).
+    with sync_playwright() as p:
+        browser = p.chromium.launch(channel="chrome", headless=True)
+        page = browser.new_page(viewport={"width": 816, "height": 1056}, device_scale_factor=1.5625)
+        for theme in ("color", "bw"):
+            page.goto((OUT / f"flyer_{theme}.html").as_uri())
+            page.wait_for_timeout(400)
+            page.screenshot(path=str(OUT / f"flyer_{theme}.png"), clip={"x": 0, "y": 0, "width": 816, "height": 1056})
+        browser.close()
+    print("done:", sorted(f.name for f in OUT.glob("flyer_*")))
+
+
+if __name__ == "__main__":
+    main()

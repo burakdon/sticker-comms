@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<style>
+  @page { size: Letter; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 8.5in; height: 11in; overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #111; background: #fff;
+  }
+  .page { width: 8.5in; height: 11in; padding: 0.55in 0.6in 0.45in; display: flex; flex-direction: column; position: relative; }
+
+  /* ---- color theme ---- */
+  .color .page { background: linear-gradient(160deg, #fff7fb 0%, #eef3ff 50%, #fff6e3 100%); }
+  .color .title em { color: #2a78d6; }
+  .color .prize { background: linear-gradient(135deg, #ffe0ee, #dbe8ff 55%, #fff0c7); border: 2px solid rgba(0,0,0,.06); box-shadow: 0 12px 36px rgba(230,120,170,.22); }
+  .color .qr-box { background: #fff; box-shadow: 0 12px 36px rgba(42,120,214,.18); border: 2px solid rgba(0,0,0,.06); }
+  .color .pill { background: #2a78d6; color: #fff; }
+  .color .strip img { box-shadow: 0 6px 16px rgba(0,0,0,.14); }
+  .color .need strong { color: #d6336c; }
+
+  /* ---- black & white theme ---- */
+  .bw img { filter: grayscale(1) contrast(1.15); }
+  .bw .title em { text-decoration: underline; text-decoration-thickness: 6px; text-underline-offset: 6px; }
+  .bw .prize { border: 3px dashed #000; background: #fff; }
+  .bw .qr-box { border: 3px solid #000; background: #fff; }
+  .bw .pill { background: #000; color: #fff; }
+  .bw .strip img { border: 2px solid #000; background: #fff; }
+
+  .strip { display: flex; justify-content: space-between; margin: 0 0.1in 0.2in; }
+  .strip img { width: 0.95in; height: 0.95in; object-fit: contain; border-radius: 16px; background: #fff; }
+  .strip img:nth-child(odd) { transform: rotate(-6deg); }
+  .strip img:nth-child(even) { transform: rotate(5deg); }
+
+  .title { font-size: 54px; line-height: 1.02; font-weight: 800; letter-spacing: -0.5px; margin: 0 0 10px; }
+  .title em { font-style: normal; }
+  .sub { font-size: 20px; line-height: 1.35; margin: 0 0 0.22in; max-width: 7in; }
+  .sub b { font-weight: 700; }
+
+  .mid { display: flex; gap: 0.3in; align-items: stretch; margin-bottom: 0.22in; }
+  .qr-box { flex: 0 0 3.05in; border-radius: 22px; padding: 0.2in; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .qr-box img { width: 2.45in; height: 2.45in; image-rendering: pixelated; filter: none; }
+  .qr-box .scan { font-size: 22px; font-weight: 800; margin-top: 8px; }
+  .qr-box .url { font-size: 12.5px; color: #444; margin-top: 2px; word-break: break-all; }
+
+  .prize { flex: 1; border-radius: 22px; padding: 0.22in 0.24in; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+  .prize img { width: 100%; max-height: 1.75in; object-fit: contain; border-radius: 14px; }
+  .prize h2 { font-size: 30px; line-height: 1.05; margin: 2px 0 0; font-weight: 800; }
+  .prize p { font-size: 16px; line-height: 1.35; margin: 0; }
+  .pill { display: inline-block; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 999px; letter-spacing: .3px; text-transform: uppercase; }
+
+  .how { display: flex; gap: 0.2in; margin-bottom: 0.2in; }
+  .how div { flex: 1; font-size: 15px; line-height: 1.35; }
+  .how .n { font-size: 28px; font-weight: 800; display: block; line-height: 1; margin-bottom: 4px; }
+
+  .need { font-size: 18px; line-height: 1.35; margin: 0 0 0.12in; }
+  .foot { margin-top: auto; font-size: 12px; color: #444; line-height: 1.35; }
+  .foot .fine { font-size: 10.5px; color: #666; margin-top: 4px; }
+</style></head>
+<body class="color">
+<div class="page">
+  <div class="strip">
+    <img src="../web/assets/decor_raccoon.webp"><img src="../web/assets/decor_hsktr.webp"><img src="../web/assets/decor_bear.webp">
+    <img src="../web/assets/decor_hasbulla.webp"><img src="../web/assets/decor_dog.webp"><img src="../web/assets/decor_mind.webp">
+  </div>
+
+  <h1 class="title">What does this sticker <em>actually</em> mean?</h1>
+  <p class="sub">A <b>5-minute game</b> on your phone. 37 stickers from Turkish, Chinese and American chats. Some on their own, some inside a conversation. Guess what the sender meant.</p>
+
+  <div class="mid">
+    <div class="qr-box">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaQAAAGkAQAAAABWN2yYAAACwklEQVR4nO2cQY7bMAxFPwfZSzfI/Y+VG4gnYBekJcrtLFo4HXPmC0Eg23pICHzQpEhbDH8/9OMfIIAUqc8plTkAzAk0DgFIx76sgl2kqlHmY2wX5GlQMTOo+KW0rIZdpIpRunygaw0qUEEzANIxr8akil2kylIihwKbQUU6XI3v+C1SpI7xOJ9oA4AAULFmHiVe9FukSH02HsDm8Sx9A5BmomLa92X3t4tUPSrS4A4g0uSID1XsJTN/Sctq2EWqDvU4h3/NZJ+Ln9mW3d8uUrUo2MD0eGaWz3u24gvyGhv3t4tULWppz/cG47DZJk4/PFwidUjqaioc3fJ4SYFolsUZaxr9IanLqXB3v0+W9swO+QGgDkm9h1Kxl/iudXg8FXuJiLgUjxoK0p52BbtIVaKwAr8WbjBKey3uyNlPHjfx+9tFqha1brsApg5TSoIVHy593t8uUrWolIO4/HKImBSIpEnqkNTVVM6CASSXmK5OhxnpM3VI6mIq+hxMxVIlRdow7aY96ine8NCGROn5/naRqkWtjWvknMUvJVc5b82MD0m9gUrZx2y3bmnn0OwPCHVI6mIqZx+rpoycR7dzvY86JHU1Ff2H0ob31YT7ayN6bFTM27O1m/fH/u9/SOonUA8ArjFTcaXZ8fEkBS7OZtB+PLRyf7tIVaXkGWFhNLt6vU9FnuaHX/4PSX1fag8OgVNpb7bcxOLImu9vF6laFCyPce71AlJRb8xt7fvbRaoalV/U4JuHKvHMshdZdL3eAXH7rmAXqUrU2ic879uMY0Hyhwdyf7tIFaTWixpgLwG2arKIrOQl+mOL2EWqDHV+jn7uIsbEXy0CoA1oNxXTbgXsIlWLOutwlfH88Xnt8RC9CrzhgfuHpK6n9vgwtXttPbEpYmT/Iak3UCsfQWqwmZ+cnkRwyH4bUtdTwvfBkroB9Qu8JnRd147soAAAAABJRU5ErkJggg==" alt="QR code">
+      <div class="scan">Scan to play</div>
+      <div class="url">burakdon.github.io/sticker-comms/web</div>
+    </div>
+    <div class="prize">
+      <img src="../web/assets/squishy.webp" alt="baby squishies">
+      <span class="pill">Giveaway</span>
+      <h2>🧸 Win a baby squishy*</h2>
+      <p>Finish the game and enter the draw. More than one squishy is up for grabs.</p>
+    </div>
+  </div>
+
+  <div class="how">
+    <div><span class="n">1</span>Scan the code, tap Start.</div>
+    <div><span class="n">2</span>For each sticker, pick positive, negative or sarcastic.</div>
+    <div><span class="n">3</span>Enter the squishy draw at the end.</div>
+  </div>
+
+  <p class="need">We need <strong>everyone</strong>, and especially native <strong>Turkish</strong>, <strong>Chinese</strong> and <strong>English</strong> speakers. Pass it on to friends and family.</p>
+
+  <div class="foot">
+    Duke AIPI 510 · Module Project 2 · Burak Dönbekci &amp; Canyang Xu · Anonymous, 18+
+    <div class="fine">*One squishy is reserved for AIPI students who attend the Project 2 presentations in person. Giveaway contact details are stored separately from answers and deleted after the draw.</div>
+  </div>
+</div>
+</body></html>
