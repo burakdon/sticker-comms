@@ -15,3 +15,5 @@ data/private/
 # Downloaded candidate GIFs; only chosen ones get copied out
 stimuli/candidates/
 stimuli/shortlist english/
+# Course grades from the end-of-study question: kept local, not published
+data/raw/extra.csv
