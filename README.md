@@ -130,3 +130,7 @@ Don't add stickers with real faces of friends, classmates or children. Profanity
 ## Contributing
 
 `main` ← `dev` ← personal branches (`dev-burak`, `dev-<teammate>`). Open PRs into `dev`; every PR is reviewed by the other team member before merging.
+
+## Presentation
+
+`report/sticker-comms-deck.pptx` is generated: `python src/viz/slide_figures.py` draws the slide figures into `outputs/figures/slides/`, then `node report/build_deck.js` (needs `pptxgenjs`) assembles the deck. Creative slides are marked `PLACEHOLDER` for hand-editing in PowerPoint.
