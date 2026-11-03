@@ -4,108 +4,126 @@
 <meta charset="utf-8">
 <title>cold open</title>
 <style>
-  :root { --bg: #111b21; --panel: #202c33; --panel2: #2a3942; --line: #2f3b43; --text: #e9edef; --muted: #8696a0; --green: #00a884; --bubble: #202c33; --me: #005c4b; }
+  :root { --bg: #111b21; --nav: #1a2329; --panel: #202c33; --panel2: #2a3942; --line: #222d34; --text: #e9edef; --muted: #8696a0; --green: #00a884; --bubble: #202c33; --sel: #2a3942; }
   * { box-sizing: border-box; }
   html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; color: var(--text); font-size: 17px; }
-  .window { position: absolute; inset: 0; display: grid; grid-template-columns: 288px 420px 1fr; background: var(--bg); }
+  .window { position: absolute; inset: 0; display: grid; grid-template-columns: 290px 418px 1fr; background: var(--bg); }
 
-  /* ---- macOS-ish left nav ---- */
-  .nav { background: #161e24; padding: 18px 14px; border-right: 1px solid var(--line); }
-  .lights { display: flex; gap: 8px; margin: 0 0 30px 2px; }
+  /* ---- left nav (macOS WhatsApp) ---- */
+  .nav { background: var(--nav); padding: 20px 14px; border-right: 1px solid var(--line); position: relative; }
+  .lights { display: flex; gap: 8px; margin: 0 0 34px 2px; }
   .lights i { width: 13px; height: 13px; border-radius: 50%; display: block; }
-  .nav .item { display: flex; align-items: center; gap: 14px; padding: 10px 12px; border-radius: 8px; color: var(--text); font-size: 17px; }
-  .nav .item.active { background: #2a3942; }
+  .nav .item { display: flex; align-items: center; gap: 14px; padding: 10px 12px; border-radius: 8px; color: var(--text); font-size: 17px; margin-bottom: 2px; }
+  .nav .item svg { width: 24px; height: 24px; fill: none; stroke: var(--text); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  .nav .item.active { background: var(--sel); }
   .nav .item .n { margin-left: auto; color: var(--muted); font-size: 15px; }
-  .nav .sec { color: var(--muted); font-size: 13px; margin: 18px 12px 8px; }
-  .nav .you { position: absolute; bottom: 20px; left: 14px; display: flex; align-items: center; gap: 12px; }
-  .ava { width: 42px; height: 42px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 22px; flex: none; }
+  .nav .sec { color: var(--muted); font-size: 13px; margin: 20px 12px 8px; display: flex; justify-content: space-between; }
+  .nav .you { position: absolute; bottom: 20px; left: 14px; right: 14px; display: flex; align-items: center; gap: 12px; font-size: 17px; }
+  .nav .you .dots { margin-left: auto; color: var(--muted); letter-spacing: 3px; }
+
+  .ava { width: 42px; height: 42px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex: none; overflow: hidden; background: #6b7c85; }
+  .ava svg { width: 100%; height: 100%; }
+  .ava.group { background: #00a884; }
+  .ava.group svg { width: 60%; height: 60%; }
 
   /* ---- chat list ---- */
-  .list { border-right: 1px solid var(--line); background: var(--bg); display: flex; flex-direction: column; }
-  .list .head { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px 8px; font-weight: 700; font-size: 18px; }
-  .search { margin: 6px 16px 10px; background: var(--panel); border-radius: 10px; padding: 9px 14px; color: var(--muted); font-size: 16px; }
-  .pills { display: flex; gap: 8px; margin: 0 16px 10px; }
-  .pill { padding: 6px 14px; border-radius: 999px; background: var(--panel); color: var(--muted); font-size: 15px; }
-  .pill.on { background: #0b3d33; color: #9fe1cb; }
-  .row { display: flex; gap: 14px; padding: 12px 16px; border-bottom: 1px solid #1f2a30; align-items: center; }
-  .row.sel { background: #2a3942; }
-  .row .ava { width: 54px; height: 54px; font-size: 26px; }
+  .list { border-right: 1px solid var(--line); background: var(--bg); display: flex; flex-direction: column; overflow: hidden; }
+  .list .head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px 6px; font-weight: 700; font-size: 18px; }
+  .list .head .plus { width: 34px; height: 34px; border-radius: 50%; background: var(--green); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 400; }
+  .search { margin: 8px 16px 10px; background: var(--panel); border-radius: 10px; padding: 9px 14px; color: var(--muted); font-size: 16px; display: flex; gap: 10px; align-items: center; }
+  .pills { display: flex; gap: 8px; margin: 0 16px 8px; }
+  .pill { padding: 6px 15px; border-radius: 999px; background: var(--panel); color: var(--muted); font-size: 15px; }
+  .pill.on { background: #0c3d33; color: #a8e9d2; }
+  .row { display: flex; gap: 14px; padding: 13px 16px; align-items: center; margin: 0 8px; border-radius: 10px; }
+  .row + .row { border-top: 1px solid var(--line); border-radius: 0 0 10px 10px; }
+  .row.sel { background: var(--sel); }
+  .row .ava { width: 54px; height: 54px; }
   .row .meta { flex: 1; min-width: 0; }
-  .row .t { display: flex; justify-content: space-between; font-weight: 600; font-size: 17px; }
+  .row .t { display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; font-size: 17px; }
   .row .t .time { color: var(--muted); font-weight: 400; font-size: 14px; }
-  .row .p { color: var(--muted); font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 3px; }
-  .row .badge { background: var(--green); color: #111; font-weight: 700; font-size: 13px; border-radius: 999px; padding: 2px 8px; margin-left: 8px; }
+  .row .p { color: var(--muted); font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 3px; display: flex; justify-content: space-between; gap: 8px; }
+  .row .badge { background: var(--green); color: #111b21; font-weight: 700; font-size: 13px; border-radius: 999px; padding: 2px 7px; flex: none; }
+  .tick { color: #53bdeb; font-size: 14px; }
 
   /* ---- chat pane ---- */
   .chat { position: relative; display: flex; flex-direction: column; background: #0b141a; }
-  .chat::before { content: ""; position: absolute; inset: 0; opacity: .06; background-image: radial-gradient(circle at 20px 20px, #fff 2px, transparent 2.5px), radial-gradient(circle at 60px 50px, #fff 1.5px, transparent 2px); background-size: 90px 80px; }
-  .chead { position: relative; z-index: 2; display: flex; align-items: center; gap: 14px; padding: 12px 20px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .wall { position: absolute; inset: 0; opacity: .035; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160' fill='none' stroke='white' stroke-width='2'><circle cx='30' cy='30' r='12'/><path d='M80 20l6 12 13 2-9 9 2 13-12-6-12 6 2-13-9-9 13-2z'/><path d='M130 40c-6-8-18-3-18 6 0 8 18 18 18 18s18-10 18-18c0-9-12-14-18-6z'/><rect x='18' y='90' width='26' height='18' rx='4'/><path d='M70 110a14 14 0 1 0 28 0a14 14 0 1 0-28 0'/><path d='M60 70h20M70 60v20'/><path d='M120 110l20 20M140 110l-20 20'/><path d='M100 140c8-10 20-10 28 0'/><circle cx='40' cy='140' r='6'/></svg>"); background-size: 160px 160px; }
+  .chead { position: relative; z-index: 2; display: flex; align-items: center; gap: 14px; padding: 10px 22px; background: var(--panel); border-bottom: 1px solid var(--line); }
   .chead .name { font-weight: 700; font-size: 18px; }
-  .chead .sub { color: var(--muted); font-size: 14px; }
-  .chead .sub.typing { color: #9fe1cb; }
-  .chead .right { margin-left: auto; color: var(--muted); font-size: 22px; letter-spacing: 6px; }
-  .msgs { position: relative; z-index: 1; flex: 1; overflow: hidden; padding: 16px 70px 16px 56px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; }
-  .m { display: flex; gap: 10px; align-items: flex-end; }
-  .m .ava { width: 36px; height: 36px; font-size: 18px; }
-  .m .box { background: var(--bubble); border-radius: 10px; padding: 8px 12px; max-width: 620px; box-shadow: 0 1px 1px rgba(0,0,0,.3); position: relative; }
-  .m .box.sticker { background: transparent; box-shadow: none; padding: 0; }
-  .m .who { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
-  .m .txt { font-size: 17px; }
-  .m .time { color: var(--muted); font-size: 12px; margin-left: 14px; }
-  .m img.stk { width: 190px; height: 190px; object-fit: contain; display: block; border-radius: 12px; }
-  .m .react { display: inline-block; background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 14px; margin: 2px 0 0 8px; }
-  .m .stamp { color: var(--muted); font-size: 12px; background: var(--panel); border-radius: 10px; padding: 3px 8px; display: inline-block; margin-top: 4px; }
-  .input { position: relative; z-index: 2; display: flex; align-items: center; gap: 14px; padding: 14px 20px; background: var(--panel); }
-  .input .field { flex: 1; background: var(--panel2); border-radius: 10px; height: 44px; }
-  .input .plus, .input .mic { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--muted); }
-  .input .mic { background: var(--green); color: #fff; }
+  .chead .sub { color: var(--muted); font-size: 14px; margin-top: 1px; }
+  .chead .sub.typing { color: #a8e9d2; }
+  .chead .right { margin-left: auto; display: flex; gap: 22px; align-items: center; color: var(--muted); }
+  .chead .right svg { width: 26px; height: 26px; fill: none; stroke: var(--muted); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .msgs { position: relative; z-index: 1; flex: 1; overflow: hidden; padding: 16px 80px 10px 60px; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; }
+  .m { display: flex; gap: 10px; align-items: flex-end; margin-top: 6px; }
+  .m .ava { width: 36px; height: 36px; }
+  .m .box { background: var(--bubble); border-radius: 10px; border-top-left-radius: 2px; padding: 7px 12px 8px; max-width: 640px; box-shadow: 0 1px 1px rgba(0,0,0,.35); position: relative; }
+  .m .box.sticker { background: transparent; box-shadow: none; padding: 0; border-radius: 0; }
+  .m .who { font-weight: 600; font-size: 15px; margin-bottom: 1px; }
+  .m .txt { font-size: 17px; line-height: 1.3; }
+  .m .time { color: var(--muted); font-size: 12px; margin-left: 12px; white-space: nowrap; }
+  .m img.stk { width: 178px; height: 178px; object-fit: contain; display: block; border-radius: 14px; }
+  .m .under { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+  .m .stamp { color: var(--muted); font-size: 12px; background: var(--panel); border-radius: 10px; padding: 3px 8px; display: inline-block; }
+  .m .react { display: inline-block; background: var(--panel); border: 1px solid #2f3b43; border-radius: 999px; padding: 2px 9px; font-size: 14px; }
+  .input { position: relative; z-index: 2; display: flex; align-items: center; gap: 14px; padding: 12px 22px; background: var(--panel); }
+  .input .plus { font-size: 30px; color: var(--muted); width: 40px; text-align: center; }
+  .input .field { flex: 1; background: var(--panel2); border-radius: 10px; height: 44px; display: flex; align-items: center; justify-content: flex-end; padding-right: 14px; color: var(--muted); font-size: 22px; }
+  .input .mic { width: 44px; height: 44px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; }
+  .input .mic svg { width: 22px; height: 22px; fill: #fff; }
 
-  /* ---- "wrong screen" layer ---- */
-  .sharebar { position: absolute; top: 0; left: 60%; transform: translateX(-50%); z-index: 50; display: flex; align-items: center; gap: 14px; background: #1f8f4e; color: #fff; padding: 6px 10px 6px 16px; border-radius: 0 0 10px 10px; font-size: 15px; font-weight: 600; box-shadow: 0 4px 14px rgba(0,0,0,.4); }
-  .sharebar .stop { background: #d9342b; color: #fff; padding: 6px 12px; border-radius: 6px; font-weight: 700; }
-  #cursor { position: absolute; z-index: 60; width: 26px; height: 36px; left: 1100px; top: 640px; pointer-events: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
-  .toast { position: absolute; z-index: 55; right: 24px; top: 70px; width: 360px; background: rgba(32,44,51,.96); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: none; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
-  .toast.show { display: block; animation: pop .25s ease-out; }
+  #cursor { position: absolute; z-index: 60; width: 26px; height: 36px; left: 1150px; top: 650px; pointer-events: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
+  .toast { position: absolute; z-index: 55; right: 24px; top: 70px; width: 360px; background: rgba(32,44,51,.97); border: 1px solid #2f3b43; border-radius: 14px; padding: 12px 14px; display: none; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+  .toast.show { display: flex; gap: 12px; align-items: center; animation: pop .25s ease-out; }
   .toast .tt { font-weight: 700; font-size: 15px; } .toast .tb { color: var(--muted); font-size: 14px; margin-top: 2px; }
   @keyframes pop { from { transform: translateY(-8px); opacity: 0; } to { transform: none; opacity: 1; } }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="person" viewBox="0 0 48 48"><circle cx="24" cy="18" r="9" fill="#cfd8dc"/><path d="M6 46c2-11 10-16 18-16s16 5 18 16z" fill="#cfd8dc"/></symbol>
+    <symbol id="group" viewBox="0 0 48 48" fill="#fff"><circle cx="17" cy="18" r="7"/><circle cx="31" cy="18" r="7"/><path d="M3 40c1-9 7-13 14-13s13 4 14 13z"/><path d="M26 27c5 0 10 3 11 13h8c-1-9-6-13-13-13-2 0-4 0-6 0z"/></symbol>
+  </defs>
+</svg>
 <div class="window">
   <div class="nav">
     <div class="lights"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
-    <div class="item active">💬 Chats</div>
-    <div class="item">◎ Updates</div>
-    <div class="item">👥 Communities</div>
-    <div class="item">📞 Calls <span class="n">41</span></div>
-    <div class="item">🖼 Media</div>
-    <div class="item">✦ Meta AI</div>
-    <div class="sec">More</div>
-    <div class="item">🗄 Archived <span class="n">2</span></div>
-    <div class="item">☆ Starred</div>
-    <div class="you"><span class="ava" style="background:#3a4048">🧑‍💻</span> You</div>
+    <div class="item active"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg>Chats</div>
+    <div class="item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>Updates</div>
+    <div class="item"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 19c1-4 4-6 6-6s5 2 6 6M12 19c1-4 3-6 4-6s4 2 5 6"/></svg>Communities</div>
+    <div class="item"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>Calls <span class="n">41</span></div>
+    <div class="item"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 16l5-5 4 4 3-3 6 6"/><circle cx="16" cy="9" r="1.5"/></svg>Media</div>
+    <div class="item"><svg viewBox="0 0 24 24"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg>Meta AI</div>
+    <div class="sec"><span>More</span><span>⌄</span></div>
+    <div class="item"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="4"/><path d="M5 9v10h14V9M10 13h4"/></svg>Archived <span class="n">2</span></div>
+    <div class="item"><svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.7 6.3.8-4.6 4.3 1.2 6.2-5.6-3-5.6 3 1.2-6.2L3 9.5l6.3-.8z"/></svg>Starred</div>
+    <div class="sec"><span>Communities</span><span>›</span></div>
+    <div class="you"><span class="ava"><svg><use href="#person"/></svg></span>You<span class="dots">•••</span></div>
   </div>
 
   <div class="list">
-    <div class="head"><span>Chats</span><span style="color:#00a884;font-size:26px;font-weight:400">⊕</span></div>
-    <div class="search">🔍 Search</div>
+    <div class="head"><span>Chats</span><span class="plus">+</span></div>
+    <div class="search">⌕ <span>Search</span></div>
     <div class="pills"><span class="pill on">All</span><span class="pill">Unread</span><span class="pill">Favorites</span><span class="pill">Groups</span></div>
-    <div class="row"><span class="ava" style="background:#2a3942">🗄</span><div class="meta"><div class="t">Archived <span class="time">2</span></div></div></div>
     <div id="rows"></div>
   </div>
 
   <div class="chat">
+    <div class="wall"></div>
     <div class="chead">
-      <span class="ava" style="background:#1f8f4e">👥</span>
+      <span class="ava group"><svg><use href="#group"/></svg></span>
       <div><div class="name">AIPI ‼️</div><div class="sub" id="sub">2 online</div></div>
-      <div class="right">▢ ⋯</div>
+      <div class="right">
+        <svg viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="M16 11l5-3v8l-5-3z"/></svg>
+        <span style="font-size:22px;letter-spacing:3px">•••</span>
+      </div>
     </div>
     <div class="msgs" id="msgs"></div>
-    <div class="input"><span class="plus">＋</span><div class="field"></div><span class="mic">🎤</span></div>
-    <div class="toast" id="toast"><div class="tt">AIPI ‼️</div><div class="tb" id="toastb">Sticker</div></div>
+    <div class="input"><span class="plus">+</span><div class="field">☺</div><span class="mic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4" stroke="#fff" stroke-width="2" fill="none"/></svg></span></div>
+    <div class="toast" id="toast"><span class="ava group"><svg><use href="#group"/></svg></span><div><div class="tt">AIPI ‼️</div><div class="tb" id="toastb">Sticker</div></div></div>
   </div>
 
-  <div class="sharebar">● You are screen sharing <span class="stop">Stop Share</span></div>
   <svg id="cursor" viewBox="0 0 26 36"><path d="M2 2 L2 28 L9 21 L14 33 L19 31 L14 19 L24 19 Z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/></svg>
 </div>
 
@@ -118,39 +136,40 @@ const stickers = [
   "CN_TXT_03","EN_TXT_02","TR_NOTXT_03","CN_NOTXT_02","TR_TXT_04","CN_TXT_06","EN_TXT_04","CN_NOTXT_04","EN_NOTXT_06",
   "TR_TXT_spare_hsktr"
 ].map(s => STK + s + ".webp");
+// invented classmates; sender-name colours follow WhatsApp's palette
 const senders = [
-  { n: "Mehmet", c: "#e67e22", a: "🧔", bg: "#5a3a1a" }, { n: "Lexie", c: "#9b59b6", a: "👩", bg: "#3d2a4a" },
-  { n: "David", c: "#1abc9c", a: "🧑", bg: "#1f4a44" }, { n: "~ Snehal", c: "#e74c3c", a: "S", bg: "#5a2a2a" },
-  { n: "Yiran", c: "#f1c40f", a: "🧑‍🎓", bg: "#4a4320" }, { n: "Alberto", c: "#3498db", a: "👨", bg: "#1f3a52" },
+  { n: "Tolga", c: "#e4a04a" }, { n: "Priya", c: "#c58ee6" }, { n: "Marcus", c: "#53bdeb" },
+  { n: "~ Wen", c: "#f08e9a" }, { n: "Aylin", c: "#8fd4a3" }, { n: "Jonas", c: "#ffd36b" }, { n: "Noor", c: "#7dd3fc" },
 ];
-const rowsData = [
-  ["AIPI ‼️", "Mehmet: We need a sticker made out of this like rn", "22:57", "#1f8f4e", "👥", true],
-  ["NYC Baddies", "~ Snehal: https://www.instagram.com/…", "22:53", "#4a3b1f", "👥", false],
-  ["Laser tag", "You: ima mail it to you if you win dw", "22:41", "#1f3a52", "🔫", false],
-  ["Roommates", "Lexie: who finished the oat milk", "21:30", "#3d2a4a", "🏠", false],
-  ["Mom ❤️", "Did you eat", "20:07", "#5a2a2a", "👩‍🦳", false],
-  ["Squishy supplier", "You: can i get 2 more by monday", "19:45", "#4a4320", "🧸", false],
-  ["Teammate 🐼", "✓✓ ok if you say so lol", "18:12", "#1f4a44", "🐼", false],
-  ["Bros", "~ Perry: 📷 Photo", "17:58", "#2a3942", "🐑", false],
-  ["+1 (628) 209-XXXX", "✓✓ @~Perry why you don't re…", "16:56", "#2a3942", "🦉", false],
-  ["Prof. office hours", "see you thursday", "15:20", "#5a3a1a", "🎓", false],
-  ["Dentist", "Reminder: appointment Nov 5, 9:00", "11:02", "#1f2a30", "🦷", false],
+const rowsData = [  // [name, preview, time, group?, badge, selected]
+  ["AIPI ‼️", "Tolga: We need a sticker made out of this like rn", "22:57", true, "", true],
+  ["Canyang Xu", "lets crush it tm!", "22:49", false, "", false],
+  ["Laser tag", "<span class='tick'>✓✓</span> You: ima mail it to you if you win dw", "22:41", true, "", false],
+  ["Janis Hampton", "pickleball sat 9am? bring the good paddle 🏓", "21:55", false, "1", false],
+  ["Roommates", "Jonas: who finished the oat milk", "21:30", true, "", false],
+  ["Mom ❤️", "Did you eat", "20:07", false, "", false],
+  ["Squishy supplier", "<span class='tick'>✓✓</span> You: can i get 2 more by monday", "19:45", false, "", false],
+  ["Thursday dinner 🍜", "Aylin: 7:30 works for me", "18:12", true, "", false],
+  ["Intramural soccer ⚽", "Marcus: we play at 8 not 9", "17:58", true, "", false],
+  ["Duke Rec Center", "Your court reservation is confirmed for Nov 4", "16:56", false, "", false],
+  ["Prof. office hours", "see you thursday", "15:20", false, "", false],
+  ["Dentist", "Reminder: appointment Nov 5, 9:00", "11:02", false, "", false],
 ];
 const rowsEl = document.getElementById("rows");
-rowsData.forEach(([n, p, t, bg, a, sel]) => {
-  rowsEl.insertAdjacentHTML("beforeend", `<div class="row ${sel ? "sel" : ""}"><span class="ava" style="background:${bg}">${a}</span><div class="meta"><div class="t"><span>${n}</span><span class="time">${t}</span></div><div class="p">${p}</div></div></div>`);
+rowsData.forEach(([n, p, t, g, b, sel]) => {
+  rowsEl.insertAdjacentHTML("beforeend", `<div class="row ${sel ? "sel" : ""}"><span class="ava ${g ? "group" : ""}"><svg><use href="#${g ? "group" : "person"}"/></svg></span><div class="meta"><div class="t"><span>${n}</span><span class="time">${t}</span></div><div class="p"><span class="pt">${p}</span>${b ? `<span class="badge">${b}</span>` : ""}</div></div></div>`);
 });
 const aipiRow = rowsEl.querySelector(".row.sel");
+const avatar = `<span class="ava"><svg><use href="#person"/></svg></span>`;
 
 const msgs = document.getElementById("msgs");
 function textMsg(s, txt, time) {
-  msgs.insertAdjacentHTML("beforeend", `<div class="m"><span class="ava" style="background:${s.bg}">${s.a}</span><div class="box"><div class="who" style="color:${s.c}">${s.n}</div><div class="txt">${txt}<span class="time">${time}</span></div></div></div>`);
+  msgs.insertAdjacentHTML("beforeend", `<div class="m">${avatar}<div class="box"><div class="who" style="color:${s.c}">${s.n}</div><div class="txt">${txt}<span class="time">${time}</span></div></div></div>`);
 }
 function stickerMsg(s, src, time, react) {
-  msgs.insertAdjacentHTML("beforeend", `<div class="m"><span class="ava" style="background:${s.bg}">${s.a}</span><div class="box sticker"><div class="who" style="color:${s.c};margin:0 0 4px 4px">${s.n}</div><img class="stk" src="${src}"><span class="stamp">${time}</span>${react ? `<span class="react">${react}</span>` : ""}</div></div>`);
+  msgs.insertAdjacentHTML("beforeend", `<div class="m">${avatar}<div class="box sticker"><div class="who" style="color:${s.c};margin:0 0 4px 2px">${s.n}</div><img class="stk" src="${src}"><div class="under"><span class="stamp">${time}</span>${react ? `<span class="react">${react}</span>` : ""}</div></div></div>`);
   while (msgs.children.length > 14) msgs.removeChild(msgs.firstChild);
 }
-// a calm starting state
 textMsg(senders[0], "We need a sticker made out of this like rn", "22:57");
 textMsg(senders[1], "Gotchu", "22:57");
 stickerMsg(senders[1], STK + "EN_NOTXT_02.webp", "22:57", "❤️");
@@ -160,7 +179,7 @@ textMsg(senders[2], "He lost an arm in the process, oof", "22:58");
 const T0 = performance.now();
 const now = () => performance.now() - T0;
 let count = 0, unread = 0;
-const reacts = ["😂", "😭", "💀", "❤️", "😂 3", "🤣", "👀"];
+const reacts = ["😂", "😭", "💀", "❤️", "😂 3", "🤣", "👀", "😂 2"];
 const sub = document.getElementById("sub"), toast = document.getElementById("toast"), toastb = document.getElementById("toastb");
 function clock() { const m = 22 * 60 + 58 + Math.floor(now() / 8000); return `${Math.floor(m / 60)}:${String(m % 60).padStart(2, "0")}`; }
 function burst() {
@@ -170,26 +189,24 @@ function burst() {
   const src = stickers[count % stickers.length];
   stickerMsg(s, src, clock(), Math.random() < 0.3 ? reacts[Math.floor(Math.random() * reacts.length)] : "");
   count++; unread++;
-  aipiRow.querySelector(".p").textContent = `${s.n}: 🎟 Sticker`;
+  aipiRow.querySelector(".pt").textContent = `${s.n}: 🎟 Sticker`;
   aipiRow.querySelector(".time").textContent = clock();
-  let b = aipiRow.querySelector(".badge"); if (!b) { b = document.createElement("span"); b.className = "badge"; aipiRow.querySelector(".t").appendChild(b); } b.textContent = unread;
+  let b = aipiRow.querySelector(".badge"); if (!b) { b = document.createElement("span"); b.className = "badge"; aipiRow.querySelector(".p").appendChild(b); } b.textContent = unread;
   sub.textContent = `${s.n} is typing…`; sub.classList.add("typing");
   setTimeout(() => { sub.textContent = `${3 + Math.floor(count / 6)} online`; sub.classList.remove("typing"); }, 400);
   if (count % 5 === 0) { toastb.textContent = `${s.n}: 🎟 Sticker`; toast.classList.remove("show"); void toast.offsetWidth; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 1400); }
-  // pace: 1.1 s between stickers at the start, 110 ms by the end
-  const interval = Math.max(110, 1100 - (t - 1500) * 0.07);
+  const interval = Math.max(110, 1100 - (t - 1500) * 0.07);   // 1.1 s between stickers at first, 110 ms by the end
   setTimeout(burst, interval);
 }
 setTimeout(burst, 1500);
 
-// ---- cursor: idle, then a panicked path to "Stop Share", overshoots, lands at the end ----
+// ---- cursor: idle, then a panicked path to the red close button (HDMI, no share bar), overshoot, land ----
 const cur = document.getElementById("cursor");
-const stop = document.querySelector(".sharebar .stop").getBoundingClientRect();
-const target = { x: stop.left + stop.width / 2 - 2, y: stop.top + stop.height / 2 - 2 };
+const target = { x: 18, y: 18 };
 const path = [
-  [0, 1100, 640], [9000, 1120, 655], [11000, 1300, 500], [12500, 700, 300], [13500, 1500, 120], [14500, 1040, 40],
-  [15200, 1180, 28], [15800, 860, 60], [16600, target.x - 60, target.y + 30], [17300, target.x + 40, target.y - 12],
-  [18200, target.x - 18, target.y + 8], [19000, target.x, target.y], [21000, target.x, target.y],
+  [0, 1150, 650], [9000, 1170, 665], [11000, 1350, 480], [12500, 760, 300], [13500, 420, 140], [14400, 90, 60],
+  [15100, 150, 20], [15700, 40, 90], [16500, target.x + 40, target.y + 30], [17300, target.x - 22, target.y - 8],
+  [18200, target.x + 12, target.y + 10], [19000, target.x, target.y], [21000, target.x, target.y],
 ];
 function lerp(a, b, k) { return a + (b - a) * k; }
 function ease(k) { return k < .5 ? 2 * k * k : -1 + (4 - 2 * k) * k; }
