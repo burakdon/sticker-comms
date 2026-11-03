@@ -20,3 +20,5 @@ data/raw/extra.csv
 report/_qa/
 report/coldopen/_frames/
 report/coldopen/_video/
+# Draw video carries winner names; keep local
+report/coldopen/draw.mp4
