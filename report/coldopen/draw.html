@@ -12,10 +12,11 @@
   .sub { position: absolute; top: 160px; left: 0; right: 0; text-align: center; font-size: 28px; color: var(--muted); font-weight: 600; }
   .pool { position: absolute; top: 215px; left: 0; right: 0; text-align: center; font-size: 22px; color: var(--muted); }
 
-  .machine { position: absolute; left: 50%; top: 300px; transform: translateX(-50%); width: 980px; height: 480px; }
+  .machine { position: absolute; top: 300px; width: 820px; height: 480px; }
+  .machine.a { left: 100px; }  .machine.b { right: 100px; }
   .window { position: absolute; inset: 0; border-radius: 36px; background: #fff; box-shadow: 0 30px 80px rgba(230,120,170,.25), inset 0 0 0 3px rgba(0,0,0,.05); overflow: hidden; }
   .reel { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
-  .card { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 60px; font-weight: 800; letter-spacing: -0.5px; color: var(--ink); border-bottom: 2px solid #efeeea; }
+  .card { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 52px; font-weight: 800; letter-spacing: -0.5px; color: var(--ink); border-bottom: 2px solid #efeeea; }
   .card.ghost { color: #c9ccd1; filter: blur(2.5px); font-weight: 700; }
   .card.ghost span { letter-spacing: 1px; }
   .fade { position: absolute; left: 0; right: 0; height: 160px; pointer-events: none; z-index: 2; }
@@ -27,24 +28,30 @@
   .arrow.l { left: -70px; border-left: 40px solid var(--green-dk); }
   .arrow.r { right: -70px; border-right: 40px solid var(--green-dk); }
 
-  .winner { position: absolute; top: 830px; left: 0; right: 0; text-align: center; font-size: 46px; font-weight: 800; color: var(--green-dk); opacity: 0; transform: translateY(14px); transition: all .5s ease-out; }
+  .winner { position: absolute; top: 810px; width: 820px; text-align: center; font-size: 40px; font-weight: 800; color: var(--green-dk); opacity: 0; transform: translateY(14px); transition: all .5s ease-out; }
   .winner.on { opacity: 1; transform: none; }
   .confetti { position: absolute; width: 14px; height: 22px; top: -40px; border-radius: 3px; opacity: 0; }
-  .squishy { position: absolute; right: 90px; bottom: 60px; width: 300px; transform: rotate(6deg); filter: drop-shadow(0 16px 30px rgba(0,0,0,.18)); }
-  .count { position: absolute; left: 90px; bottom: 70px; font-size: 24px; color: var(--muted); font-weight: 600; }
+  .squishy { position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%) rotate(4deg); width: 230px; transform: rotate(6deg); filter: drop-shadow(0 16px 30px rgba(0,0,0,.18)); }
+  .count { position: absolute; left: 100px; bottom: 44px; font-size: 24px; color: var(--muted); font-weight: 600; }
 </style>
 </head>
 <body>
 <div class="stage">
   <div class="title">🧸 Squishy draw</div>
-  <div class="sub" id="sub">Round 1 of 2</div>
+  <div class="sub" id="sub">Two squishies, two winners</div>
   <div class="pool" id="pool"></div>
-  <div class="machine">
-    <div class="window"><div class="reel" id="reel"></div><div class="fade top"></div><div class="fade bot"></div></div>
-    <div class="frame" id="frame"></div>
+  <div class="machine a">
+    <div class="window"><div class="reel" id="reelA"></div><div class="fade top"></div><div class="fade bot"></div></div>
+    <div class="frame" id="frameA"></div>
     <div class="arrow l"></div><div class="arrow r"></div>
   </div>
-  <div class="winner" id="winner"></div>
+  <div class="machine b">
+    <div class="window"><div class="reel" id="reelB"></div><div class="fade top"></div><div class="fade bot"></div></div>
+    <div class="frame" id="frameB"></div>
+    <div class="arrow l"></div><div class="arrow r"></div>
+  </div>
+  <div class="winner" id="winnerA" style="left:100px"></div>
+  <div class="winner" id="winnerB" style="right:100px"></div>
   <div class="count" id="count"></div>
   <img class="squishy" src="../../web/assets/squishy.webp" alt="">
 </div>
@@ -64,58 +71,48 @@ function fakeName() {
   return w() + " " + w();
 }
 
-const reel = document.getElementById("reel"), frame = document.getElementById("frame"), winEl = document.getElementById("winner"), sub = document.getElementById("sub");
-const CARD = 160, SPINS = 42;                      // cards that fly past before the winner
+const sub = document.getElementById("sub");
+const CARD = 160, SPINS = 42;
 
-function buildReel(winner) {
+function buildReel(reel, winner) {
   reel.innerHTML = "";
   for (let i = 0; i < SPINS; i++) reel.insertAdjacentHTML("beforeend", `<div class="card ghost"><span>${fakeName()}</span></div>`);
-  reel.insertAdjacentHTML("beforeend", `<div class="card" id="win"><span>${winner}</span></div>`);
+  reel.insertAdjacentHTML("beforeend", `<div class="card"><span>${winner}</span></div>`);
   for (let i = 0; i < 3; i++) reel.insertAdjacentHTML("beforeend", `<div class="card ghost"><span>${fakeName()}</span></div>`);
-  reel.style.transform = "translateY(160px)";   // first card centred in the middle slot
+  reel.style.transform = "translateY(160px)";
 }
-
 function confetti() {
   const cols = ["#25D366", "#128C7E", "#EB6834", "#2A78D6", "#6250D6", "#FFD36B", "#F08E9A"];
-  for (let i = 0; i < 90; i++) {
+  for (let i = 0; i < 110; i++) {
     const c = document.createElement("div"); c.className = "confetti";
     c.style.left = Math.random() * 1920 + "px"; c.style.background = cols[i % cols.length];
     document.querySelector(".stage").appendChild(c);
-    const dur = 1800 + Math.random() * 1400, rot = Math.random() * 720 - 360;
-    c.animate([{ transform: "translateY(0) rotate(0)", opacity: 1 }, { transform: `translateY(1160px) rotate(${rot}deg)`, opacity: .9 }],
-              { duration: dur, delay: Math.random() * 400, easing: "cubic-bezier(.2,.6,.4,1)", fill: "forwards" });
+    c.animate([{ transform: "translateY(0) rotate(0)", opacity: 1 }, { transform: `translateY(1160px) rotate(${Math.random() * 720 - 360}deg)`, opacity: .9 }],
+              { duration: 1800 + Math.random() * 1400, delay: Math.random() * 400, easing: "cubic-bezier(.2,.6,.4,1)", fill: "forwards" });
   }
 }
-
 function easeOut(k) { return 1 - Math.pow(1 - k, 4); }
-
-function spin(winner, ms) {
+function spin(id, winner, ms) {
+  const reel = document.getElementById("reel" + id), frame = document.getElementById("frame" + id), winEl = document.getElementById("winner" + id);
+  buildReel(reel, winner);
   return new Promise((done) => {
-    buildReel(winner); frame.classList.remove("on"); winEl.classList.remove("on");
-    const total = SPINS * CARD;                      // distance to land the winner in the middle slot
-    const t0 = performance.now();
+    const total = SPINS * CARD, t0 = performance.now();
     function f(t) {
       const k = Math.min(1, (t - t0) / ms);
-      const y = 160 - total * easeOut(k);
-      reel.style.transform = `translateY(${y}px)`;
+      reel.style.transform = `translateY(${160 - total * easeOut(k)}px)`;
       if (k < 1) requestAnimationFrame(f);
-      else { frame.classList.add("on"); winEl.textContent = `🎉 ${winner}`; winEl.classList.add("on"); confetti(); setTimeout(done, 3200); }
+      else { frame.classList.add("on"); winEl.textContent = `🎉 ${winner}`; winEl.classList.add("on"); done(); }
     }
     requestAnimationFrame(f);
   });
 }
-
 (async () => {
-  await new Promise(r => setTimeout(r, 1200));
-  sub.textContent = "Round 1 of 2";
-  await spin(winners[0], 6500);
-  if (winners[1]) {
-    sub.textContent = "Round 2 of 2";
-    document.querySelectorAll(".confetti").forEach(c => c.remove());
-    await new Promise(r => setTimeout(r, 600));
-    await spin(winners[1], 6500);
-  }
+  sub.textContent = "Two squishies, two winners";
+  await new Promise(r => setTimeout(r, 900));
+  await Promise.all([spin("A", winners[0], 5200), spin("B", winners[1] || winners[0], 6400)]);
+  confetti();
   sub.textContent = "Congratulations 🧸🧸";
+  await new Promise(r => setTimeout(r, 2800));
   window.__done = true;
 })();
 </script>
