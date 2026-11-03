@@ -17,7 +17,7 @@
   .window { position: absolute; inset: 0; border-radius: 36px; background: #fff; box-shadow: 0 30px 80px rgba(230,120,170,.25), inset 0 0 0 3px rgba(0,0,0,.05); overflow: hidden; }
   .reel { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
   .card { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 52px; font-weight: 800; letter-spacing: -0.5px; color: var(--ink); border-bottom: 2px solid #efeeea; }
-  .card.ghost { color: #c9ccd1; filter: blur(2.5px); font-weight: 700; }
+  .card.ghost { color: #9AA0A8; font-weight: 700; }
   .card.ghost span { letter-spacing: 1px; }
   .fade { position: absolute; left: 0; right: 0; height: 160px; pointer-events: none; z-index: 2; }
   .fade.top { top: 0; background: linear-gradient(#fff, rgba(255,255,255,0)); }
@@ -61,14 +61,21 @@
 const params = new URLSearchParams(location.search);
 const winners = (params.get("w") || "Winner One|Winner Two").split("|");
 const N = Number(params.get("n") || 45);
+const pool = (params.get("names") || "").split("|").filter(Boolean).filter(n => !winners.includes(n));
 document.getElementById("pool").textContent = `${N} entries · everyone who finished the study`;
 document.getElementById("count").textContent = `${N} entries shuffled · drawn with Python's random module`;
 
 // Ghost cards: plausible-looking but scrambled, so no real entrant is readable.
 const syll = ["ka","mi","ra","el","no","ta","li","so","ve","an","dr","ou","ye","zi","ha","lu","pe","ri","na","to"];
-function fakeName() {
+function fakeName() {   // kept as a fallback when no name list is passed
   const w = () => { let s = ""; for (let i = 0; i < 2 + Math.floor(Math.random() * 2); i++) s += syll[Math.floor(Math.random() * syll.length)]; return s[0].toUpperCase() + s.slice(1); };
   return w() + " " + w();
+}
+let bag = [];
+function nextName() {
+  if (!pool.length) return fakeName();
+  if (!bag.length) bag = pool.slice().sort(() => Math.random() - 0.5);
+  return bag.pop();
 }
 
 const sub = document.getElementById("sub");
@@ -76,9 +83,9 @@ const CARD = 160, SPINS = 42;
 
 function buildReel(reel, winner) {
   reel.innerHTML = "";
-  for (let i = 0; i < SPINS; i++) reel.insertAdjacentHTML("beforeend", `<div class="card ghost"><span>${fakeName()}</span></div>`);
+  for (let i = 0; i < SPINS; i++) reel.insertAdjacentHTML("beforeend", `<div class="card ghost"><span>${nextName()}</span></div>`);
   reel.insertAdjacentHTML("beforeend", `<div class="card"><span>${winner}</span></div>`);
-  for (let i = 0; i < 3; i++) reel.insertAdjacentHTML("beforeend", `<div class="card ghost"><span>${fakeName()}</span></div>`);
+  for (let i = 0; i < 3; i++) reel.insertAdjacentHTML("beforeend", `<div class="card ghost"><span>${nextName()}</span></div>`);
   reel.style.transform = "translateY(160px)";
 }
 function confetti() {

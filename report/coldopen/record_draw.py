@@ -29,10 +29,20 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("winners", nargs="+")
     ap.add_argument("--entries", type=int, default=45)
+    ap.add_argument("--names", default=str(HERE.parents[1] / "data" / "private" / "giveaway.csv"),
+                    help="CSV with a name column; real names roll past on the reels (default: the giveaway export)")
     ap.add_argument("--out", default=str(HERE / "draw.mp4"))
     a = ap.parse_args()
 
-    url = (HERE / "draw.html").as_uri() + "?" + urlencode({"w": "|".join(a.winners), "n": a.entries})
+    q = {"w": "|".join(a.winners), "n": a.entries}
+    names_path = Path(a.names)
+    if names_path.exists():
+        import csv
+        with open(names_path, newline="", encoding="utf-8") as f:
+            names = sorted({row["name"].strip() for row in csv.DictReader(f) if row.get("name", "").strip()})
+        q["names"] = "|".join(names)
+        q["n"] = a.entries or len(names)
+    url = (HERE / "draw.html").as_uri() + "?" + urlencode(q)
     tmp = HERE / "_video"
     shutil.rmtree(tmp, ignore_errors=True)
     with sync_playwright() as p:
