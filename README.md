@@ -47,10 +47,31 @@ python src/collection/make_placeholder_stickers.py
 python src/collection/assign_conditions.py
 
 # 4. Export responses from the Google Sheet -> data/raw/*.csv
-python src/collection/export_responses.py --url "<Apps Script URL>" --token "<EXPORT_TOKEN>"
+python src/collection/export_responses.py          # needs .env (see .env.example)
+
+# 5. Clean -> data/processed/*.csv + outputs/tables/cleaning_log.csv
+python src/cleaning/clean_trials.py
+
+# 6. Answer-key check -> outputs/tables/answer_key_validation.csv, flagged_stickers.csv
+python src/analysis/validate_answer_key.py
+
+# 7. Confirmatory tests (H1, H5, RM-ANOVA + Holm post hocs, H4) -> outputs/tables/primary_tests.csv
+python src/analysis/primary_tests.py
+
+# 8. Mixed-effects logistic regression (H2, H3) -> outputs/tables/mixed_model.csv
+python src/analysis/mixed_model.py
+
+# 9. Figures -> outputs/figures/fig1..fig6
+python src/viz/figures.py
+
+# Sensitivity analyses (same scripts, different inputs)
+python src/cleaning/clean_trials.py --exclude-attention-failures --suffix _prereg   # pre-registered exclusion
+python src/analysis/primary_tests.py --suffix _prereg
+python src/cleaning/clean_trials.py --drop-flagged outputs/tables/flagged_stickers.csv --suffix _noflag
+python src/analysis/primary_tests.py --suffix _noflag
 ```
 
-Cleaning and analysis steps will be added here as the scripts land.
+All steps from 5 on run offline from the committed `data/raw/` files, so the full analysis is reproducible without the Google Sheet.
 
 ## Running the study
 
@@ -109,3 +130,7 @@ Don't add stickers with real faces of friends, classmates or children. Profanity
 ## Contributing
 
 `main` ← `dev` ← personal branches (`dev-burak`, `dev-<teammate>`). Open PRs into `dev`; every PR is reviewed by the other team member before merging.
+
+## Presentation
+
+`report/sticker-comms-deck.pptx` is generated: `python src/viz/slide_figures.py` draws the slide figures into `outputs/figures/slides/`, then `node report/build_deck.js` (needs `pptxgenjs`) assembles the deck. Creative slides are marked `PLACEHOLDER` for hand-editing in PowerPoint.

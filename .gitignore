@@ -15,3 +15,10 @@ data/private/
 # Downloaded candidate GIFs; only chosen ones get copied out
 stimuli/candidates/
 stimuli/shortlist english/
+# Course grades from the end-of-study question: kept local, not published
+data/raw/extra.csv
+report/_qa/
+report/coldopen/_frames/
+report/coldopen/_video/
+# Draw video carries winner names; keep local
+report/coldopen/draw.mp4

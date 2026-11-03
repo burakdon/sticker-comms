@@ -1,0 +1,5 @@
+rule,dropped,remaining,unit
+incomplete session,0,70,participants
+attention-check trial itself,70,2520,trials
+trials on stickers the participant authored,12,2508,trials
+reaction time outside 300 ms - 30 s,64,2444,trials

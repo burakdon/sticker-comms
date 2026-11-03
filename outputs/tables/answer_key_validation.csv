@@ -1,0 +1,37 @@
+sticker_id,sticker_culture,has_text,key,insider_n,insider_agreement,insider_modal,outsider_n,outsider_accuracy,flagged,description
+CN_NOTXT_05,CN,0,sarcastic,13,0.154,negative,20,0.65,True,A yellow face with a fixed smile against the user-supplied bright green background.
+CN_TXT_05,CN,1,sarcastic,13,0.231,negative,20,0.3,True,An exhausted person lying down says '没事啊 我很好啊'. Translation: It is fine. I am doing great.
+CN_TXT_06,CN,1,sarcastic,14,0.571,sarcastic,16,0.5,False,A yellow animal playfully mock-scolds. Text: '你胆子真是肥嘟嘟'. Translation: You have got some nerve!
+CN_NOTXT_01,CN,0,positive,21,0.714,positive,18,0.722,False,A black-and-white panda-head meme with a human-like laughing face and raised arm.
+CN_NOTXT_04,CN,0,negative,21,0.762,negative,18,0.667,False,A crying yellow emoji face split by a crack down the middle.
+CN_TXT_01,CN,1,positive,21,0.905,positive,18,0.611,False,An enthusiastic panda-head compliment. Text: '牛批 牛批'. Translation: So impressive! / That is awesome!
+CN_NOTXT_02,CN,0,positive,14,0.929,positive,20,0.8,False,A pink cartoon character laughing with its mouth open and hands on its hips.
+CN_NOTXT_03,CN,0,negative,14,0.929,negative,16,0.875,False,"A small black-haired cartoon figure sits curled up, visibly crying blue tears."
+CN_NOTXT_06,CN,0,sarcastic,15,0.933,sarcastic,16,0.562,False,"A side-eye emoji eating watermelon, referencing the Chinese internet expression 吃瓜 (watching gossip or drama)."
+CN_TXT_03,CN,1,negative,15,0.933,negative,15,0.467,False,Panda-head reaction signaling frustration. Text: '没一个字是我爱听的'. Translation: Not a single word of that is what I wanted to hear.
+CN_TXT_02,CN,1,positive,14,1.0,positive,20,0.9,False,"Nailong cheers with both arms raised. Text: '好耶好耶'. Translation: Yay, yay!"
+CN_TXT_04,CN,1,negative,20,1.0,negative,17,1.0,False,A crying pink fox-like plush with the text '崩溃'. Translation: Breaking down / I cannot take it anymore.
+EN_NOTXT_04,EN,0,negative,13,0.154,sarcastic,4,0.5,True,Hasbulla crying and wiping his eyes
+EN_NOTXT_06,EN,0,sarcastic,12,0.417,negative,2,1.0,True,Pedro the monkey puppet looking away awkwardly
+EN_TXT_05,EN,1,sarcastic,13,0.615,sarcastic,2,0.5,False,"Patrick Star answering the phone, caption 'No, this is Patrick!' (SpongeBob)"
+EN_NOTXT_01,EN,0,positive,15,0.733,positive,4,0.75,False,Nick Wilde the fox (Zootopia) doing a little dance
+EN_TXT_04,EN,1,negative,15,0.733,negative,4,0.5,False,"Cartoon blue cat crying at a desk, caption 'DEVASTATED'"
+EN_TXT_03,EN,1,negative,12,0.75,negative,2,1.0,False,"Michael Scott screaming, caption 'NO, GOD! PLEASE NO! NO! NO! NOOOO!' (The Office)"
+EN_NOTXT_02,EN,0,positive,15,0.8,positive,2,1.0,False,White chihuahua with a big open-mouth smile
+EN_TXT_06,EN,1,sarcastic,12,0.833,sarcastic,2,1.0,False,"Tina Fey frantic in an office, caption 'EVERYTHING IS FINE'"
+EN_NOTXT_05,EN,0,sarcastic,14,0.857,sarcastic,2,0.5,False,Blinking white guy meme (Drew Scanlon)
+EN_TXT_01,EN,1,positive,14,0.857,positive,4,1.0,False,"Two men nodding, caption 'Did we nail it? Cause I feel like we nailed it.' (Workaholics)"
+EN_NOTXT_03,EN,0,negative,12,1.0,negative,2,1.0,False,Crying cat meme (photo of a cat with tears)
+EN_TXT_02,EN,1,positive,15,1.0,positive,2,1.0,False,"Woman snapping her fingers, caption 'YAS QUEEN!'"
+TR_TXT_05,TR,1,negative,6,0.333,sarcastic,26,0.615,True,"TV host Müge Anlı with a blank stare, text 'napim' (what am I supposed to do)"
+TR_TXT_06,TR,1,negative,11,0.364,sarcastic,31,0.548,True,"Ottoman painting of a sultan pointing, text 'SİKİN' (vulgar: 'fuck it / screw you')"
+TR_NOTXT_02,TR,0,sarcastic,12,0.5,negative,31,0.161,False,Singer İbrahim Tatlıses pointing a gun at the camera
+TR_TXT_04,TR,1,sarcastic,7,0.571,sarcastic,25,0.68,False,"Man with unibrow and open shirt, text 'gusam mı hocam' (shall I vomit, teacher?)"
+TR_NOTXT_04,TR,0,negative,7,0.714,negative,26,0.846,False,Actor Kenan İmirzalıoğlu crying
+TR_NOTXT_06,TR,0,sarcastic,7,0.714,sarcastic,25,0.56,False,"Caillou's face with a smug half-smile (the 'HSKTR' meme, caption cropped off)"
+TR_NOTXT_05,TR,0,positive,13,0.846,positive,20,0.7,False,Kemal Sunal as Şaban saluting with a big grin
+TR_TXT_03,TR,1,sarcastic,13,0.846,sarcastic,21,0.429,False,"Politician Devlet Bahçeli gesturing at a podium, text 'SAKİN OL LİSELİ' (calm down, high-schooler)"
+TR_NOTXT_01,TR,0,positive,12,0.917,positive,31,1.0,False,"Politician Binali Yıldırım making finger hearts, surrounded by heart emoji"
+TR_NOTXT_03,TR,0,sarcastic,12,1.0,sarcastic,19,0.526,False,Historian İlber Ortaylı looking skeptical/unimpressed
+TR_TXT_01,TR,1,positive,11,1.0,positive,30,0.667,False,"Cartoon blob offering a flower, text 'ÜZÜLME AL ÇİÇEK' (don't be sad, have a flower)"
+TR_TXT_02,TR,1,positive,12,1.0,positive,21,0.905,False,"Child's drawing of a smiling blob with hearts, text 'SENİ YERİM' (lit. 'I'll eat you' = you're adorable)"
