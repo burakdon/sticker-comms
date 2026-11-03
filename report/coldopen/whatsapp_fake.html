@@ -72,7 +72,6 @@
   .input .mic { width: 44px; height: 44px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; }
   .input .mic svg { width: 22px; height: 22px; fill: #fff; }
 
-  #cursor { position: absolute; z-index: 60; width: 26px; height: 36px; left: 1150px; top: 650px; pointer-events: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
   .toast { position: absolute; z-index: 55; right: 24px; top: 70px; width: 360px; background: rgba(32,44,51,.97); border: 1px solid #2f3b43; border-radius: 14px; padding: 12px 14px; display: none; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
   .toast.show { display: flex; gap: 12px; align-items: center; animation: pop .25s ease-out; }
   .toast .tt { font-weight: 700; font-size: 15px; } .toast .tb { color: var(--muted); font-size: 14px; margin-top: 2px; }
@@ -124,7 +123,6 @@
     <div class="toast" id="toast"><span class="ava group"><svg><use href="#group"/></svg></span><div><div class="tt">AIPI ‼️</div><div class="tb" id="toastb">Sticker</div></div></div>
   </div>
 
-  <svg id="cursor" viewBox="0 0 26 36"><path d="M2 2 L2 28 L9 21 L14 33 L19 31 L14 19 L24 19 Z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/></svg>
 </div>
 
 <script>
@@ -151,9 +149,6 @@ const rowsData = [  // [name, preview, time, group?, badge, selected]
   ["Squishy supplier", "<span class='tick'>✓✓</span> You: can i get 2 more by monday", "19:45", false, "", false],
   ["Thursday dinner 🍜", "Aylin: 7:30 works for me", "18:12", true, "", false],
   ["Intramural soccer ⚽", "Marcus: we play at 8 not 9", "17:58", true, "", false],
-  ["Duke Rec Center", "Your court reservation is confirmed for Nov 4", "16:56", false, "", false],
-  ["Prof. office hours", "see you thursday", "15:20", false, "", false],
-  ["Dentist", "Reminder: appointment Nov 5, 9:00", "11:02", false, "", false],
 ];
 const rowsEl = document.getElementById("rows");
 rowsData.forEach(([n, p, t, g, b, sel]) => {
@@ -182,6 +177,14 @@ let count = 0, unread = 0;
 const reacts = ["😂", "😭", "💀", "❤️", "😂 3", "🤣", "👀", "😂 2"];
 const sub = document.getElementById("sub"), toast = document.getElementById("toast"), toastb = document.getElementById("toastb");
 function clock() { const m = 22 * 60 + 58 + Math.floor(now() / 8000); return `${Math.floor(m / 60)}:${String(m % 60).padStart(2, "0")}`; }
+function bump(row, preview) {
+  row.querySelector(".pt").textContent = preview;
+  row.querySelector(".time").textContent = clock();
+  let b = row.querySelector(".badge");
+  if (!b) { b = document.createElement("span"); b.className = "badge"; b.textContent = "0"; row.querySelector(".p").appendChild(b); }
+  b.textContent = Number(b.textContent) + 1;
+  rowsEl.prepend(row);
+}
 function burst() {
   const t = now();
   if (t > 19600) return;
@@ -189,9 +192,13 @@ function burst() {
   const src = stickers[count % stickers.length];
   stickerMsg(s, src, clock(), Math.random() < 0.3 ? reacts[Math.floor(Math.random() * reacts.length)] : "");
   count++; unread++;
-  aipiRow.querySelector(".pt").textContent = `${s.n}: 🎟 Sticker`;
-  aipiRow.querySelector(".time").textContent = clock();
-  let b = aipiRow.querySelector(".badge"); if (!b) { b = document.createElement("span"); b.className = "badge"; aipiRow.querySelector(".p").appendChild(b); } b.textContent = unread;
+  bump(aipiRow, `${s.n}: 🎟 Sticker`);
+  if (Math.random() < 0.45) {                       // another chat lights up too and jumps to the top
+    const rows = [...rowsEl.querySelectorAll(".row:not(.sel)")];
+    const r = rows[Math.floor(Math.random() * rows.length)];
+    const isGroup = r.querySelector(".ava").classList.contains("group");
+    bump(r, isGroup ? `${senders[Math.floor(Math.random() * senders.length)].n}: 🎟 Sticker` : "🎟 Sticker");
+  }
   sub.textContent = `${s.n} is typing…`; sub.classList.add("typing");
   setTimeout(() => { sub.textContent = `${3 + Math.floor(count / 6)} online`; sub.classList.remove("typing"); }, 400);
   if (count % 5 === 0) { toastb.textContent = `${s.n}: 🎟 Sticker`; toast.classList.remove("show"); void toast.offsetWidth; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 1400); }
@@ -200,28 +207,7 @@ function burst() {
 }
 setTimeout(burst, 1500);
 
-// ---- cursor: idle, then a panicked path to the red close button (HDMI, no share bar), overshoot, land ----
-const cur = document.getElementById("cursor");
-const target = { x: 18, y: 18 };
-const path = [
-  [0, 1150, 650], [9000, 1170, 665], [11000, 1350, 480], [12500, 760, 300], [13500, 420, 140], [14400, 90, 60],
-  [15100, 150, 20], [15700, 40, 90], [16500, target.x + 40, target.y + 30], [17300, target.x - 22, target.y - 8],
-  [18200, target.x + 12, target.y + 10], [19000, target.x, target.y], [21000, target.x, target.y],
-];
-function lerp(a, b, k) { return a + (b - a) * k; }
-function ease(k) { return k < .5 ? 2 * k * k : -1 + (4 - 2 * k) * k; }
-function tick() {
-  const t = now();
-  for (let i = 0; i < path.length - 1; i++) {
-    const [t1, x1, y1] = path[i], [t2, x2, y2] = path[i + 1];
-    if (t >= t1 && t < t2) {
-      const k = ease((t - t1) / (t2 - t1)), jitter = t > 12000 && t < 19000 ? Math.sin(t / 37) * 2 : 0;
-      cur.style.left = lerp(x1, x2, k) + jitter + "px"; cur.style.top = lerp(y1, y2, k) + jitter + "px";
-    }
-  }
-  if (t < 21000) requestAnimationFrame(tick);
-}
-requestAnimationFrame(tick);
+// (no fake cursor: the presenter moves the real one)
 </script>
 </body>
 </html>
