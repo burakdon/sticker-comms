@@ -18,3 +18,5 @@ stimuli/shortlist english/
 # Course grades from the end-of-study question: kept local, not published
 data/raw/extra.csv
 report/_qa/
+report/coldopen/_frames/
+report/coldopen/_video/
