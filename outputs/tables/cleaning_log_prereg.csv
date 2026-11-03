@@ -1,0 +1,6 @@
+rule,dropped,remaining,unit
+incomplete session,0,70,participants
+failed attention check (pre-registered rule),13,57,participants
+attention-check trial itself,57,2052,trials
+trials on stickers the participant authored,12,2040,trials
+reaction time outside 300 ms - 30 s,53,1987,trials

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>squishy draw</title>
+<style>
+  :root { --bg: #FBFBF9; --ink: #3A4048; --muted: #9AA0A8; --green: #25D366; --green-dk: #128C7E; --pink: #FFE0EE; --blue: #DBE8FF; --yellow: #FFF0C7; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); font-family: "Avenir Next", -apple-system, "Helvetica Neue", Arial, sans-serif; color: var(--ink); }
+  .stage { position: absolute; inset: 0; background: linear-gradient(160deg, #fff7fb 0%, #eef3ff 50%, #fff6e3 100%); }
+  .title { position: absolute; top: 70px; left: 0; right: 0; text-align: center; font-size: 64px; font-weight: 800; letter-spacing: -1px; }
+  .sub { position: absolute; top: 160px; left: 0; right: 0; text-align: center; font-size: 28px; color: var(--muted); font-weight: 600; }
+  .pool { position: absolute; top: 215px; left: 0; right: 0; text-align: center; font-size: 22px; color: var(--muted); }
+
+  .machine { position: absolute; top: 300px; width: 820px; height: 480px; }
+  .machine.a { left: 100px; }  .machine.b { right: 100px; }
+  .window { position: absolute; inset: 0; border-radius: 36px; background: #fff; box-shadow: 0 30px 80px rgba(230,120,170,.25), inset 0 0 0 3px rgba(0,0,0,.05); overflow: hidden; }
+  .reel { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
+  .card { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 52px; font-weight: 800; letter-spacing: -0.5px; color: var(--ink); border-bottom: 2px solid #efeeea; }
+  .card.ghost { color: #9AA0A8; font-weight: 700; }
+  .card.ghost span { letter-spacing: 1px; }
+  .fade { position: absolute; left: 0; right: 0; height: 160px; pointer-events: none; z-index: 2; }
+  .fade.top { top: 0; background: linear-gradient(#fff, rgba(255,255,255,0)); }
+  .fade.bot { bottom: 0; background: linear-gradient(rgba(255,255,255,0), #fff); }
+  .frame { position: absolute; left: -14px; right: -14px; top: 160px; height: 160px; border: 6px solid var(--green); border-radius: 22px; z-index: 3; box-shadow: 0 0 0 10px rgba(37,211,102,.18); opacity: .0; transition: opacity .3s; }
+  .frame.on { opacity: 1; }
+  .arrow { position: absolute; top: 212px; width: 0; height: 0; border: 28px solid transparent; z-index: 4; }
+  .arrow.l { left: -70px; border-left: 40px solid var(--green-dk); }
+  .arrow.r { right: -70px; border-right: 40px solid var(--green-dk); }
+
+  .winner { position: absolute; top: 810px; width: 820px; text-align: center; font-size: 40px; font-weight: 800; color: var(--green-dk); opacity: 0; transform: translateY(14px); transition: all .5s ease-out; }
+  .winner.on { opacity: 1; transform: none; }
+  .confetti { position: absolute; width: 14px; height: 22px; top: -40px; border-radius: 3px; opacity: 0; }
+  .squishy { position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%) rotate(4deg); width: 230px; transform: rotate(6deg); filter: drop-shadow(0 16px 30px rgba(0,0,0,.18)); }
+  .count { position: absolute; left: 100px; bottom: 44px; font-size: 24px; color: var(--muted); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="title">🧸 Squishy draw</div>
+  <div class="sub" id="sub">Two squishies, two winners</div>
+  <div class="pool" id="pool"></div>
+  <div class="machine a">
+    <div class="window"><div class="reel" id="reelA"></div><div class="fade top"></div><div class="fade bot"></div></div>
+    <div class="frame" id="frameA"></div>
+    <div class="arrow l"></div><div class="arrow r"></div>
+  </div>
+  <div class="machine b">
+    <div class="window"><div class="reel" id="reelB"></div><div class="fade top"></div><div class="fade bot"></div></div>
+    <div class="frame" id="frameB"></div>
+    <div class="arrow l"></div><div class="arrow r"></div>
+  </div>
+  <div class="winner" id="winnerA" style="left:100px"></div>
+  <div class="winner" id="winnerB" style="right:100px"></div>
+  <div class="count" id="count"></div>
+  <img class="squishy" src="../../web/assets/squishy.webp" alt="">
+</div>
+
+<script>
+// Winners are passed in by the recorder: ?w=Name%201|Name%202&n=45
+const params = new URLSearchParams(location.search);
+const winners = (params.get("w") || "Winner One|Winner Two").split("|");
+const N = Number(params.get("n") || 45);
+const pool = (params.get("names") || "").split("|").filter(Boolean).filter(n => !winners.includes(n));
+document.getElementById("pool").textContent = `${N} entries · everyone who finished the study`;
+document.getElementById("count").textContent = `${N} entries shuffled · drawn with Python's random module`;
+
+// Ghost cards: plausible-looking but scrambled, so no real entrant is readable.
+const syll = ["ka","mi","ra","el","no","ta","li","so","ve","an","dr","ou","ye","zi","ha","lu","pe","ri","na","to"];
+function fakeName() {   // kept as a fallback when no name list is passed
+  const w = () => { let s = ""; for (let i = 0; i < 2 + Math.floor(Math.random() * 2); i++) s += syll[Math.floor(Math.random() * syll.length)]; return s[0].toUpperCase() + s.slice(1); };
+  return w() + " " + w();
+}
+let bag = [];
+function nextName() {
+  if (!pool.length) return fakeName();
+  if (!bag.length) bag = pool.slice().sort(() => Math.random() - 0.5);
+  return bag.pop();
+}
+
+const sub = document.getElementById("sub");
+const CARD = 160, SPINS = 42;
+
+function buildReel(reel, winner) {
+  reel.innerHTML = "";
+  for (let i = 0; i < SPINS; i++) reel.insertAdjacentHTML("beforeend", `<div class="card ghost"><span>${nextName()}</span></div>`);
+  reel.insertAdjacentHTML("beforeend", `<div class="card"><span>${winner}</span></div>`);
+  for (let i = 0; i < 3; i++) reel.insertAdjacentHTML("beforeend", `<div class="card ghost"><span>${nextName()}</span></div>`);
+  reel.style.transform = "translateY(160px)";
+}
+function confetti() {
+  const cols = ["#25D366", "#128C7E", "#EB6834", "#2A78D6", "#6250D6", "#FFD36B", "#F08E9A"];
+  for (let i = 0; i < 110; i++) {
+    const c = document.createElement("div"); c.className = "confetti";
+    c.style.left = Math.random() * 1920 + "px"; c.style.background = cols[i % cols.length];
+    document.querySelector(".stage").appendChild(c);
+    c.animate([{ transform: "translateY(0) rotate(0)", opacity: 1 }, { transform: `translateY(1160px) rotate(${Math.random() * 720 - 360}deg)`, opacity: .9 }],
+              { duration: 1800 + Math.random() * 1400, delay: Math.random() * 400, easing: "cubic-bezier(.2,.6,.4,1)", fill: "forwards" });
+  }
+}
+function easeOut(k) { return 1 - Math.pow(1 - k, 4); }
+function spin(id, winner, ms) {
+  const reel = document.getElementById("reel" + id), frame = document.getElementById("frame" + id), winEl = document.getElementById("winner" + id);
+  buildReel(reel, winner);
+  return new Promise((done) => {
+    const total = SPINS * CARD, t0 = performance.now();
+    function f(t) {
+      const k = Math.min(1, (t - t0) / ms);
+      reel.style.transform = `translateY(${160 - total * easeOut(k)}px)`;
+      if (k < 1) requestAnimationFrame(f);
+      else { frame.classList.add("on"); winEl.textContent = `🎉 ${winner}`; winEl.classList.add("on"); done(); }
+    }
+    requestAnimationFrame(f);
+  });
+}
+(async () => {
+  sub.textContent = "Two squishies, two winners";
+  await new Promise(r => setTimeout(r, 900));
+  await Promise.all([spin("A", winners[0], 5200), spin("B", winners[1] || winners[0], 6400)]);
+  confetti();
+  sub.textContent = "Congratulations 🧸🧸";
+  await new Promise(r => setTimeout(r, 2800));
+  window.__done = true;
+})();
+</script>
+</body>
+</html>
