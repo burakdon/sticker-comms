@@ -2,135 +2,94 @@
 
 **Can people tell what a WhatsApp sticker means when it comes from a culture they're not part of, and does seeing it inside a chat help?**
 
-Module Project 2 (Statistical Analysis), Duke AIPI 510. A within-subject experiment: participants judge the intended sentiment (positive / negative / sarcastic) of 36 Turkish, Chinese and English/American stickers (6 with text and 6 without per culture). Each sticker is shown alone, in a mock chat, or as the chat line only (sticker hidden), with the condition counterbalanced by a Latin square.
+Duke AIPI 510, Module Project 2 (Statistical Analysis). Burak Dönbekci and Canyang Xu.
 
-The full design, hypotheses, analysis plan and timeline are in [PROJECT_BRIEF.md](PROJECT_BRIEF.md).
+- **Written report:** <https://burakdon.github.io/sticker-comms/report/>
+- **The study itself** (still live): <https://burakdon.github.io/sticker-comms/web/>
+- **Design and analysis plan**, written before data collection: [PROJECT_BRIEF.md](PROJECT_BRIEF.md)
+
+## The experiment
+
+A within-subject online experiment. 70 participants judged the intended sentiment (positive / negative / sarcastic) of 36 stickers: 12 Turkish, 12 Chinese and 12 English/American, half with text on the sticker and half without. Each sticker appeared once per person in one of three conditions, assigned by a Latin square so every sticker got every condition equally often across the sample:
+
+| Condition | What the participant saw |
+|---|---|
+| alone | the sticker by itself |
+| chat | the sticker as a reply to a one-line message in a mock chat |
+| text-only | the same chat with the sticker hidden (control: how much does the message alone give away?) |
+
+The answer key is sender intent: the author of each culture's set labeled what they mean when they send it, and native participants' agreement with those labels was checked afterwards.
+
+## Main results
+
+| | Result |
+|---|---|
+| Chat vs alone (H1, primary) | +11.3 points, 95% CI [6.6, 16.0], d_z = 0.58, p < .0001 (paired t, n = 70) |
+| Chat vs text-only (H5) | +7.5 points, 95% CI [2.9, 12.1], p = .002: the sticker adds meaning beyond the message |
+| In-group advantage (H2) | OR 1.51 [1.26, 1.81], mixed logistic regression with participant and sticker random intercepts |
+| Context × in-group (H3) | not supported; hiding the sticker removes the native advantage instead (OR 0.65 [0.48, 0.88]) |
+| Outsiders vs chance (H4) | 67% correct on no-text stickers with no context, chance 33%, p < .0001 |
+
+The context effect holds under the pre-registered attention-check exclusion, with the six low-agreement stickers removed, and with both applied together. Full numbers are in `outputs/tables/`.
 
 ## Repository layout
 
 ```
 data/
-  stimuli.csv           one row per sticker: answer key (intended_sentiment), chat line, metadata
-  sticker_sets.csv      generated: Latin-square set (A/B/C) per sticker
-  raw/                  exported responses (participants.csv, trials.csv, freetext.csv, starts.csv)
-  processed/            cleaned data
-stimuli/                sticker images and the attention-check SVG
-web/                    the task page (vanilla HTML/JS, hosted on GitHub Pages)
+  stimuli.csv           one row per sticker: answer key, chat line, metadata
+  sticker_sets.csv      Latin-square set (A/B/C) per sticker, generated
+  raw/                  exported responses: participants, trials, freetext, starts
+  processed/            cleaned data and per-participant summaries
+stimuli/                sticker images
+web/                    the task page (vanilla HTML/JS on GitHub Pages)
 backend/Code.gs         Google Apps Script that writes responses to a Google Sheet
 src/
-  collection/           placeholder stickers, condition assignment, response export
-  cleaning/             cleaning script
-  analysis/             power analysis, hypothesis tests, mixed model
-  viz/                  figures
+  collection/           condition assignment, response export, placeholder stickers
+  cleaning/             clean_trials.py (logged exclusions)
+  analysis/             power analysis, answer-key check, confirmatory tests, mixed model
+  viz/                  report and slide figures
 outputs/                figures/ and tables/ produced by the scripts
-report/                 report draft
+flyer/                  recruitment flyer with a QR code (channel-tagged link)
+report/                 written report (index.html), presentation deck and its build scripts
+tests/                  integrity checks for the stimulus set and task page
 ```
 
-## Setup
+## Reproducing the analysis
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+
+python src/analysis/power_analysis.py            # a priori power: analytic + simulation
+python src/cleaning/clean_trials.py              # data/raw -> data/processed, with outputs/tables/cleaning_log.csv
+python src/analysis/validate_answer_key.py       # insider agreement per sticker; flags < 50%
+python src/analysis/primary_tests.py             # H1, H5, RM-ANOVA + Holm post hocs, H4
+python src/analysis/mixed_model.py               # H2, H3: crossed random-effects logistic regression
+python src/viz/figures.py                        # report figures
+
+# Sensitivity analyses
+python src/cleaning/clean_trials.py --exclude-attention-failures --suffix _prereg && python src/analysis/primary_tests.py --suffix _prereg
+python src/cleaning/clean_trials.py --drop-flagged outputs/tables/flagged_stickers.csv --suffix _noflag && python src/analysis/primary_tests.py --suffix _noflag
+python src/cleaning/clean_trials.py --exclude-attention-failures --drop-flagged outputs/tables/flagged_stickers.csv --suffix _both && python src/analysis/primary_tests.py --suffix _both
 ```
 
-## Pipeline
+Everything runs offline from the committed `data/raw/` files. Re-exporting from the Google Sheet (`src/collection/export_responses.py`) needs the private token in `.env` (see `.env.example`) and is not required.
 
-```bash
-# 1. Power analysis -> outputs/tables/power_*.csv, outputs/figures/power_curve.png
-python src/analysis/power_analysis.py
+Slide figures and the deck: `python src/viz/slide_figures.py`, then `node report/build_deck.js` (needs `pptxgenjs`).
 
-# 2. Optional development placeholders -> stimuli/*.svg (skips real files)
-python src/collection/make_placeholder_stickers.py
+## Data and privacy
 
-# 3. Latin-square assignment -> data/sticker_sets.csv, web/conditions.json
-#    Re-run after ANY edit to data/stimuli.csv.
-python src/collection/assign_conditions.py
+- Responses are anonymous: a random participant ID, age, familiarity ratings and language, no names or contact details. `data/raw/` and `data/processed/` are committed in full.
+- The two authors are retained as participants only for stickers they did not author (`src/cleaning/clean_trials.py`, `AUTHORS`).
+- Giveaway entries (name + contact) sit in a separate sheet tab that the default export never pulls, and are kept out of the repository. The end-of-study course-grade question (`extra.csv`) is likewise kept local.
+- Stickers are reproduced for non-commercial research. Several contain profanity or licensed characters, which is noted in the report's limitations.
 
-# 4. Export responses from the Google Sheet -> data/raw/*.csv
-python src/collection/export_responses.py          # needs .env (see .env.example)
+## Running the study again
 
-# 5. Clean -> data/processed/*.csv + outputs/tables/cleaning_log.csv
-python src/cleaning/clean_trials.py
+The task page works as-is: open `web/` on any static host, or `python -m http.server 8765` and visit <http://localhost:8765/web/>. With `ENDPOINT_URL` empty in `web/config.js` it runs in local mode and offers a JSON download at the end, which `export_responses.py --from-local` turns into the raw CSVs.
 
-# 6. Answer-key check -> outputs/tables/answer_key_validation.csv, flagged_stickers.csv
-python src/analysis/validate_answer_key.py
+To collect centrally, paste [backend/Code.gs](backend/Code.gs) into a Google Sheet's Apps Script, set `EXPORT_TOKEN`, deploy it as a web app ("execute as me", "anyone"), and put the web-app URL in `web/config.js`. Rotation, trial order and the attention check are all handled client-side; submissions are retried until the server confirms and deduplicated by participant ID.
 
-# 7. Confirmatory tests (H1, H5, RM-ANOVA + Holm post hocs, H4) -> outputs/tables/primary_tests.csv
-python src/analysis/primary_tests.py
+## Branching
 
-# 8. Mixed-effects logistic regression (H2, H3) -> outputs/tables/mixed_model.csv
-python src/analysis/mixed_model.py
-
-# 9. Figures -> outputs/figures/fig1..fig6
-python src/viz/figures.py
-
-# Sensitivity analyses (same scripts, different inputs)
-python src/cleaning/clean_trials.py --exclude-attention-failures --suffix _prereg   # pre-registered exclusion
-python src/analysis/primary_tests.py --suffix _prereg
-python src/cleaning/clean_trials.py --drop-flagged outputs/tables/flagged_stickers.csv --suffix _noflag
-python src/analysis/primary_tests.py --suffix _noflag
-```
-
-All steps from 5 on run offline from the committed `data/raw/` files, so the full analysis is reproducible without the Google Sheet.
-
-## Running the study
-
-### Try it locally
-
-```bash
-python -m http.server 8765
-```
-
-Open <http://localhost:8765/web/>. With `ENDPOINT_URL` empty in `web/config.js` the page runs in **local mode**: nothing is sent anywhere, and the thank-you screen offers a JSON download. Those files can be turned into the raw CSVs with
-
-```bash
-python src/collection/export_responses.py --from-local path/to/json/folder
-```
-
-### Set up the response backend (once, ~5 min)
-
-1. Create a blank Google Sheet.
-2. Extensions → Apps Script. Replace the default code with [backend/Code.gs](backend/Code.gs).
-3. Set `EXPORT_TOKEN` to a long random string (keep it private). `SECRET` must match `web/config.js`.
-4. Deploy → New deployment → Web app. *Execute as:* Me. *Who has access:* Anyone. Authorize, copy the web app URL.
-5. Paste the URL into `ENDPOINT_URL` in `web/config.js`, commit, push.
-6. Complete the task once and check that rows appear in the `participants`, `trials` and `freetext` tabs.
-
-If you later edit `Code.gs`, redeploy (Deploy → Manage deployments → edit → New version).
-
-### Deploy the task page
-
-The page is served by GitHub Pages from the repository root, so the link is
-`https://burakdon.github.io/sticker-comms/web/`. Pushing to the Pages branch updates it within a minute or so.
-
-### How the page collects data
-
-- Every participant gets a random `participant_id` and a random rotation (0–2). The rotation maps sticker sets A/B/C to the three contexts, so across the sample each sticker appears equally often alone, in chat and text-only.
-- Trial order is shuffled. One attention check (`ATTN_01`) is inserted in the middle third and always shown alone.
-- Per trial: `response`, `confidence` (1–5) and `rt_ms` (stimulus shown → sentiment tapped).
-- Submissions are sent once at the end. The payload is kept in the browser until the server confirms it, and re-sent on the next visit if the upload failed. The server ignores duplicate `participant_id`s, so retries are safe.
-- A "start" ping on survey completion lets us count drop-outs.
-
-## Replacing the placeholder stickers
-
-The images in `stimuli/` are emoji stand-ins so the pipeline can be tested. To swap in a real sticker:
-
-1. Save the image as `stimuli/<sticker_id>.png` (or `.webp`) — or host it elsewhere and use the full URL.
-2. In `data/stimuli.csv`, update `file`, `description`, `intended_sentiment` and `chat_line`. Set `in_repo = 0` for licensed characters and host those outside the repo.
-3. Run `python src/collection/assign_conditions.py` and push.
-
-Don't add stickers with real faces of friends, classmates or children. Profanity is fine; it's how these stickers are actually used.
-
-## Data
-
-- `data/stimuli.csv` is written by hand by the sticker authors (Burak: Turkish, teammate: Chinese, both: English/American). `intended_sentiment` is the sender-intent answer key. It is deliberately **not** included in `web/conditions.json`, so participants can't read it from the page.
-- Responses are anonymous: random participant ID, demographics in brackets, no names or contact details.
-- **Giveaway entries** (name + contact) live in a separate `giveaway` tab of the sheet, linked only by participant ID. The default export never pulls them; `python src/collection/export_responses.py --giveaway` writes them to `data/private/` (gitignored) and reports duplicate contacts. Delete the tab after the draw.
-
-## Contributing
-
-`main` ← `dev` ← personal branches (`dev-burak`, `dev-<teammate>`). Open PRs into `dev`; every PR is reviewed by the other team member before merging.
-
-## Presentation
-
-`report/sticker-comms-deck.pptx` is generated: `python src/viz/slide_figures.py` draws the slide figures into `outputs/figures/slides/`, then `node report/build_deck.js` (needs `pptxgenjs`) assembles the deck. Creative slides are marked `PLACEHOLDER` for hand-editing in PowerPoint.
+`main` ← `dev` ← personal branches. All work went through pull requests reviewed by the other author.
